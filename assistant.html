@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Assistant - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <h1>AI Assistant</h1>
+        </div>
+        <div class="header-right">
+          <span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>
+        </div>
+      </div>
+
+      <p class="text-muted mb-16" style="font-size: 12px;">Tanya apa saja tentang bisnis Anda. AKSA menjawab berdasarkan data transaksi Anda.</p>
+
+      <div class="chat-container" id="chatMessages">
+        <div class="chat-message ai">
+          <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI <span class="premium-badge" style="margin-left:6px;"><i class="fas fa-crown"></i> Premium</span></div>
+          <div>Halo! Saya AKSA, asisten AI bisnis Anda. <br><br>Saya bisa membantu menganalisis:<br>
+          ✅ Kenapa omzet naik atau turun<br>
+          ✅ Prediksi stok bahan baku<br>
+          ✅ Rekomendasi promo terbaik<br>
+          ✅ Kondisi pelanggan dan tren<br><br>
+          <strong>Coba tanya:</strong> "Kenapa omzet saya turun minggu ini?"</div>
+        </div>
+      </div>
+
+      <div class="premium-overlay-banner" id="premiumOverlayAssistant">
+        <i class="fas fa-crown"></i>
+        <h3>Buka AI Assistant Premium</h3>
+        <p>Dapatkan analisis bisnis real-time, rekomendasi cerdas, dan wawasan mendalam yang dipersonalisasi untuk bisnis Anda dengan AKSA Premium.</p>
+        <button class="btn-premium" onclick="document.getElementById('premiumToggle')?.click(); window.location.href='profile.html'"><i class="fas fa-crown"></i> Upgrade ke Premium</button>
+      </div>
+    </div>
+
+    <div class="chat-input-area" id="chatInputArea" style="padding: 12px 20px; background: var(--bg); border-top: 1px solid var(--border); opacity:0.4; pointer-events:none;">
+      <input type="text" id="chatInput" placeholder="Tanya tentang bisnis Anda..." disabled>
+      <button class="btn-send" id="sendBtn" disabled style="opacity:0.4;">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

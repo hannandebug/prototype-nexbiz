@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pertumbuhan - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Pertumbuhan</h1>
+        </div>
+        <div class="header-right">
+          <i class="fas fa-rocket" style="color: #8B5CF6; font-size: 20px;"></i>
+        </div>
+      </div>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="detail-header-value">
+        <div class="detail-big-value">+15%</div>
+        <div class="detail-big-change positive"><i class="fas fa-arrow-up"></i> Meningkat bulan ini</div>
+        <div class="detail-big-label">Pertumbuhan bisnis bulan ini</div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Perkembangan Pertumbuhan 6 Bulan Terakhir</div>
+        <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="growthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.15" />
+              <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.01" />
+            </linearGradient>
+          </defs>
+          <path d="M0,100 L0,100 L10,95 L50,90 L90,80 L130,70 L170,50 L210,40 L250,30 L290,20 L300,18 L300,120 L0,120 Z" fill="url(#growthGrad)"/>
+          <polyline fill="none" stroke="#8B5CF6" stroke-width="2" points="10,95 50,90 90,80 130,70 170,50 210,40 250,30 290,20" vector-effect="non-scaling-stroke"/>
+          <circle cx="290" cy="20" r="3" fill="#8B5CF6"/>
+        </svg>
+      </div>
+
+      <div class="detail-summary">
+        <h4>Ringkasan Performa</h4>
+        <p>Bisnis tumbuh <strong>15%</strong> bulan ini — tertinggi dalam 6 bulan terakhir. Pertumbuhan didorong oleh peningkatan pelanggan baru (8%) dan strategi promo bundling yang efektif.</p>
+      </div>
+
+      <div class="detail-insight">
+        <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
+        <p>Pertumbuhan 15% merupakan capaian positif yang didorong oleh peningkatan penjualan produk unggulan dan efektivitas promo. Untuk mempertahankan tren ini, AKSA merekomendasikan untuk terus berinovasi pada menu dan mempertahankan kualitas layanan.</p>
+      </div>
+
+      <a href="analysis.html" class="btn btn-secondary-soft btn-full">
+        <i class="fas fa-microchip"></i>
+        Analisis AI Lebih Detail
+      </a>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

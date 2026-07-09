@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Analisis - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Analisis Bisnis</h1>
+        </div>
+        <div class="header-right">
+          <i class="fas fa-robot" style="color: var(--primary); font-size: 22px;"></i>
+        </div>
+      </div>
+
+      <p class="text-muted mb-16">AKSA menganalisis data transaksi Anda dan menemukan beberapa hal penting.</p>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="analysis-section" id="analysisSection"></div>
+
+      <div class="confidence-bar">
+        <div class="conf-label">Confidence Score</div>
+        <div class="conf-score"><span id="confScore">0</span></div>
+        <div class="conf-track">
+          <div class="conf-fill" style="width: 0%;"></div>
+        </div>
+        <p class="text-muted mt-8" style="font-size: 12px;">AKSA yakin dengan analisis ini berdasarkan 1.240 data transaksi Anda</p>
+      </div>
+
+      <a href="passport.html" class="btn btn-primary btn-full">
+        <i class="fas fa-passport"></i>
+        Lihat Business Passport
+      </a>
+
+      <a href="recommendation.html" class="btn btn-secondary btn-full mt-12">
+        <i class="fas fa-list-check"></i>
+        Lihat Rekomendasi
+      </a>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

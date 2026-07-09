@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dashboard - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <div class="greeting">
+            <h2>Halo, Pak Budi 👋</h2>
+            <p>Warung Kopi Senja</p>
+          </div>
+        </div>
+        <div class="notif-bell">
+          <i class="fas fa-bell"></i>
+          <span class="badge">3</span>
+        </div>
+      </div>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="health-card clickable" onclick="window.location.href='health-report.html'">
+        <div class="health-score">
+          <div class="score-circle">
+            <span class="number">0</span>
+            <span class="label">/100</span>
+          </div>
+          <div class="score-info">
+            <div class="score-label">Business Health Score</div>
+            <div class="score-status">
+              Sangat Sehat
+              <span class="status-badge"><i class="fas fa-check-circle"></i> Active</span>
+            </div>
+            <div class="score-sub">Ketuk untuk melihat laporan lengkap</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-card" onclick="window.location.href='recommendation.html'">
+        <div class="priority-label">
+          <i class="fas fa-bolt"></i>
+          Prioritas Hari Ini
+          <span class="arrow-indicator"><i class="fas fa-arrow-right"></i></span>
+        </div>
+        <p>🔥 Restock <strong>gula</strong> dalam 2 hari — stok tersisa 8 kg dengan konsumsi 2 kg/hari. Persiapkan juga <strong>susu</strong> untuk antisipasi lonjakan akhir pekan.</p>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card clickable" onclick="window.location.href='revenue-detail.html'">
+          <div class="metric-icon blue"><i class="fas fa-wallet"></i></div>
+          <div class="metric-label">Pendapatan</div>
+          <div class="metric-value">Rp 3.250.000</div>
+          <div class="metric-change positive"><i class="fas fa-arrow-up"></i> +12% hari ini</div>
+        </div>
+
+        <div class="metric-card clickable" onclick="window.location.href='profit-detail.html'">
+          <div class="metric-icon green"><i class="fas fa-chart-line"></i></div>
+          <div class="metric-label">Keuntungan</div>
+          <div class="metric-value">Rp 980.000</div>
+          <div class="metric-change positive"><i class="fas fa-arrow-up"></i> +8% minggu ini</div>
+        </div>
+
+        <div class="metric-card clickable" onclick="window.location.href='cashflow-detail.html'">
+          <div class="metric-icon orange"><i class="fas fa-money-bill-wave"></i></div>
+          <div class="metric-label">Arus Kas</div>
+          <div class="metric-value">Rp 1.750.000</div>
+          <div class="metric-change positive"><i class="fas fa-minus"></i> Stabil</div>
+        </div>
+
+        <div class="metric-card clickable" onclick="window.location.href='growth-detail.html'">
+          <div class="metric-icon purple"><i class="fas fa-rocket"></i></div>
+          <div class="metric-label">Pertumbuhan</div>
+          <div class="metric-value">+15%</div>
+          <div class="metric-change positive"><i class="fas fa-arrow-up"></i> Bulan ini</div>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-header">
+          <i class="fas fa-lightbulb"></i>
+          <h4>Insight Hari Ini</h4>
+        </div>
+        <p>Omzet hari ini naik 12% dibandingkan kemarin. Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Cuaca dingin meningkatkan permintaan minuman hangat.</p>
+      </div>
+
+      <div class="ai-preview">
+        <div class="ai-preview-header">
+          <i class="fas fa-robot"></i>
+          <h4>Today's Recommendation</h4>
+        </div>
+        <p>Berdasarkan data 7 hari terakhir, AKSA merekomendasikan untuk menambah stok <strong>gula</strong> dan <strong>susu</strong>. Permintaan diprediksi naik 25% menjelang akhir pekan. Segera lakukan pemesanan untuk menghindari kehabisan stok.</p>
+        <a href="analysis.html" class="btn btn-secondary-soft btn-full">
+          <i class="fas fa-chart-bar"></i>
+          Lihat Analisis Lengkap
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

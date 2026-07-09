@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rekomendasi - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <a href="passport.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Rekomendasi</h1>
+        </div>
+        <div class="header-right">
+          <i class="fas fa-list-check" style="color: var(--primary); font-size: 20px;"></i>
+        </div>
+      </div>
+
+      <p class="text-muted mb-16">Rekomendasi prioritas berdasarkan analisis data transaksi Anda.</p>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="recommendation-list" id="recommendationList"></div>
+
+      <div class="mt-20">
+        <a href="forecast.html" class="btn btn-primary btn-full">
+          <i class="fas fa-chart-simple"></i>
+          Lihat Prediksi
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

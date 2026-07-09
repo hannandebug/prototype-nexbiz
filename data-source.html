@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sumber Data - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <a href="business-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Sumber Data</h1>
+        </div>
+      </div>
+
+      <p class="text-muted mb-16">Pilih cara menghubungkan data transaksi bisnis Anda ke AKSA.</p>
+
+      <div class="kasir-status clickable" onclick="selectDataSource('kasir-pintar')">
+        <div class="kasir-left">
+          <div class="kasir-icon"><i class="fas fa-cash-register"></i></div>
+          <div class="kasir-info">
+            <h4>Kasir Pintar</h4>
+            <p>Hubungkan langsung dengan aplikasi Kasir Pintar Anda</p>
+          </div>
+        </div>
+        <div class="kasir-right">
+          <span class="disconnected"><i class="fas fa-chevron-right" style="font-size:10px;"></i></span>
+        </div>
+      </div>
+
+      <p class="text-muted mt-16" style="font-size:12px; text-align:center;">Atau upload data transaksi dengan metode lain</p>
+
+      <div class="data-source-grid" style="margin-top:12px;">
+        <div class="data-source-card" onclick="selectDataSource('excel')">
+          <div class="ds-icon green"><i class="fas fa-file-excel"></i></div>
+          <h4>Upload Excel</h4>
+          <p>Upload file Excel (.xlsx) berisi data transaksi Anda</p>
+        </div>
+
+        <div class="data-source-card" onclick="selectDataSource('csv')">
+          <div class="ds-icon orange"><i class="fas fa-file-csv"></i></div>
+          <h4>Upload CSV</h4>
+          <p>Upload file CSV dengan format yang sudah disediakan</p>
+        </div>
+
+        <div class="data-source-card" onclick="selectDataSource('manual')">
+          <div class="ds-icon purple"><i class="fas fa-keyboard"></i></div>
+          <h4>Input Manual</h4>
+          <p>Masukkan data transaksi secara manual ke dalam sistem</p>
+        </div>
+      </div>
+
+      <div class="data-source-footer">
+        <p><i class="fas fa-info-circle"></i> Anda dapat mengubah metode ini kapan saja</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

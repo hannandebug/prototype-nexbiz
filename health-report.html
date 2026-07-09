@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Health Report - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Health Report</h1>
+        </div>
+        <div class="header-right">
+          <i class="fas fa-heart-pulse" style="color: var(--secondary); font-size: 20px;"></i>
+        </div>
+      </div>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="report-overview">
+        <div class="report-score">92</div>
+        <div class="report-score-label">dari 100 — Business Health Score</div>
+        <div class="report-status-badge"><i class="fas fa-check-circle"></i> Sangat Sehat</div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-category">
+          <div class="cat-label">Penjualan</div>
+          <div class="cat-score">95</div>
+          <div class="cat-bar"><div class="cat-fill green" style="width:95%"></div></div>
+        </div>
+        <div class="report-category">
+          <div class="cat-label">Keuntungan</div>
+          <div class="cat-score">90</div>
+          <div class="cat-bar"><div class="cat-fill green" style="width:90%"></div></div>
+        </div>
+        <div class="report-category">
+          <div class="cat-label">Arus Kas</div>
+          <div class="cat-score">91</div>
+          <div class="cat-bar"><div class="cat-fill green" style="width:91%"></div></div>
+        </div>
+        <div class="report-category">
+          <div class="cat-label">Perputaran Stok</div>
+          <div class="cat-score" style="color:var(--warning);">85</div>
+          <div class="cat-bar"><div class="cat-fill orange" style="width:85%"></div></div>
+        </div>
+        <div class="report-category" style="grid-column: 1 / -1;">
+          <div class="cat-label">Pertumbuhan Bisnis</div>
+          <div class="cat-score">94</div>
+          <div class="cat-bar"><div class="cat-fill green" style="width:94%"></div></div>
+        </div>
+      </div>
+
+      <div class="report-interpretation">
+        <h4>Interpretasi Skor</h4>
+        <div class="interpretation-item" data-range="sangat-sehat">
+          <span class="int-dot green"></span>
+          <span class="int-range">90 – 100</span>
+          <span>Sangat Sehat <i class="fas fa-check-circle" style="color:var(--secondary);"></i></span>
+        </div>
+        <div class="interpretation-item" data-range="sehat">
+          <span class="int-dot blue"></span>
+          <span class="int-range">70 – 89</span>
+          <span>Sehat</span>
+        </div>
+        <div class="interpretation-item" data-range="perlu-perhatian">
+          <span class="int-dot orange"></span>
+          <span class="int-range">50 – 69</span>
+          <span>Perlu Perhatian</span>
+        </div>
+        <div class="interpretation-item" data-range="berisiko">
+          <span class="int-dot red"></span>
+          <span class="int-range">30 – 49</span>
+          <span>Berisiko</span>
+        </div>
+        <div class="interpretation-item" data-range="kritis">
+          <span class="int-dot red"></span>
+          <span class="int-range">0 – 29</span>
+          <span>Kritis</span>
+        </div>
+      </div>
+
+      <div class="detail-insight">
+        <div class="insight-label"><i class="fas fa-robot"></i> Analisis AI</div>
+        <p>Skor bisnis Anda mencapai <strong>92</strong> karena penjualan stabil (95), keuntungan meningkat (90), arus kas sehat (91), dan pertumbuhan bisnis kuat (94). Namun <strong>perputaran stok</strong> (85) perlu perhatian — beberapa bahan baku seperti teh masih menumpuk di gudang. Disarankan untuk menyesuaikan jumlah pembelian dengan permintaan aktual agar tidak terjadi pemborosan.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

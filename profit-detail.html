@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Keuntungan - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <div class="header-left">
+          <button class="hamburger"><i class="fas fa-bars"></i></button>
+          <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+          <h1>Keuntungan</h1>
+        </div>
+        <div class="header-right">
+          <i class="fas fa-chart-line" style="color: var(--secondary); font-size: 20px;"></i>
+        </div>
+      </div>
+
+      <div class="period-selector" id="periodSelector"></div>
+
+      <div class="detail-header-value">
+        <div class="detail-big-value">Rp 980.000</div>
+        <div class="detail-big-change positive"><i class="fas fa-arrow-up"></i> +8% minggu ini</div>
+        <div class="detail-big-label">Total keuntungan minggu ini</div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Perkembangan Keuntungan 7 Hari Terakhir</div>
+        <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="profitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.15" />
+              <stop offset="100%" style="stop-color:#10B981;stop-opacity:0.01" />
+            </linearGradient>
+          </defs>
+          <path d="M0,100 L0,100 L10,90 L50,85 L90,70 L130,75 L170,55 L210,50 L250,35 L290,30 L300,28 L300,120 L0,120 Z" fill="url(#profitGrad)"/>
+          <polyline fill="none" stroke="#10B981" stroke-width="2" points="10,90 50,85 90,70 130,75 170,55 210,50 250,35 290,30" vector-effect="non-scaling-stroke"/>
+          <circle cx="290" cy="30" r="3" fill="#10B981"/>
+        </svg>
+      </div>
+
+      <div class="detail-summary">
+        <h4>Ringkasan Performa</h4>
+        <p>Keuntungan minggu ini mencapai <strong>Rp 980.000</strong>, naik 8% dibandingkan minggu lalu. Meskipun omzet naik 12%, margin keuntungan sedikit tertekan oleh kenaikan harga bahan baku sebesar 8% (susu dan gula).</p>
+      </div>
+
+      <div class="detail-insight">
+        <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
+        <p>Keuntungan naik 8% karena efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi seperti <strong>Kopi Susu</strong>. Namun kenaikan harga bahan baku menggerus margin. Disarankan evaluasi harga jual atau cari supplier alternatif.</p>
+      </div>
+
+      <a href="analysis.html" class="btn btn-secondary-soft btn-full">
+        <i class="fas fa-microchip"></i>
+        Analisis AI Lebih Detail
+      </a>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
