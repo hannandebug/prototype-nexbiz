@@ -68,22 +68,22 @@ const monthData = {
     priorityText: '🔥 Restock <strong>gula</strong> dalam 2 hari — stok tersisa 8 kg dengan konsumsi 2 kg/hari. Persiapkan juga <strong>susu</strong> untuk antisipasi lonjakan akhir pekan.',
     aiPreviewText: 'Berdasarkan data 7 hari terakhir, AKSA merekomendasikan untuk menambah stok <strong>gula</strong> dan <strong>susu</strong>. Permintaan diprediksi naik 25% menjelang akhir pekan. Segera lakukan pemesanan untuk menghindari kehabisan stok.',
     recommendations: [
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Tambah Stok Gula', desc: 'Stok gula diperkirakan habis dalam 2 hari dengan tingkat konsumsi saat ini (rata-rata 2 kg/hari). Segera lakukan pemesanan untuk menghindari gangguan operasional.' },
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Promo Bundling Jam Sepi', desc: 'Buat promo bundling Kopi Susu + Roti Bakar pada pukul 14.00-16.00. Data menunjukkan hanya 3-4 pelanggan per jam. Promo dapat meningkatkan kunjungan hingga 40%.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kurangi Stok Teh', desc: 'Stok teh tersisa 30% di atas rata-rata permintaan. Permintaan Es Teh turun 15% saat cuaca dingin. Alihkan dana untuk bahan baku yang lebih dibutuhkan.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Evaluasi Harga Menu', desc: 'Harga bahan baku naik 8% (susu dan gula). Margin keuntungan menipis 3%. Pertimbangkan penyesuaian harga jual sebesar 5-10% untuk mempertahankan profitabilitas.' },
-      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Tambah Varian Minuman Hangat', desc: 'Musim hujan meningkatkan permintaan minuman hangat. Pertimbangkan menambah varian seperti Kopi Aren, Matcha Latte, atau Cokelat Hangat.' }
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Tambah Stok Gula', desc: 'Stok gula diperkirakan habis dalam 2 hari dengan tingkat konsumsi saat ini (rata-rata 2 kg/hari). Segera lakukan pemesanan untuk menghindari gangguan operasional.', reason: 'Konsumsi harian gula rata-rata 2 kg dengan stok tersisa 8 kg, habis dalam 4 hari.', confidence: 92 },
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Promo Bundling Jam Sepi', desc: 'Buat promo bundling Kopi Susu + Roti Bakar pada pukul 14.00-16.00. Data menunjukkan hanya 3-4 pelanggan per jam. Promo dapat meningkatkan kunjungan hingga 40%.', reason: 'Data menunjukkan jam 14.00-16.00 memiliki rata-rata kunjungan terendah.', confidence: 89 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kurangi Stok Teh', desc: 'Stok teh tersisa 30% di atas rata-rata permintaan. Permintaan Es Teh turun 15% saat cuaca dingin. Alihkan dana untuk bahan baku yang lebih dibutuhkan.', reason: 'Permintaan Es Teh turun 15% saat musim hujan, stok menumpuk.', confidence: 87 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Evaluasi Harga Menu', desc: 'Harga bahan baku naik 8% (susu dan gula). Margin keuntungan menipis 3%. Pertimbangkan penyesuaian harga jual sebesar 5-10% untuk mempertahankan profitabilitas.', reason: 'Kenaikan harga bahan baku dari supplier mengikis margin keuntungan.', confidence: 91 },
+      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Tambah Varian Minuman Hangat', desc: 'Musim hujan meningkatkan permintaan minuman hangat. Pertimbangkan menambah varian seperti Kopi Aren, Matcha Latte, atau Cokelat Hangat.', reason: 'Pola musiman menunjukkan permintaan minuman hangat naik 25% saat hujan.', confidence: 84 }
     ],
     analysis: [
-      { icon: 'up', title: 'Omzet Naik 12%', desc: 'Penjualan <strong>Kopi Susu</strong> meningkat 25% dan <strong>Roti Bakar</strong> naik 15%. Cuaca dingin dalam 3 hari terakhir mendorong pelanggan memilih minuman hangat. Ini pola musiman yang positif.' },
-      { icon: 'down', title: 'Laba Turun 3%', desc: 'Harga bahan baku seperti <strong>susu</strong> dan <strong>gula</strong> naik 8% dalam sebulan terakhir. Akibatnya margin keuntungan menipis meskipun omzet naik. Disarankan evaluasi harga jual atau cari supplier alternatif.' },
-      { icon: 'down', title: 'Pelanggan Berkurang di Jam Sepi', desc: 'Terjadi penurunan pengunjung pada pukul 14.00-16.00. Rata-rata hanya 3-4 pelanggan per jam. Ini adalah jam sepi yang konsisten setiap hari. Disarankan membuat promo <strong>bundling</strong> atau diskon khusus di jam tersebut.' },
-      { icon: 'up', title: 'Produk Terlaris: Kopi Susu', desc: '<strong>Kopi Susu</strong> menyumbang 40% dari total penjualan dengan rata-rata 45 porsi per hari. Disusul <strong>Es Teh</strong> (25%) dan <strong>Roti Bakar</strong> (20%). Fokus promosi pada produk terlaris untuk hasil maksimal.' }
+      { icon: 'up', title: 'Omzet Naik 12%', desc: 'Penjualan <strong>Kopi Susu</strong> meningkat 25% dan <strong>Roti Bakar</strong> naik 15%. Cuaca dingin dalam 3 hari terakhir mendorong pelanggan memilih minuman hangat. Ini pola musiman yang positif.', reason: 'Pola cuaca dingin meningkatkan permintaan minuman hangat secara signifikan.', urgency: 'normal', confidence: 95 },
+      { icon: 'down', title: 'Laba Turun 3%', desc: 'Harga bahan baku seperti <strong>susu</strong> dan <strong>gula</strong> naik 8% dalam sebulan terakhir. Akibatnya margin keuntungan menipis meskipun omzet naik. Disarankan evaluasi harga jual atau cari supplier alternatif.', reason: 'Kenaikan harga bahan baku supplier tidak diimbangi dengan penyesuaian harga jual.', urgency: 'important', confidence: 91 },
+      { icon: 'down', title: 'Pelanggan Berkurang di Jam Sepi', desc: 'Terjadi penurunan pengunjung pada pukul 14.00-16.00. Rata-rata hanya 3-4 pelanggan per jam. Ini adalah jam sepi yang konsisten setiap hari. Disarankan membuat promo <strong>bundling</strong> atau diskon khusus di jam tersebut.', reason: 'Pola perilaku pelanggan menunjukkan penurunan aktivitas di jam istirahat siang.', urgency: 'important', confidence: 88 },
+      { icon: 'up', title: 'Produk Terlaris: Kopi Susu', desc: '<strong>Kopi Susu</strong> menyumbang 40% dari total penjualan dengan rata-rata 45 porsi per hari. Disusul <strong>Es Teh</strong> (25%) dan <strong>Roti Bakar</strong> (20%). Fokus promosi pada produk terlaris untuk hasil maksimal.', reason: 'Kopi Susu memiliki nilai jual tertinggi dan paling konsisten diminati pelanggan.', urgency: 'normal', confidence: 96 }
     ],
     forecast: [
-      { icon: 'fa-cube', title: 'Stok Gula Habis dalam 4 Hari', desc: 'Berdasarkan rata-rata konsumsi 2 kg per hari, stok gula Anda saat ini (8 kg) diperkirakan habis pada hari Sabtu. Segera lakukan pemesanan ulang untuk mengantisipasi lonjakan akhir pekan.', confidence: 92, color: 'orange' },
-      { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Naik 25%', desc: 'Akhir pekan ini diprediksi permintaan Kopi Susu meningkat 25% disebabkan cuaca dingin dan hari libur. Pastikan stok susu, gula, dan biji kopi mencukupi.', confidence: 88, color: '' },
-      { icon: 'fa-snowflake', title: 'Es Teh Turun 15% saat Hujan', desc: 'BMKG memprediksi hujan di akhir pekan. Permintaan Es Teh diperkirakan turun 15%. Disarankan mengurangi stok es dan mempromosikan minuman hangat.', confidence: 85, color: 'green' }
+      { icon: 'fa-cube', title: 'Stok Gula Habis dalam 4 Hari', desc: 'Berdasarkan rata-rata konsumsi 2 kg per hari, stok gula Anda saat ini (8 kg) diperkirakan habis pada hari Sabtu. Segera lakukan pemesanan ulang untuk mengantisipasi lonjakan akhir pekan.', confidence: 92, color: 'orange', reason: 'Konsumsi harian rata-rata 2 kg dengan stok tersisa 8 kg = 4 hari habis.', urgency: 'urgent' },
+      { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Naik 25%', desc: 'Akhir pekan ini diprediksi permintaan Kopi Susu meningkat 25% disebabkan cuaca dingin dan hari libur. Pastikan stok susu, gula, dan biji kopi mencukupi.', confidence: 88, color: '', reason: 'Pola musiman menunjukkan lonjakan permintaan saat cuaca dingin dan weekend.', urgency: 'important' },
+      { icon: 'fa-snowflake', title: 'Es Teh Turun 15% saat Hujan', desc: 'BMKG memprediksi hujan di akhir pekan. Permintaan Es Teh diperkirakan turun 15%. Disarankan mengurangi stok es dan mempromosikan minuman hangat.', confidence: 85, color: 'green', reason: 'Cuaca hujan menurunkan permintaan minuman dingin secara konsisten.', urgency: 'normal' }
     ]
   },
   januari: {
@@ -107,22 +107,22 @@ const monthData = {
     priorityText: '🚨 Darurat! <strong>Biaya operasional</strong> lebih besar dari pendapatan. Segera lakukan evaluasi — kurangi pengeluaran tidak perlu dan cari strategi promosi darurat untuk meningkatkan omzet.',
     aiPreviewText: 'Berdasarkan kondisi kritis saat ini, AKSA merekomendasikan <strong>evaluasi total</strong> bisnis Anda. Fokus pada pengurangan biaya, promosi besar-besaran, dan negosiasi ulang dengan supplier. Setiap hari sangat berharga.',
     recommendations: [
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Evaluasi Total Biaya Operasional', desc: 'Biaya operasional melebihi pendapatan. Lakukan audit pengeluaran segera. Hentikan pengeluaran yang tidak perlu dan negosiasi ulang sewa tempat jika memungkinkan.' },
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Promo Darurat Diskon Besar', desc: 'Buat promo diskon 30-50% untuk produk andalan (Kopi Susu) untuk menarik pelanggan kembali. Pasang spanduk promosi di depan toko dan media sosial.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Negosiasi Supplier', desc: 'Hubungi supplier susu dan gula untuk menunda pembayaran atau meminta harga khusus. Setiap penghematan 5-10% sangat berarti di kondisi kritis saat ini.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kurangi Stok Semua Produk', desc: 'Jangan beli stok baru kecuali benar-benar habis. Fokus jual stok yang ada untuk menghasilkan kas. Kurangi variasi menu sementara waktu.' },
-      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Cari Pendapatan Tambahan', desc: 'Pertimbangkan jualan frozen food atau camilan kemasan yang tidak memerlukan modal besar. Buka layanan antar untuk menjangkau lebih banyak pelanggan.' }
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Evaluasi Total Biaya Operasional', desc: 'Biaya operasional melebihi pendapatan. Lakukan audit pengeluaran segera. Hentikan pengeluaran yang tidak perlu dan negosiasi ulang sewa tempat jika memungkinkan.', reason: 'Pendapatan harian tidak mencukupi biaya tetap operasional.', confidence: 96 },
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Promo Darurat Diskon Besar', desc: 'Buat promo diskon 30-50% untuk produk andalan (Kopi Susu) untuk menarik pelanggan kembali. Pasang spanduk promosi di depan toko dan media sosial.', reason: 'Volume penjualan sangat rendah, promosi agresif diperlukan untuk menarik pelanggan.', confidence: 88 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Negosiasi Supplier', desc: 'Hubungi supplier susu dan gula untuk menunda pembayaran atau meminta harga khusus. Setiap penghematan 5-10% sangat berarti di kondisi kritis saat ini.', reason: 'Kenaikan harga bahan baku memperparah defisit yang sudah terjadi.', confidence: 85 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kurangi Stok Semua Produk', desc: 'Jangan beli stok baru kecuali benar-benar habis. Fokus jual stok yang ada untuk menghasilkan kas. Kurangi variasi menu sementara waktu.', reason: 'Arus kas negatif membutuhkan penghematan maksimal pada pengadaan stok.', confidence: 90 },
+      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Cari Pendapatan Tambahan', desc: 'Pertimbangkan jualan frozen food atau camilan kemasan yang tidak memerlukan modal besar. Buka layanan antar untuk menjangkau lebih banyak pelanggan.', reason: 'Diversifikasi pendapatan dapat membantu menstabilkan arus kas.', confidence: 78 }
     ],
     analysis: [
-      { icon: 'down', title: 'Omzet Anjlok 35%', desc: 'Penjualan <strong>Kopi Susu</strong> turun drastis dari 45 menjadi 12 porsi per hari. Total omzet bulan ini hanya Rp 850.000 — turun 35% dibanding bulan sebelumnya. Kondisi ini sangat kritis.' },
-      { icon: 'down', title: 'Keuntungan Hampir Nol', desc: 'Keuntungan hanya Rp 75.000 dengan margin sangat tipis. Biaya operasional tetap (sewa, gaji) lebih besar dari pendapatan. Bisnis mengalami <strong>kerugian</strong> bersih setiap hari.' },
-      { icon: 'down', title: 'Arus Kas Negatif', desc: 'Arus kas dalam kondisi negatif dengan saldo sangat terbatas (Rp 200.000). Tidak cukup untuk membeli stok baru atau membayar kewajiban minggu depan. <strong>Butuh injeksi dana segera.</strong>' },
-      { icon: 'down', title: 'Pelanggan Berkurang 60%', desc: 'Jumlah pelanggan harian turun dari 40 menjadi hanya 15 orang. Kemungkinan disebabkan oleh harga yang tidak kompetitif atau kemunculan pesaing baru. Survey pelanggan sangat disarankan.' }
+      { icon: 'down', title: 'Omzet Anjlok 35%', desc: 'Penjualan <strong>Kopi Susu</strong> turun drastis dari 45 menjadi 12 porsi per hari. Total omzet bulan ini hanya Rp 850.000 — turun 35% dibanding bulan sebelumnya. Kondisi ini sangat kritis.', reason: 'Kombinasi harga tidak kompetitif dan munculnya pesaing baru di sekitar lokasi.', urgency: 'urgent', confidence: 94 },
+      { icon: 'down', title: 'Keuntungan Hampir Nol', desc: 'Keuntungan hanya Rp 75.000 dengan margin sangat tipis. Biaya operasional tetap (sewa, gaji) lebih besar dari pendapatan. Bisnis mengalami <strong>kerugian</strong> bersih setiap hari.', reason: 'Biaya tetap operasional tidak berkurang meskipun pendapatan menurun drastis.', urgency: 'urgent', confidence: 97 },
+      { icon: 'down', title: 'Arus Kas Negatif', desc: 'Arus kas dalam kondisi negatif dengan saldo sangat terbatas (Rp 200.000). Tidak cukup untuk membeli stok baru atau membayar kewajiban minggu depan. <strong>Butuh injeksi dana segera.</strong>', reason: 'Pendapatan harian tidak mencukupi untuk menutup pengeluaran operasional wajib.', urgency: 'urgent', confidence: 96 },
+      { icon: 'down', title: 'Pelanggan Berkurang 60%', desc: 'Jumlah pelanggan harian turun dari 40 menjadi hanya 15 orang. Kemungkinan disebabkan oleh harga yang tidak kompetitif atau kemunculan pesaing baru. Survey pelanggan sangat disarankan.', reason: 'Hilangnya pelanggan setia akibat perubahan preferensi dan persaingan harga.', urgency: 'urgent', confidence: 89 }
     ],
     forecast: [
-      { icon: 'fa-triangle-exclamation', title: 'Risiko Kehabisan Kas dalam 7 Hari', desc: 'Dengan arus kas saat ini (Rp 200.000) dan pengeluaran harian rata-rata Rp 150.000, kas diperkirakan habis dalam 7 hari. <strong>Segera cari solusi pendanaan darurat.</strong>', confidence: 96, color: 'red' },
-      { icon: 'fa-chart-line', title: 'Omzet Diprediksi Turun Lagi 10%', desc: 'Jika tidak ada perubahan strategi, omzet diperkirakan terus turun 10% di minggu depan. Promo besar-besaran diperlukan untuk membalikkan tren negatif ini.', confidence: 88, color: 'orange' },
-      { icon: 'fa-users', title: 'Pelanggan Baru Sulit Didapat', desc: 'Biaya akuisisi pelanggan baru meningkat 3x lipat. Disarankan fokus mempertahankan pelanggan setia dengan program loyalitas sederhana.', confidence: 82, color: 'orange' }
+      { icon: 'fa-triangle-exclamation', title: 'Risiko Kehabisan Kas dalam 7 Hari', desc: 'Dengan arus kas saat ini (Rp 200.000) dan pengeluaran harian rata-rata Rp 150.000, kas diperkirakan habis dalam 7 hari. <strong>Segera cari solusi pendanaan darurat.</strong>', confidence: 96, color: 'red', reason: 'Arus kas negatif dengan rasio pengeluaran/pendapatan > 1.', urgency: 'urgent' },
+      { icon: 'fa-chart-line', title: 'Omzet Diprediksi Turun Lagi 10%', desc: 'Jika tidak ada perubahan strategi, omzet diperkirakan terus turun 10% di minggu depan. Promo besar-besaran diperlukan untuk membalikkan tren negatif ini.', confidence: 88, color: 'orange', reason: 'Tren penurunan 3 bulan beruntun menunjukkan pola yang berkelanjutan.', urgency: 'urgent' },
+      { icon: 'fa-users', title: 'Pelanggan Baru Sulit Didapat', desc: 'Biaya akuisisi pelanggan baru meningkat 3x lipat. Disarankan fokus mempertahankan pelanggan setia dengan program loyalitas sederhana.', confidence: 82, color: 'orange', reason: 'Persaingan harga dengan pesaing baru meningkatkan biaya akuisisi.', urgency: 'important' }
     ]
   },
   februari: {
@@ -146,22 +146,22 @@ const monthData = {
     priorityText: '📈 <strong>Kopi Susu</strong> mulai diminati kembali — 25 porsi/hari. Fokuskan promosi pada produk ini. Kurangi stok <strong>teh</strong> yang pergerakannya lambat.',
     aiPreviewText: 'Berdasarkan data pemulihan bulan ini, AKSA merekomendasikan untuk fokus pada <strong>produk cepat laku</strong> seperti Kopi Susu. Kurangi stok teh yang lambat bergerak dan tingkatkan promosi di jam sibuk pagi hari.',
     recommendations: [
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Fokus Promosi Kopi Susu', desc: 'Kopi Susu menunjukkan peningkatan permintaan (25 porsi/hari). Tambah stok susu dan kopi, buat promo khusus seperti "Beli 2 Gratis 1" di jam sibuk pagi untuk mendorong penjualan.' },
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Kurangi Stok Teh Berlebih', desc: 'Stok teh masih 30% di atas permintaan. Permintaan Es Teh belum pulih. Buat promo bundling teh dengan makanan ringan untuk mempercepat pengurangan stok.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Optimalkan Jam Sibuk', desc: 'Puncak kunjungan terjadi pukul 08.00-10.00 dan 17.00-19.00. Pastikan stok bahan baku cukup di jam-jam tersebut. Tambah 1 karyawan paruh waktu jika perlu.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kendalikan Biaya Bahan Baku', desc: 'Biaya bahan baku masih 8% lebih tinggi. Cari supplier alternatif atau beli dalam jumlah grosir untuk mendapatkan harga lebih murah. Targetkan penghematan 5%.' },
-      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Program Loyalitas Pelanggan', desc: 'Terapkan program poin atau "Beli 10 Gratis 1" untuk mempertahankan pelanggan yang sudah kembali. Pelanggan setia adalah kunci pemulihan bisnis.' }
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Fokus Promosi Kopi Susu', desc: 'Kopi Susu menunjukkan peningkatan permintaan (25 porsi/hari). Tambah stok susu dan kopi, buat promo khusus seperti "Beli 2 Gratis 1" di jam sibuk pagi untuk mendorong penjualan.', reason: 'Kopi Susu menjadi produk recovery utama dengan tren positif.', confidence: 90 },
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Kurangi Stok Teh Berlebih', desc: 'Stok teh masih 30% di atas permintaan. Permintaan Es Teh belum pulih. Buat promo bundling teh dengan makanan ringan untuk mempercepat pengurangan stok.', reason: 'Stok teh menumpuk dari periode sebelumnya dan permintaan masih rendah.', confidence: 87 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Optimalkan Jam Sibuk', desc: 'Puncak kunjungan terjadi pukul 08.00-10.00 dan 17.00-19.00. Pastikan stok bahan baku cukup di jam-jam tersebut. Tambah 1 karyawan paruh waktu jika perlu.', reason: 'Data transaksi menunjukkan pola kunjungan yang konsisten di jam tertentu.', confidence: 86 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Kendalikan Biaya Bahan Baku', desc: 'Biaya bahan baku masih 8% lebih tinggi. Cari supplier alternatif atau beli dalam jumlah grosir untuk mendapatkan harga lebih murah. Targetkan penghematan 5%.', reason: 'Harga supplier belum kembali normal setelah kenaikan sebelumnya.', confidence: 84 },
+      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Program Loyalitas Pelanggan', desc: 'Terapkan program poin atau "Beli 10 Gratis 1" untuk mempertahankan pelanggan yang sudah kembali. Pelanggan setia adalah kunci pemulihan bisnis.', reason: 'Mempertahankan pelanggan 5x lebih hemat daripada mendapatkan pelanggan baru.', confidence: 82 }
     ],
     analysis: [
-      { icon: 'up', title: 'Omzet Mulai Pulih Naik 8%', desc: 'Omzet bulan ini Rp 1.850.000 — naik 8% dibanding bulan lalu. <strong>Kopi Susu</strong> menjadi motor pemulihan dengan peningkatan penjualan dari 12 menjadi 25 porsi per hari. Tren positif perlu dipertahankan.' },
-      { icon: 'up', title: 'Keuntungan Mulai Membaik', desc: 'Keuntungan naik menjadi Rp 420.000 (+5%). Meskipun masih tipis, ini menunjukkan arah yang benar. Fokus pada efisiensi biaya untuk meningkatkan margin keuntungan.' },
-      { icon: 'up', title: 'Arus Kas Cukup Stabil', desc: 'Arus kas membaik dengan status "Cukup" dan saldo Rp 850.000. Mulai ada dana untuk pembelian stok. Namun tetap disarankan mengatur pengeluaran dengan hati-hati.' },
-      { icon: 'down', title: 'Perputaran Stok Masih Lambat', desc: 'Perputaran stok masih lambat (skor 55). Stok teh dan beberapa bahan masih menumpuk. Percepat penjualan dengan promo bundling atau diskon terbatas.' }
+      { icon: 'up', title: 'Omzet Mulai Pulih Naik 8%', desc: 'Omzet bulan ini Rp 1.850.000 — naik 8% dibanding bulan lalu. <strong>Kopi Susu</strong> menjadi motor pemulihan dengan peningkatan penjualan dari 12 menjadi 25 porsi per hari. Tren positif perlu dipertahankan.', reason: 'Strategi promosi Kopi Susu mulai membuahkan hasil dan pelanggan mulai kembali.', urgency: 'normal', confidence: 90 },
+      { icon: 'up', title: 'Keuntungan Mulai Membaik', desc: 'Keuntungan naik menjadi Rp 420.000 (+5%). Meskipun masih tipis, ini menunjukkan arah yang benar. Fokus pada efisiensi biaya untuk meningkatkan margin keuntungan.', reason: 'Peningkatan volume penjualan mulai menutup biaya operasional tetap.', urgency: 'normal', confidence: 87 },
+      { icon: 'up', title: 'Arus Kas Cukup Stabil', desc: 'Arus kas membaik dengan status "Cukup" dan saldo Rp 850.000. Mulai ada dana untuk pembelian stok. Namun tetap disarankan mengatur pengeluaran dengan hati-hati.', reason: 'Pemulihan penjualan meningkatkan pemasukan kas secara bertahap.', urgency: 'normal', confidence: 85 },
+      { icon: 'down', title: 'Perputaran Stok Masih Lambat', desc: 'Perputaran stok masih lambat (skor 55). Stok teh dan beberapa bahan masih menumpuk. Percepat penjualan dengan promo bundling atau diskon terbatas.', reason: 'Stok berlebih dari periode sebelumnya belum terserap dengan baik.', urgency: 'important', confidence: 88 }
     ],
     forecast: [
-      { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Bakal Naik 20%', desc: 'Berdasarkan tren pemulihan, permintaan Kopi Susu diprediksi naik 20% dalam 2 minggu ke depan. Siapkan stok susu dan biji kopi tambahan.', confidence: 90, color: '' },
-      { icon: 'fa-cube', title: 'Stok Gula Cukup untuk 10 Hari', desc: 'Dengan konsumsi saat ini, stok gula aman untuk 10 hari. Namun antisipasi kenaikan permintaan akhir pekan dengan menambah stok 20% lebih banyak.', confidence: 87, color: 'blue' },
-      { icon: 'fa-chart-line', title: 'Omzet Diprediksi Naik 10-15%', desc: 'Jika tren pemulihan berlanjut, omzet bulan depan diprediksi naik 10-15%. Persiapkan strategi untuk memanfaatkan momentum ini.', confidence: 84, color: 'green' }
+      { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Bakal Naik 20%', desc: 'Berdasarkan tren pemulihan, permintaan Kopi Susu diprediksi naik 20% dalam 2 minggu ke depan. Siapkan stok susu dan biji kopi tambahan.', confidence: 90, color: '', reason: 'Tren peningkatan penjualan Kopi Susu konsisten selama 2 minggu terakhir.', urgency: 'important' },
+      { icon: 'fa-cube', title: 'Stok Gula Cukup untuk 10 Hari', desc: 'Dengan konsumsi saat ini, stok gula aman untuk 10 hari. Namun antisipasi kenaikan permintaan akhir pekan dengan menambah stok 20% lebih banyak.', confidence: 87, color: 'blue', reason: 'Konsumsi stabil dan stok tersisa masih dalam batas aman.', urgency: 'normal' },
+      { icon: 'fa-chart-line', title: 'Omzet Diprediksi Naik 10-15%', desc: 'Jika tren pemulihan berlanjut, omzet bulan depan diprediksi naik 10-15%. Persiapkan strategi untuk memanfaatkan momentum ini.', confidence: 84, color: 'green', reason: 'Pola pemulihan menunjukkan laju pertumbuhan yang berkelanjutan.', urgency: 'normal' }
     ]
   },
   maret: {
@@ -185,22 +185,22 @@ const monthData = {
     priorityText: '✅ Bisnis dalam kondisi <strong>sehat</strong>! Optimalkan dengan menambah varian minuman hangat untuk musim hujan. Pantau stok <strong>gula</strong> agar tidak kehabisan.',
     aiPreviewText: 'Dengan kondisi bisnis yang sehat, AKSA merekomendasikan untuk <strong>ekspansi variasi menu</strong> dan meningkatkan efisiensi stok. Pertahankan momentum pertumbuhan dengan promosi bundling yang sudah terbukti efektif.',
     recommendations: [
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Tambah Varian Minuman Hangat', desc: 'Musim hujan meningkatkan permintaan minuman hangat. Tambah varian seperti Kopi Aren, Cokelat Hangat, atau Wedang Jahe untuk menarik pelanggan baru dan meningkatkan omzet.' },
-      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Optimalkan Promo Bundling', desc: 'Promo bundling Kopi Susu + Roti Bakar terbukti meningkatkan penjualan 35%. Kembangkan bundling varian baru seperti Kopi Aren + Pisang Goreng untuk variasi.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Tingkatkan Perputaran Stok Teh', desc: 'Stok teh masih bergerak lambat. Buat menu spesial "Es Teh Segar" dengan harga promo atau bundling dengan gorengan untuk mempercepat perputaran stok.' },
-      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Siapkan Stok untuk Akhir Pekan', desc: 'Akhir pekan diprediksi ramai dengan cuaca dingin. Tambah stok susu 30% dan gula 20% dari biasanya. Pastikan semua bahan baku tersedia cukup.' },
-      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Evaluasi Harga Jual', desc: 'Dengan kondisi bisnis yang stabil, evaluasi harga jual untuk meningkatkan margin. Kenaikan Rp 500-1000 per produk dapat meningkatkan keuntungan 10-15%.' }
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Tambah Varian Minuman Hangat', desc: 'Musim hujan meningkatkan permintaan minuman hangat. Tambah varian seperti Kopi Aren, Cokelat Hangat, atau Wedang Jahe untuk menarik pelanggan baru dan meningkatkan omzet.', reason: 'Pola musiman menunjukkan permintaan minuman hangat naik signifikan saat musim hujan.', confidence: 93 },
+      { urgency: 'urgent', badge: 'Sangat Mendesak', icon: '🔥', title: 'Optimalkan Promo Bundling', desc: 'Promo bundling Kopi Susu + Roti Bakar terbukti meningkatkan penjualan 35%. Kembangkan bundling varian baru seperti Kopi Aren + Pisang Goreng untuk variasi.', reason: 'Data historis membuktikan promo bundling efektif meningkatkan rata-rata transaksi.', confidence: 89 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Tingkatkan Perputaran Stok Teh', desc: 'Stok teh masih bergerak lambat. Buat menu spesial "Es Teh Segar" dengan harga promo atau bundling dengan gorengan untuk mempercepat perputaran stok.', reason: 'Perputaran stok teh masih di bawah optimal, berpotensi merugikan.', confidence: 86 },
+      { urgency: 'important', badge: 'Penting', icon: '⚠', title: 'Siapkan Stok untuk Akhir Pekan', desc: 'Akhir pekan diprediksi ramai dengan cuaca dingin. Tambah stok susu 30% dan gula 20% dari biasanya. Pastikan semua bahan baku tersedia cukup.', reason: 'Pola penjualan akhir pekan menunjukkan lonjakan permintaan yang konsisten.', confidence: 88 },
+      { urgency: 'optional', badge: 'Opsional', icon: '💡', title: 'Evaluasi Harga Jual', desc: 'Dengan kondisi bisnis yang stabil, evaluasi harga jual untuk meningkatkan margin. Kenaikan Rp 500-1000 per produk dapat meningkatkan keuntungan 10-15%.', reason: 'Margin saat ini sudah stabil, ada ruang untuk penyesuaian harga.', confidence: 84 }
     ],
     analysis: [
-      { icon: 'up', title: 'Omzet Naik 10% Stabil', desc: 'Omzet bulan ini Rp 2.450.000 dengan pertumbuhan 10%. <strong>Kopi Susu</strong> tetap menjadi andalan dengan 32 porsi per hari. Pola pertumbuhan konsisten dan stabil menunjukkan bisnis sehat.' },
-      { icon: 'up', title: 'Keuntungan Stabil di Rp 720.000', desc: 'Keuntungan stabil di Rp 720.000 dengan margin yang terjaga. Biaya bahan baku sudah terkendali dan harga jual optimal. Pertahankan strategi pengelolaan biaya saat ini.' },
-      { icon: 'up', title: 'Arus Kas Stabil dan Sehat', desc: 'Arus kas dalam kondisi stabil dengan status "Stabil" dan saldo Rp 1.250.000. Bisnis memiliki likuiditas yang cukup untuk operasional dan pengembangan.' },
-      { icon: 'down', title: 'Perputaran Stok Butuh Peningkatan', desc: 'Skor perputaran stok 70 — masih di bawah kategori ideal. Fokus pada strategi promosi untuk produk yang lambat bergerak seperti teh dan beberapa bahan kue.' }
+      { icon: 'up', title: 'Omzet Naik 10% Stabil', desc: 'Omzet bulan ini Rp 2.450.000 dengan pertumbuhan 10%. <strong>Kopi Susu</strong> tetap menjadi andalan dengan 32 porsi per hari. Pola pertumbuhan konsisten dan stabil menunjukkan bisnis sehat.', reason: 'Kombinasi strategi promosi yang tepat dan loyalitas pelanggan meningkat.', urgency: 'normal', confidence: 93 },
+      { icon: 'up', title: 'Keuntungan Stabil di Rp 720.000', desc: 'Keuntungan stabil di Rp 720.000 dengan margin yang terjaga. Biaya bahan baku sudah terkendali dan harga jual optimal. Pertahankan strategi pengelolaan biaya saat ini.', reason: 'Efisiensi pengadaan bahan baku dan penyesuaian harga jual membuahkan hasil.', urgency: 'normal', confidence: 90 },
+      { icon: 'up', title: 'Arus Kas Stabil dan Sehat', desc: 'Arus kas dalam kondisi stabil dengan status "Stabil" dan saldo Rp 1.250.000. Bisnis memiliki likuiditas yang cukup untuk operasional dan pengembangan.', reason: 'Pemasukan konsisten dari penjualan harian menjamin kelancaran arus kas.', urgency: 'normal', confidence: 91 },
+      { icon: 'down', title: 'Perputaran Stok Butuh Peningkatan', desc: 'Skor perputaran stok 70 — masih di bawah kategori ideal. Fokus pada strategi promosi untuk produk yang lambat bergerak seperti teh dan beberapa bahan kue.', reason: 'Beberapa item stok memiliki permintaan musiman yang belum dioptimalkan.', urgency: 'important', confidence: 86 }
     ],
     forecast: [
-      { icon: 'fa-mug-hot', title: 'Permintaan Minuman Hangat Naik 30%', desc: 'Musim hujan diprediksi meningkatkan permintaan minuman hangat hingga 30%. Siapkan stok kopi, susu, cokelat, dan jahe untuk mengantisipasi lonjakan.', confidence: 93, color: '' },
-      { icon: 'fa-cart-plus', title: 'Omzet Diprediksi Tembus Rp 3 Juta', desc: 'Dengan strategi yang tepat, omzet bulan depan diprediksi tembus Rp 3 juta untuk pertama kalinya. Fokus pada promosi bundling dan varian baru.', confidence: 89, color: 'green' },
-      { icon: 'fa-snowflake', title: 'Es Teh Turun 10% Musim Hujan', desc: 'Permintaan Es Teh diperkirakan turun 10% selama musim hujan. Kurangi stok es dan alihkan fokus promosi ke minuman hangat.', confidence: 86, color: 'orange' }
+      { icon: 'fa-mug-hot', title: 'Permintaan Minuman Hangat Naik 30%', desc: 'Musim hujan diprediksi meningkatkan permintaan minuman hangat hingga 30%. Siapkan stok kopi, susu, cokelat, dan jahe untuk mengantisipasi lonjakan.', confidence: 93, color: '', reason: 'Pola musiman konsisten menunjukkan kenaikan permintaan saat musim hujan.', urgency: 'important' },
+      { icon: 'fa-cart-plus', title: 'Omzet Diprediksi Tembus Rp 3 Juta', desc: 'Dengan strategi yang tepat, omzet bulan depan diprediksi tembus Rp 3 juta untuk pertama kalinya. Fokus pada promosi bundling dan varian baru.', confidence: 89, color: 'green', reason: 'Tren pertumbuhan 10% per bulan mendekati target Rp 3 juta.', urgency: 'normal' },
+      { icon: 'fa-snowflake', title: 'Es Teh Turun 10% Musim Hujan', desc: 'Permintaan Es Teh diperkirakan turun 10% selama musim hujan. Kurangi stok es dan alihkan fokus promosi ke minuman hangat.', confidence: 86, color: 'orange', reason: 'Pola musiman menunjukkan penurunan permintaan minuman dingin saat hujan.', urgency: 'normal' }
     ]
   }
 };
@@ -332,13 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // --- Premium ---
   initPremium();
-  // Apply premium state on every page (not just profile)
-  const hasPremiumUI = document.getElementById('premiumOverlayForecast')
-                    || document.getElementById('premiumOverlayAssistant')
-                    || document.getElementById('chatInputArea');
-  if (hasPremiumUI) {
-    updatePremiumUI();
-  }
+  // Always update sidebar premium state on every page
+  updatePremiumUI();
 
   // Ensure content scrolls to top on load
   const content = document.querySelector('.content');
@@ -500,7 +495,10 @@ function updateRecommendations() {
   const data = getData();
   if (!data || !data.recommendations) return;
 
-  container.innerHTML = data.recommendations.map(rec => `
+  container.innerHTML = data.recommendations.map(rec => {
+    const urgencyLabel = rec.urgency === 'urgent' ? 'Sangat Penting' : rec.urgency === 'important' ? 'Penting' : 'Normal';
+    const urgencyClass = rec.urgency === 'urgent' ? 'urgent' : rec.urgency === 'important' ? 'important' : 'normal';
+    return `
     <div class="rec-item ${rec.urgency}">
       <div class="rec-header">
         <span class="rec-badge ${rec.urgency}"><i class="fas ${rec.urgency === 'urgent' ? 'fa-fire' : rec.urgency === 'important' ? 'fa-triangle-exclamation' : 'fa-lightbulb'}"></i> ${rec.badge}</span>
@@ -508,8 +506,34 @@ function updateRecommendations() {
       </div>
       <h4 class="rec-title">${rec.title}</h4>
       <p class="rec-desc">${rec.desc}</p>
+      ${rec.reason || rec.confidence ? `
+      <div class="explainable-ai">
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Mengapa?</span>
+          <span class="ai-explain-value reason">${rec.reason || '-'}</span>
+        </div>
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Urgensi</span>
+          <span class="ai-explain-value urgency ${urgencyClass}"><i class="fas ${urgencyClass === 'urgent' ? 'fa-fire' : urgencyClass === 'important' ? 'fa-triangle-exclamation' : 'fa-check-circle'}"></i> ${urgencyLabel}</span>
+        </div>
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Confidence</span>
+          <span class="ai-explain-value confidence-val">${rec.confidence || 0}%</span>
+          <div class="ai-conf-mini-bar"><div class="conf-mini-fill" data-target="${rec.confidence || 0}"></div></div>
+        </div>
+      </div>
+      ` : ''}
     </div>
-  `).join('');
+    `;
+  }).join('');
+
+  // Animate mini confidence bars
+  setTimeout(() => {
+    container.querySelectorAll('.conf-mini-fill').forEach(el => {
+      const target = el.getAttribute('data-target');
+      if (target) el.style.width = target + '%';
+    });
+  }, 200);
 }
 
 function updateAnalysisPage() {
@@ -520,17 +544,46 @@ function updateAnalysisPage() {
 
   container.innerHTML = `
     <div class="analysis-card">
-      ${data.analysis.map((item, i) => `
+      ${data.analysis.map((item, i) => {
+        const urgencyLabel = item.urgency === 'urgent' ? 'Sangat Penting' : item.urgency === 'important' ? 'Penting' : 'Normal';
+        const urgencyClass = item.urgency === 'urgent' ? 'urgent' : item.urgency === 'important' ? 'important' : 'normal';
+        return `
         <div class="analysis-item"${i === data.analysis.length - 1 ? ' style="border-bottom: none; padding-bottom: 0;"' : ''}>
           <div class="item-header">
             <i class="fas fa-arrow-${item.icon === 'up' ? 'up up' : 'down down'}"></i>
             <h4>${item.title}</h4>
           </div>
           <div class="item-desc">${item.desc}</div>
+          ${item.reason || item.urgency || item.confidence ? `
+          <div class="explainable-ai">
+            <div class="ai-explain-row">
+              <span class="ai-explain-label">Mengapa?</span>
+              <span class="ai-explain-value reason">${item.reason || '-'}</span>
+            </div>
+            <div class="ai-explain-row">
+              <span class="ai-explain-label">Urgensi</span>
+              <span class="ai-explain-value urgency ${urgencyClass}"><i class="fas ${urgencyClass === 'urgent' ? 'fa-fire' : urgencyClass === 'important' ? 'fa-triangle-exclamation' : 'fa-check-circle'}"></i> ${urgencyLabel}</span>
+            </div>
+            <div class="ai-explain-row">
+              <span class="ai-explain-label">Confidence</span>
+              <span class="ai-explain-value confidence-val">${item.confidence || 0}%</span>
+              <div class="ai-conf-mini-bar"><div class="conf-mini-fill" data-target="${item.confidence || 0}"></div></div>
+            </div>
+          </div>
+          ` : ''}
         </div>
-      `).join('')}
+        `;
+      }).join('')}
     </div>
   `;
+
+  // Animate mini confidence bars
+  setTimeout(() => {
+    container.querySelectorAll('.conf-mini-fill').forEach(el => {
+      const target = el.getAttribute('data-target');
+      if (target) el.style.width = target + '%';
+    });
+  }, 200);
 }
 
 function updateForecastPage() {
@@ -539,7 +592,10 @@ function updateForecastPage() {
   const data = getData();
   if (!data || !data.forecast) return;
 
-  container.innerHTML = data.forecast.map(item => `
+  container.innerHTML = data.forecast.map(item => {
+    const urgencyLabel = item.urgency === 'urgent' ? 'Sangat Penting' : item.urgency === 'important' ? 'Penting' : 'Normal';
+    const urgencyClass = item.urgency === 'urgent' ? 'urgent' : item.urgency === 'important' ? 'important' : 'normal';
+    return `
     <div class="forecast-card">
       <div class="forecast-header">
         <i class="fas ${item.icon}"></i>
@@ -555,8 +611,26 @@ function updateForecastPage() {
           <strong style="font-size: 14px;">${item.confidence}%</strong>
         </div>
       </div>
+      ${item.reason || item.urgency ? `
+      <div class="explainable-ai">
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Mengapa?</span>
+          <span class="ai-explain-value reason">${item.reason || '-'}</span>
+        </div>
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Urgensi</span>
+          <span class="ai-explain-value urgency ${urgencyClass}"><i class="fas ${urgencyClass === 'urgent' ? 'fa-fire' : urgencyClass === 'important' ? 'fa-triangle-exclamation' : 'fa-check-circle'}"></i> ${urgencyLabel}</span>
+        </div>
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Confidence</span>
+          <span class="ai-explain-value confidence-val">${item.confidence || 0}%</span>
+          <div class="ai-conf-mini-bar"><div class="conf-mini-fill" data-target="${item.confidence || 0}"></div></div>
+        </div>
+      </div>
+      ` : ''}
     </div>
-  `).join('');
+    `;
+  }).join('');
 
   // Animate confidence bars after render
   setTimeout(() => {
@@ -565,6 +639,10 @@ function updateForecastPage() {
       if (!isNaN(val)) {
         animateConfidence(el.closest('.forecast-card').querySelector('.progress-fill'), val);
       }
+    });
+    container.querySelectorAll('.conf-mini-fill').forEach(el => {
+      const target = el.getAttribute('data-target');
+      if (target) el.style.width = target + '%';
     });
   }, 100);
 }
@@ -760,38 +838,66 @@ function closeAllPeriodDropdowns() {
 const chatResponses = [
   {
     keywords: ['omzet', 'turun', 'pendapatan', 'penjualan'],
-    response: 'Berdasarkan analisis data transaksi 7 hari terakhir, omzet turun karena produk minuman mengalami penurunan penjualan sebesar 18%. Produk Kopi Susu dan Es Teh menjadi penyebab utama penurunan. Disarankan membuat promo bundling untuk meningkatkan daya tarik pelanggan.',
-    confidence: 94
+    response: 'Penjualan minuman turun 18% selama 7 hari terakhir.',
+    penyebab: 'Produk yang paling memengaruhi:\n• Kopi Susu (-20%)\n• Es Teh (-15%)',
+    rekomendasi: 'Buat promo bundling Kopi Susu + Roti Bakar.',
+    urgency: 'Penting',
+    confidence: 94,
+    related: ['analysis', 'forecast', 'recommendation']
   },
   {
     keywords: ['naik', 'meningkat', 'untung', 'laba'],
-    response: 'Omzet mengalami kenaikan 12% dibandingkan minggu lalu. Produk Kopi Susu menjadi kontributor utama dengan peningkatan penjualan 25%. Disarankan untuk mempertahankan stok bahan baku agar tidak kehabisan di akhir pekan.',
-    confidence: 92
+    response: 'Omzet mengalami kenaikan 12% dibandingkan minggu lalu.',
+    penyebab: 'Produk yang paling berkontribusi:\n• Kopi Susu (+25%)\n• Roti Bakar (+15%)',
+    rekomendasi: 'Pertahankan stok bahan baku agar tidak kehabisan di akhir pekan.',
+    urgency: 'Normal',
+    confidence: 92,
+    related: ['analysis', 'recommendation']
   },
   {
     keywords: ['stok', 'habis', 'bahan', 'gula', 'susu', 'kopi', 'teh'],
-    response: 'Sistem mendeteksi stok gula akan habis dalam 4 hari dengan tingkat konsumsi saat ini. Stok susu masih aman untuk 7 hari ke depan. Disarankan segera melakukan pemesanan gula untuk menghindari kehabisan stok.',
-    confidence: 91
+    response: 'Stok gula akan habis dalam 4 hari dengan tingkat konsumsi saat ini.',
+    penyebab: 'Konsumsi harian rata-rata 2 kg dengan stok tersisa 8 kg.',
+    rekomendasi: 'Segera lakukan pemesanan gula untuk menghindari kehabisan stok.',
+    urgency: 'Sangat Penting',
+    confidence: 91,
+    related: ['forecast', 'recommendation']
   },
   {
     keywords: ['promo', 'promosi', 'diskon', 'bundling'],
-    response: 'Berdasarkan data pembelian, promo bundling Kopi Susu + Roti Bakar meningkatkan penjualan sebesar 35% saat diterapkan. Waktu terbaik untuk promo adalah jam 14.00 - 16.00 yang merupakan jam sepi pelanggan.',
-    confidence: 89
+    response: 'Promo bundling Kopi Susu + Roti Bakar meningkatkan penjualan 35%.',
+    penyebab: 'Data menunjukkan jam 14.00-16.00 memiliki rata-rata kunjungan terendah.',
+    rekomendasi: 'Terapkan promo bundling di jam 14.00-16.00 untuk meningkatkan kunjungan.',
+    urgency: 'Penting',
+    confidence: 89,
+    related: ['analysis', 'recommendation']
   },
   {
     keywords: ['pelanggan', 'pengunjung', 'rame', 'ramai', 'sepi'],
-    response: 'Jumlah pelanggan meningkat 8% dalam 2 minggu terakhir. Puncak kunjungan terjadi pada jam 08.00 - 10.00 dan 17.00 - 19.00. Jam sepi terjadi pada pukul 14.00 - 16.00. Disarankan membuat promo khusus di jam sepi.',
-    confidence: 93
+    response: 'Jumlah pelanggan meningkat 8% dalam 2 minggu terakhir.',
+    penyebab: 'Puncak kunjungan pada jam 08.00-10.00 dan 17.00-19.00.',
+    rekomendasi: 'Buat promo khusus di jam sepi (14.00-16.00) untuk menarik pelanggan.',
+    urgency: 'Normal',
+    confidence: 93,
+    related: ['analysis', 'recommendation']
   },
   {
     keywords: ['biaya', 'modal', 'pengeluaran', 'belanja'],
-    response: 'Biaya bahan baku naik 8% dibandingkan bulan lalu. Kenaikan harga susu dan gula menjadi faktor utama. Disarankan mencari supplier alternatif atau membeli dalam jumlah lebih besar untuk mendapatkan harga grosir.',
-    confidence: 87
+    response: 'Biaya bahan baku naik 8% dibandingkan bulan lalu.',
+    penyebab: 'Kenaikan harga susu dan gula menjadi faktor utama.',
+    rekomendasi: 'Cari supplier alternatif atau beli dalam jumlah grosir untuk harga lebih murah.',
+    urgency: 'Penting',
+    confidence: 87,
+    related: ['analysis', 'recommendation']
   },
   {
     keywords: ['rekomendasi', 'saran', 'harus', 'baik'],
-    response: 'Berdasarkan kondisi bisnis saat ini, berikut rekomendasi prioritas:\n\n1. Tambah stok gula (sangat mendesak)\n2. Buat promo bundling untuk jam sepi\n3. Evaluasi harga jual produk\n4. Kurangi stok teh yang berlebih\n\nDengan menerapkan rekomendasi ini, diprediksi omzet dapat naik 15-20% dalam 2 minggu.',
-    confidence: 95
+    response: 'Berdasarkan kondisi bisnis saat ini, berikut rekomendasi prioritas:',
+    penyebab: '1. Tambah stok gula (sangat mendesak)\n2. Buat promo bundling untuk jam sepi\n3. Evaluasi harga jual produk\n4. Kurangi stok teh yang berlebih',
+    rekomendasi: 'Dengan menerapkan rekomendasi ini, diprediksi omzet dapat naik 15-20% dalam 2 minggu.',
+    urgency: 'Sangat Penting',
+    confidence: 95,
+    related: ['analysis', 'forecast', 'recommendation']
   }
 ];
 
@@ -802,6 +908,21 @@ function setupChat() {
 
   if (!chatInput || !sendBtn || !chatContainer) return;
 
+  // Load saved chat history
+  loadChatHistory();
+
+  // Toggle send button active state based on input
+  function toggleSendBtn() {
+    if (chatInput.value.trim().length > 0) {
+      sendBtn.classList.add('active');
+    } else {
+      sendBtn.classList.remove('active');
+    }
+  }
+
+  chatInput.addEventListener('input', toggleSendBtn);
+  toggleSendBtn();
+
   function sendMessage() {
     const text = chatInput.value.trim();
     if (!text) return;
@@ -809,11 +930,12 @@ function setupChat() {
     // Add user message
     addUserMessage(text);
     chatInput.value = '';
+    toggleSendBtn();
 
     // Simulate AI typing delay
     setTimeout(() => {
       const response = getAIResponse(text);
-      addAIMessage(response.response, response.confidence);
+      addAIMessage(response.response, response.confidence, response.extra);
     }, 800 + Math.random() * 400);
   }
 
@@ -839,33 +961,123 @@ function addUserMessage(text) {
   div.textContent = text;
   container.appendChild(div);
   scrollContentToBottom();
+  saveChatHistory();
 }
 
-function addAIMessage(text, confidence) {
+function addAIMessage(text, confidence, extra) {
   const container = document.getElementById('chatMessages');
   if (!container) return;
 
-  const lines = text.split('\n');
-  let formattedText = '';
-  lines.forEach((line, idx) => {
-    if (line.trim().startsWith('1.') || line.trim().startsWith('2.') || line.trim().startsWith('3.') || line.trim().startsWith('4.') || line.trim().startsWith('5.')) {
-      formattedText += '<br>' + line;
-    } else if (idx > 0 && line.trim() !== '') {
-      formattedText += '<br>' + line;
-    } else {
-      formattedText += line;
+  let structuredHTML = '';
+
+  if (extra && extra.penyebab) {
+    // Structured response
+    const urgencyClass = extra.urgency === 'Sangat Penting' ? 'urgent' : extra.urgency === 'Penting' ? 'important' : 'normal';
+    const urgencyIcon = urgencyClass === 'urgent' ? 'fa-fire' : urgencyClass === 'important' ? 'fa-triangle-exclamation' : 'fa-check-circle';
+
+    let relatedHTML = '';
+    if (extra.related && extra.related.length > 0) {
+      const relatedLinks = extra.related.map(r => {
+        if (r === 'analysis') return '<a href="analysis.html" class="ai-related-link"><i class="fas fa-chart-bar"></i> Business Analysis</a>';
+        if (r === 'forecast') return '<a href="forecast.html" class="ai-related-link"><i class="fas fa-chart-simple"></i> Forecast</a>';
+        if (r === 'recommendation') return '<a href="recommendation.html" class="ai-related-link"><i class="fas fa-lightbulb"></i> Recommendation</a>';
+        return '';
+      }).join('');
+
+      relatedHTML = `
+        <div class="ai-related">
+          <div class="ai-related-title">Analisis Terkait</div>
+          <div class="ai-related-links">${relatedLinks}</div>
+        </div>
+      `;
     }
-  });
+
+    structuredHTML = `
+      <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>
+      <div><strong>Penyebab</strong></div>
+      <div>${text}</div>
+      <div style="margin-top:6px;">${extra.penyebab.replace(/\n/g, '<br>')}</div>
+      <div style="margin-top:10px;"><strong>Rekomendasi</strong></div>
+      <div>${extra.rekomendasi}</div>
+      <div class="explainable-ai">
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Urgensi</span>
+          <span class="ai-explain-value urgency ${urgencyClass}"><i class="fas ${urgencyIcon}"></i> ${extra.urgency}</span>
+        </div>
+        <div class="ai-explain-row">
+          <span class="ai-explain-label">Confidence</span>
+          <span class="ai-explain-value confidence-val">${extra.confidence}%</span>
+          <div class="ai-conf-mini-bar"><div class="conf-mini-fill" style="width: ${extra.confidence}%;"></div></div>
+        </div>
+      </div>
+      ${relatedHTML}
+    `;
+  } else {
+    // Simple fallback response
+    const lines = text.split('\n');
+    let formattedText = '';
+    lines.forEach((line, idx) => {
+      if (line.trim().startsWith('1.') || line.trim().startsWith('2.') || line.trim().startsWith('3.') || line.trim().startsWith('4.') || line.trim().startsWith('5.')) {
+        formattedText += '<br>' + line;
+      } else if (idx > 0 && line.trim() !== '') {
+        formattedText += '<br>' + line;
+      } else {
+        formattedText += line;
+      }
+    });
+
+    structuredHTML = `
+      <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>
+      <div>${formattedText}</div>
+      <div class="ai-confidence"><i class="fas fa-check-circle"></i> Confidence: ${confidence || 85}%</div>
+    `;
+  }
 
   const div = document.createElement('div');
   div.className = 'chat-message ai';
-  div.innerHTML = `
-    <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>
-    <div>${formattedText}</div>
-    <div class="ai-confidence"><i class="fas fa-check-circle"></i> Confidence: ${confidence}%</div>
-  `;
+  div.innerHTML = structuredHTML;
   container.appendChild(div);
   scrollContentToBottom();
+  saveChatHistory();
+}
+
+function saveChatHistory() {
+  const container = document.getElementById('chatMessages');
+  if (!container) return;
+  const messages = [];
+  container.querySelectorAll('.chat-message').forEach(msg => {
+    const isUser = msg.classList.contains('user');
+    messages.push({
+      type: isUser ? 'user' : 'ai',
+      html: msg.innerHTML,
+      text: msg.textContent
+    });
+  });
+  localStorage.setItem('aksaChatHistory', JSON.stringify(messages));
+}
+
+function loadChatHistory() {
+  const container = document.getElementById('chatMessages');
+  if (!container) return;
+  const saved = localStorage.getItem('aksaChatHistory');
+  if (!saved) return;
+
+  try {
+    const messages = JSON.parse(saved);
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'chat-message ' + msg.type;
+      div.innerHTML = msg.html;
+      container.appendChild(div);
+    });
+    scrollContentToBottom();
+  } catch(e) {
+    // ignore parse errors
+  }
+}
+
+function clearChatHistory() {
+  localStorage.removeItem('aksaChatHistory');
 }
 
 function getAIResponse(userMessage) {
@@ -896,13 +1108,21 @@ function getAIResponse(userMessage) {
   if (!bestMatch || bestScore === 0) {
     return {
       response: 'Maaf, saya belum bisa menganalisis pertanyaan tersebut. Coba tanyakan tentang omzet, stok, pelanggan, atau promo bisnis Anda.',
-      confidence: 85
+      confidence: 85,
+      extra: null
     };
   }
 
   return {
     response: bestMatch.response,
-    confidence: bestMatch.confidence
+    confidence: bestMatch.confidence,
+    extra: {
+      penyebab: bestMatch.penyebab,
+      rekomendasi: bestMatch.rekomendasi,
+      urgency: bestMatch.urgency,
+      confidence: bestMatch.confidence,
+      related: bestMatch.related
+    }
   };
 }
 
@@ -953,12 +1173,27 @@ function handleBusinessProfile(e) {
 }
 
 /* ==========================================
+   SYNC DETAIL MODAL
+   ========================================== */
+function openSyncModal() {
+  document.getElementById('syncModalOverlay').classList.add('open');
+  document.getElementById('syncModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSyncModal() {
+  document.getElementById('syncModalOverlay').classList.remove('open');
+  document.getElementById('syncModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ==========================================
    DATA SOURCE
    ========================================== */
 function selectDataSource(method) {
-  // Simpan metode yang dipilih (prototype: langsung lanjut)
   localStorage.setItem('aksaDataSource', method);
-  window.location.href = 'dashboard.html';
+  localStorage.setItem('aksaSyncTime', new Date().toISOString());
+  window.location.href = 'onboarding.html';
 }
 
 /* ==========================================
@@ -988,7 +1223,7 @@ function initSidebar() {
   if (!phone) return;
 
   const currentPage = getCurrentPage();
-  const noSidebar = ['index.html', 'login.html', 'business-profile.html', 'data-source.html'];
+  const noSidebar = ['index.html', 'login.html', 'business-profile.html', 'data-source.html', 'onboarding.html'];
   if (noSidebar.includes(currentPage)) return;
 
   const overlay = document.createElement('div');
@@ -1021,8 +1256,8 @@ function initSidebar() {
   sidebarConfig.items.forEach(item => {
     const isActive = currentPage === item.href;
     const isLogout = item.label === 'Keluar';
-    const premiumTag = item.premium && !isPremium
-      ? '<span class="premium-tag"><i class="fas fa-crown"></i> Premium</span>'
+    const premiumTag = item.premium
+      ? `<span class="premium-tag" style="${isPremium ? 'display:none' : ''}"><i class="fas fa-crown"></i> Premium</span>`
       : '';
     const extraClass = isLogout ? ' logout-item' : '';
     html += `
@@ -1071,6 +1306,7 @@ function togglePremium() {
   isPremium = !isPremium;
   localStorage.setItem('aksapremium', isPremium);
   updatePremiumUI();
+  updateSidebarPremium();
 }
 
 function updatePremiumUI() {
@@ -1106,6 +1342,20 @@ function updatePremiumUI() {
   if (overlayForecast) overlayForecast.style.display = isPremium ? 'none' : '';
   if (overlayAssistant) overlayAssistant.style.display = isPremium ? 'none' : '';
 
+  // Hide forecast content when not premium
+  const forecastContainer = document.getElementById('forecastContainer');
+  if (forecastContainer) {
+    forecastContainer.style.opacity = isPremium ? '1' : '0.15';
+    forecastContainer.style.pointerEvents = isPremium ? 'auto' : 'none';
+  }
+
+  // Hide period selector on forecast page when not premium
+  const periodSelectorForecast = document.querySelector('#periodSelector');
+  if (periodSelectorForecast && document.getElementById('forecastContainer')) {
+    periodSelectorForecast.style.opacity = isPremium ? '1' : '0.4';
+    periodSelectorForecast.style.pointerEvents = isPremium ? 'auto' : 'none';
+  }
+
   // Toggle premium-active class on phone container
   const phone = document.querySelector('.phone');
   if (phone) phone.classList.toggle('premium-active', isPremium);
@@ -1128,4 +1378,21 @@ function initPremium() {
     premiumToggle.addEventListener('change', togglePremium);
     updatePremiumUI();
   }
+}
+
+function updateSidebarPremium() {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+
+  const userPlan = sidebar.querySelector('.user-plan');
+  const userBadge = sidebar.querySelector('.user-badge');
+  if (userPlan) userPlan.textContent = isPremium ? 'Premium Plan' : 'Basic Plan';
+  if (userBadge) {
+    userBadge.textContent = isPremium ? 'Premium' : 'Basic';
+    userBadge.className = 'user-badge' + (isPremium ? ' premium' : '');
+  }
+
+  sidebar.querySelectorAll('.premium-tag').forEach(tag => {
+    tag.style.display = isPremium ? 'none' : '';
+  });
 }

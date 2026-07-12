@@ -44,22 +44,79 @@
       <p class="text-muted mt-16" style="font-size:12px; text-align:center;">Atau upload data transaksi dengan metode lain</p>
 
       <div class="data-source-grid" style="margin-top:12px;">
-        <div class="data-source-card" onclick="selectDataSource('excel')">
+        <div class="data-source-card" onclick="document.getElementById('excelFileInput').click()">
           <div class="ds-icon green"><i class="fas fa-file-excel"></i></div>
           <h4>Upload Excel</h4>
           <p>Upload file Excel (.xlsx) berisi data transaksi Anda</p>
         </div>
 
-        <div class="data-source-card" onclick="selectDataSource('csv')">
+        <div class="data-source-card" onclick="document.getElementById('csvFileInput').click()">
           <div class="ds-icon orange"><i class="fas fa-file-csv"></i></div>
           <h4>Upload CSV</h4>
           <p>Upload file CSV dengan format yang sudah disediakan</p>
         </div>
 
-        <div class="data-source-card" onclick="selectDataSource('manual')">
+        <div class="data-source-card" onclick="openManualInput()">
           <div class="ds-icon purple"><i class="fas fa-keyboard"></i></div>
           <h4>Input Manual</h4>
           <p>Masukkan data transaksi secara manual ke dalam sistem</p>
+        </div>
+      </div>
+
+      <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display:none;" onchange="handleFileUpload(this, 'Excel')">
+      <input type="file" id="csvFileInput" accept=".csv" style="display:none;" onchange="handleFileUpload(this, 'CSV')">
+
+      <div id="uploadStatus" style="display:none;"></div>
+
+      <div id="manualInputSection" style="display:none;">
+        <div class="manual-input-header">
+          <h3 class="section-title" style="margin-bottom:4px;">Input Data Manual</h3>
+          <p class="text-muted" style="font-size:12px;">Masukkan data transaksi harian bisnis Anda.</p>
+        </div>
+
+        <div class="manual-form">
+          <div class="form-group">
+            <label>Tanggal Transaksi</label>
+            <input type="date" id="manualDate" value="">
+          </div>
+
+          <div class="form-group">
+            <label>Produk</label>
+            <select id="manualProduct">
+              <option value="">Pilih produk</option>
+              <option value="Kopi Susu">Kopi Susu</option>
+              <option value="Es Teh">Es Teh</option>
+              <option value="Roti Bakar">Roti Bakar</option>
+              <option value="Kopi Aren">Kopi Aren</option>
+              <option value="Matcha Latte">Matcha Latte</option>
+              <option value="Cokelat Hangat">Cokelat Hangat</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Jumlah Terjual (Porsi)</label>
+            <input type="number" id="manualQty" placeholder="Contoh: 25" min="1">
+          </div>
+
+          <div class="form-group">
+            <label>Harga Per Porsi (Rp)</label>
+            <input type="number" id="manualPrice" placeholder="Contoh: 18000" min="0">
+          </div>
+
+          <div class="form-group">
+            <label>Total Pendapatan</label>
+            <input type="text" id="manualTotal" placeholder="Otomatis dihitung" readonly style="background: var(--bg); color: var(--text-secondary);">
+          </div>
+
+          <button class="btn btn-primary btn-full" onclick="submitManualData()">
+            <i class="fas fa-plus"></i> Simpan Data
+          </button>
+
+          <div id="manualEntries" style="margin-top: 16px;"></div>
+
+          <button class="btn btn-secondary btn-full mt-12" onclick="finishManualInput()" id="btnFinishManual" style="display:none;">
+            <i class="fas fa-check"></i> Selesai & Lanjutkan
+          </button>
         </div>
       </div>
 
@@ -70,5 +127,138 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('manualDate');
+    if (dateInput) dateInput.value = today;
+
+    // Auto-calculate total
+    const qtyInput = document.getElementById('manualQty');
+    const priceInput = document.getElementById('manualPrice');
+    const totalInput = document.getElementById('manualTotal');
+
+    function updateTotal() {
+      const qty = parseInt(qtyInput.value) || 0;
+      const price = parseInt(priceInput.value) || 0;
+      const total = qty * price;
+      totalInput.value = total > 0 ? 'Rp ' + total.toLocaleString('id-ID') : '';
+    }
+
+    if (qtyInput) qtyInput.addEventListener('input', updateTotal);
+    if (priceInput) priceInput.addEventListener('input', updateTotal);
+
+    let manualEntries = [];
+
+    function handleFileUpload(input, type) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        alert('Ukuran file terlalu besar. Maksimal 5MB.');
+        input.value = '';
+        return;
+      }
+
+      const statusEl = document.getElementById('uploadStatus');
+      statusEl.style.display = 'flex';
+      statusEl.className = 'processing';
+      statusEl.innerHTML =
+        '<div class="upload-icon"><i class="fas fa-spinner fa-spin"></i></div>' +
+        '<div class="upload-info"><h4>Mengimpor ' + type + '...</h4><p>Memproses ' + file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)</p></div>';
+
+      setTimeout(function() {
+        statusEl.className = 'success';
+        statusEl.innerHTML =
+          '<div class="upload-icon"><i class="fas fa-check"></i></div>' +
+          '<div class="upload-info"><h4>' + type + ' Berhasil Diimpor!</h4><p>' + file.name + ' &middot; Data transaksi akan dianalisis oleh AI.</p></div>';
+
+        localStorage.setItem('aksaDataSource', type.toLowerCase());
+        localStorage.setItem('aksaFileName', file.name);
+
+        setTimeout(function() {
+          window.location.href = 'onboarding.html';
+        }, 1500);
+      }, 1500);
+
+      input.value = '';
+    }
+
+    function openManualInput() {
+      const section = document.getElementById('manualInputSection');
+      const grid = document.querySelector('.data-source-grid');
+      const footer = document.querySelector('.data-source-footer');
+      if (section) {
+        section.style.display = 'block';
+        if (grid) grid.style.display = 'none';
+        if (footer) footer.style.display = 'none';
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function submitManualData() {
+      const date = document.getElementById('manualDate').value;
+      const product = document.getElementById('manualProduct').value;
+      const qty = document.getElementById('manualQty').value;
+      const price = document.getElementById('manualPrice').value;
+
+      if (!date || !product || !qty || !price) {
+        alert('Harap isi semua field terlebih dahulu.');
+        return;
+      }
+
+      const total = parseInt(qty) * parseInt(price);
+      manualEntries.push({ date, product, qty: parseInt(qty), price: parseInt(price), total });
+
+      renderManualEntries();
+
+      // Reset form
+      document.getElementById('manualProduct').value = '';
+      document.getElementById('manualQty').value = '';
+      document.getElementById('manualPrice').value = '';
+      totalInput.value = '';
+
+      document.getElementById('btnFinishManual').style.display = '';
+    }
+
+    function removeManualEntry(index) {
+      manualEntries.splice(index, 1);
+      renderManualEntries();
+      if (manualEntries.length === 0) {
+        document.getElementById('btnFinishManual').style.display = 'none';
+      }
+    }
+
+    function renderManualEntries() {
+      const container = document.getElementById('manualEntries');
+      if (!container) return;
+      if (manualEntries.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = '<h4 style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Data Tersimpan (' + manualEntries.length + ')</h4>' +
+        manualEntries.map(function(entry, i) {
+          return '<div class="manual-entry-item">' +
+            '<div class="manual-entry-info">' +
+              '<span class="manual-entry-product">' + entry.product + '</span>' +
+              '<span class="manual-entry-detail">' + entry.qty + ' porsi &middot; Rp ' + entry.price.toLocaleString('id-ID') + '</span>' +
+            '</div>' +
+            '<span class="manual-entry-total">Rp ' + entry.total.toLocaleString('id-ID') + '</span>' +
+            '<button class="manual-entry-remove" onclick="removeManualEntry(' + i + ')"><i class="fas fa-xmark"></i></button>' +
+          '</div>';
+        }).join('');
+    }
+
+    function finishManualInput() {
+      if (manualEntries.length === 0) {
+        alert('Minimal masukkan 1 data transaksi.');
+        return;
+      }
+      localStorage.setItem('aksaManualData', JSON.stringify(manualEntries));
+      selectDataSource('manual');
+    }
+  </script>
 </body>
 </html>

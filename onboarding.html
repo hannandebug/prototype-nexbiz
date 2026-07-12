@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Onboarding - AKSA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span class="time">09:41</span>
+      <div class="status-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+
+    <div class="content" style="padding: 0;">
+      <div class="onboarding-screen" id="onboardingScreen">
+        <div class="onboarding-content" id="onboardingContent">
+          <!-- Step 1 -->
+          <div class="onboarding-step active" data-step="1">
+            <div class="onboarding-illustration" style="background: linear-gradient(135deg, rgba(37,99,235,0.12) 0%, rgba(16,185,129,0.08) 100%);">
+              <i class="fas fa-robot" style="color: var(--primary);"></i>
+            </div>
+            <h2 class="onboarding-title">Selamat Datang di AKSA</h2>
+            <p class="onboarding-desc">AI Business Passport untuk membantu UMKM mengambil keputusan berdasarkan data.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="onboarding-step" data-step="2" style="display:none;">
+            <div class="onboarding-illustration" style="background: linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(52,211,153,0.08) 100%);">
+              <i class="fas fa-link" style="color: var(--secondary);"></i>
+            </div>
+            <h2 class="onboarding-title">Hubungkan Akun Kasir Pintar</h2>
+            <p class="onboarding-desc">Hubungkan akun Kasir Pintar Anda agar AKSA dapat mengimpor data transaksi secara otomatis.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="onboarding-step" data-step="3" style="display:none;">
+            <div class="onboarding-illustration" style="background: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(251,191,36,0.08) 100%);">
+              <i class="fas fa-sync-alt" style="color: var(--warning);"></i>
+            </div>
+            <h2 class="onboarding-title">Sinkronkan Data Transaksi</h2>
+            <p class="onboarding-desc">Data transaksi Anda akan disinkronkan dan diproses oleh sistem AI AKSA untuk analisis mendalam.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="onboarding-step" data-step="4" style="display:none;">
+            <div class="onboarding-illustration" style="background: linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(167,139,250,0.08) 100%);">
+              <i class="fas fa-brain" style="color: #8B5CF6;"></i>
+            </div>
+            <h2 class="onboarding-title">AI Mulai Menganalisis</h2>
+            <p class="onboarding-desc">AKSA akan menganalisis data bisnis Anda dan memberikan insight, rekomendasi, serta prediksi yang akurat.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="onboarding-step" data-step="5" style="display:none;">
+            <div class="onboarding-illustration" style="background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(37,99,235,0.1) 100%);">
+              <i class="fas fa-passport" style="color: var(--secondary);"></i>
+            </div>
+            <h2 class="onboarding-title">Business Passport Siap</h2>
+            <p class="onboarding-desc">Business Passport Anda telah siap digunakan. Pantau kesehatan bisnis Anda kapan saja dan di mana saja.</p>
+          </div>
+        </div>
+
+        <div class="onboarding-footer">
+          <div class="onboarding-dots" id="onboardingDots">
+            <div class="onboarding-dot active" data-dot="1"></div>
+            <div class="onboarding-dot" data-dot="2"></div>
+            <div class="onboarding-dot" data-dot="3"></div>
+            <div class="onboarding-dot" data-dot="4"></div>
+            <div class="onboarding-dot" data-dot="5"></div>
+          </div>
+          <div class="onboarding-actions">
+            <button class="btn btn-onboarding-skip" id="btnSkip" onclick="skipOnboarding()">Lewati</button>
+            <button class="btn btn-primary" id="btnNext" onclick="nextStep()">Mulai</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        // Hide current step
+        document.querySelector('.onboarding-step[data-step="' + currentStep + '"]').style.display = 'none';
+        currentStep++;
+        // Show next step
+        document.querySelector('.onboarding-step[data-step="' + currentStep + '"]').style.display = '';
+        // Update dots
+        updateDots();
+        // Update button text on last step
+        if (currentStep === totalSteps) {
+          document.getElementById('btnNext').textContent = 'Mulai';
+          document.getElementById('btnNext').onclick = function() { skipOnboarding(); };
+        }
+      } else {
+        skipOnboarding();
+      }
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.onboarding-dot').forEach(dot => {
+        const dotStep = parseInt(dot.getAttribute('data-dot'));
+        if (dotStep === currentStep) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function skipOnboarding() {
+      localStorage.setItem('aksaOnboarded', 'true');
+      window.location.href = 'dashboard.html';
+    }
+
+    // Check if already onboarded
+    if (localStorage.getItem('aksaOnboarded') === 'true') {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>
