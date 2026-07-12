@@ -3406,7 +3406,7 @@ img {
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  animation: pageIn 0.4s ease;
+  animation: pageIn 0.35s ease;
 }
 
 .onboarding-content {
@@ -3418,6 +3418,7 @@ img {
   padding: 40px 28px;
   text-align: center;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .onboarding-step {
@@ -3427,6 +3428,7 @@ img {
   justify-content: center;
   width: 100%;
   text-align: center;
+  animation: stepIn 0.4s ease;
 }
 
 .onboarding-illustration {
@@ -3457,19 +3459,18 @@ img {
   line-height: 1.3;
   text-align: center;
   width: 100%;
+  padding: 0 8px;
 }
 
 .onboarding-desc {
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.7;
-  max-width: 300px;
+  max-width: 320px;
+  width: 100%;
   text-align: center;
   margin: 0 auto;
-}
-
-.onboarding-step {
-  animation: stepIn 0.4s ease;
+  padding: 0 8px;
 }
 
 @keyframes stepIn {
@@ -3550,9 +3551,18 @@ img {
     padding: 0 16px 16px;
   }
 
-  /* Onboarding responsive */
+  /* Onboarding fills screen on mobile */
+  .onboarding-screen {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
+
   .onboarding-content {
     padding: 24px 20px;
+    justify-content: center;
   }
 
   .onboarding-illustration {
@@ -3564,14 +3574,21 @@ img {
 
   .onboarding-title {
     font-size: 20px;
+    padding: 0 4px;
   }
 
   .onboarding-desc {
     max-width: 100%;
     font-size: 13px;
+    padding: 0 4px;
   }
 
   .onboarding-footer {
-    padding: 16px 20px 24px;
+    padding: 16px 20px 28px;
+  }
+
+  .onboarding-actions .btn {
+    height: 48px;
+    font-size: 15px;
   }
 }

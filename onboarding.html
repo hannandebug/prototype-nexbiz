@@ -85,25 +85,29 @@
   </div>
 
   <script>
+    // Instant redirect if already onboarded — prevents flash/ghost
+    if (localStorage.getItem('aksaOnboarded') === 'true') {
+      document.documentElement.style.display = 'none';
+      window.location.replace('dashboard.html');
+    }
+  </script>
+  <script src="js/script.js"></script>
+  <script>
     let currentStep = 1;
     const totalSteps = 5;
 
     function nextStep() {
       if (currentStep < totalSteps) {
-        // Hide current step
         document.querySelector('.onboarding-step[data-step="' + currentStep + '"]').style.display = 'none';
         currentStep++;
-        // Show next step
         document.querySelector('.onboarding-step[data-step="' + currentStep + '"]').style.display = '';
-        // Update dots
         updateDots();
-        // Update button text on last step
         if (currentStep === totalSteps) {
           document.getElementById('btnNext').textContent = 'Mulai';
-          document.getElementById('btnNext').onclick = function() { skipOnboarding(); };
+          document.getElementById('btnNext').onclick = function() { finishOnboarding(); };
         }
       } else {
-        skipOnboarding();
+        finishOnboarding();
       }
     }
 
@@ -118,14 +122,19 @@
       });
     }
 
-    function skipOnboarding() {
-      localStorage.setItem('aksaOnboarded', 'true');
-      window.location.href = 'dashboard.html';
+    function finishOnboarding() {
+      const screen = document.getElementById('onboardingScreen');
+      screen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      screen.style.opacity = '0';
+      screen.style.transform = 'scale(0.95)';
+      setTimeout(function() {
+        localStorage.setItem('aksaOnboarded', 'true');
+        window.location.replace('dashboard.html');
+      }, 300);
     }
 
-    // Check if already onboarded
-    if (localStorage.getItem('aksaOnboarded') === 'true') {
-      window.location.href = 'dashboard.html';
+    function skipOnboarding() {
+      finishOnboarding();
     }
   </script>
 </body>
