@@ -1505,6 +1505,7 @@ function handleLogin(e) {
     window.location.href = 'dashboard.html';
   }
   localStorage.setItem('aksaLoggedIn', 'true');
+  localStorage.setItem('aksaPassword', password);
   return false;
 }
 
@@ -1515,6 +1516,9 @@ function handleGoogleLogin() {
     window.location.href = 'dashboard.html';
   }
   localStorage.setItem('aksaLoggedIn', 'true');
+  if (!localStorage.getItem('aksaPassword')) {
+    localStorage.setItem('aksaPassword', '123456');
+  }
 }
 
 /* ==========================================
