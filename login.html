@@ -59,54 +59,54 @@
           Belum punya akun? <a href="#" onclick="openRegisterModal(event)">Daftar sekarang</a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Forgot Password Modal -->
-  <div class="modal-overlay" id="forgotOverlay" onclick="closeForgotModal()"></div>
-  <div class="modal" id="forgotModal">
-    <div class="modal-header">
-      <h3>Lupa Password</h3>
-      <button class="modal-close" onclick="closeForgotModal()"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <p>Masukkan email yang terdaftar untuk menerima link reset password.</p>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="resetEmail" placeholder="Masukkan email Anda">
+      <!-- Forgot Password Modal -->
+      <div class="modal-overlay" id="forgotOverlay" onclick="closeForgotModal()"></div>
+      <div class="modal" id="forgotModal">
+        <div class="modal-header">
+          <h3>Lupa Password</h3>
+          <button class="modal-close" onclick="closeForgotModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <p>Masukkan email yang terdaftar untuk menerima link reset password.</p>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="resetEmail" placeholder="Masukkan email Anda">
+          </div>
+          <button class="btn btn-primary btn-full mt-12" onclick="handleResetPassword()">
+            <i class="fas fa-paper-plane"></i>
+            Kirim Link Reset
+          </button>
+        </div>
       </div>
-      <button class="btn btn-primary btn-full mt-12" onclick="handleResetPassword()">
-        <i class="fas fa-paper-plane"></i>
-        Kirim Link Reset
-      </button>
-    </div>
-  </div>
 
-  <!-- Register Modal -->
-  <div class="modal-overlay" id="registerOverlay" onclick="closeRegisterModal()"></div>
-  <div class="modal" id="registerModal">
-    <div class="modal-header">
-      <h3>Daftar Akun Baru</h3>
-      <button class="modal-close" onclick="closeRegisterModal()"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <p>Isi data berikut untuk membuat akun AKSA baru.</p>
-      <div class="form-group">
-        <label>Nama Lengkap</label>
-        <input type="text" id="regName" placeholder="Masukkan nama lengkap">
+      <!-- Register Modal -->
+      <div class="modal-overlay" id="registerOverlay" onclick="closeRegisterModal()"></div>
+      <div class="modal" id="registerModal">
+        <div class="modal-header">
+          <h3>Daftar Akun Baru</h3>
+          <button class="modal-close" onclick="closeRegisterModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <p>Isi data berikut untuk membuat akun AKSA baru.</p>
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="regName" placeholder="Masukkan nama lengkap">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="regEmail" placeholder="Masukkan email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="regPassword" placeholder="Buat password baru">
+          </div>
+          <button class="btn btn-primary btn-full mt-12" onclick="handleRegister()">
+            <i class="fas fa-user-plus"></i>
+            Daftar
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="regEmail" placeholder="Masukkan email">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="regPassword" placeholder="Buat password baru">
-      </div>
-      <button class="btn btn-primary btn-full mt-12" onclick="handleRegister()">
-        <i class="fas fa-user-plus"></i>
-        Daftar
-      </button>
     </div>
   </div>
 

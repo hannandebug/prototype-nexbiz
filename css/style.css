@@ -152,6 +152,7 @@ img {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  contain: layout paint;
   box-shadow:
     0 0 0 2px #1a1a2e,
     0 0 0 4px #2d2d44,
@@ -518,22 +519,22 @@ img {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
 .login-header {
   text-align: center;
-  padding: 60px 0 40px;
+  padding: 32px 0 24px;
 }
 
 .login-header .login-icon {
-  width: 110px;
-  height: 110px;
-  border-radius: 18px;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
   overflow: hidden;
 }
 
@@ -544,14 +545,14 @@ img {
 }
 
 .login-header h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .login-header p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
   font-weight: 400;
 }
@@ -563,24 +564,24 @@ img {
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .form-group label {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .form-group input {
   width: 100%;
-  height: 48px;
-  padding: 0 16px;
+  height: 44px;
+  padding: 0 14px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text);
   background: var(--card);
@@ -598,7 +599,7 @@ img {
 
 .forgot-password {
   text-align: right;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .forgot-password a {
@@ -612,9 +613,9 @@ img {
 }
 
 .btn {
-  height: 50px;
+  height: 46px;
   border-radius: var(--radius-md);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -689,10 +690,10 @@ img {
 .divider {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 24px 0;
+  gap: 12px;
+  margin: 16px 0;
   color: var(--text-light);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .divider::before,
@@ -705,8 +706,8 @@ img {
 
 .login-footer {
   text-align: center;
-  padding: 24px 0;
-  font-size: 13px;
+  padding: 16px 0;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 
@@ -2989,6 +2990,7 @@ img {
   top: 0;
   left: 0;
   width: 270px;
+  max-width: 80%;
   height: 100%;
   background: var(--card);
   z-index: 201;
@@ -3618,11 +3620,11 @@ img {
   background: var(--card);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   z-index: 301;
-  max-height: 85%;
+  max-height: 80%;
   overflow-y: auto;
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .modal.open {
@@ -3638,7 +3640,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 14px;
+  padding: 16px 18px 12px;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -3647,14 +3649,14 @@ img {
 }
 
 .modal-header h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: none;
   background: var(--bg);
@@ -3663,7 +3665,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.2s;
 }
 
@@ -3673,14 +3675,14 @@ img {
 }
 
 .modal-body {
-  padding: 20px;
+  padding: 16px 18px;
 }
 
 .modal-body p {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 /* ==========================================
@@ -3691,7 +3693,8 @@ img {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 320px;
+  width: calc(100% - 16px);
+  max-width: 320px;
   max-height: 400px;
   background: var(--card);
   border-radius: var(--radius);
@@ -3990,6 +3993,121 @@ img {
   .onboarding-actions .btn {
     height: 48px;
     font-size: 15px;
+  }
+
+  /* Login & Register page - mobile compact */
+  .login-page {
+    padding: 0 14px;
+  }
+
+  .login-header {
+    padding: 20px 0 18px;
+  }
+
+  .login-header .login-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .login-header h2 {
+    font-size: 18px;
+  }
+
+  .login-header p {
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input {
+    height: 42px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .forgot-password {
+    margin-bottom: 12px;
+  }
+
+  .forgot-password a {
+    font-size: 12px;
+  }
+
+  .btn {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .divider {
+    margin: 12px 0;
+    font-size: 11px;
+  }
+
+  .login-footer {
+    padding: 12px 0;
+    font-size: 11px;
+  }
+
+  .modal {
+    max-height: 75%;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .modal-header {
+    padding: 14px 16px 10px;
+  }
+
+  .modal-header h3 {
+    font-size: 14px;
+  }
+
+  .modal-body {
+    padding: 14px 16px;
+  }
+
+  .modal-body p {
+    font-size: 11px;
+  }
+
+  .sync-modal {
+    max-height: 75%;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .sync-modal-header {
+    padding: 14px 16px 10px;
+  }
+
+  .sync-modal-header h3 {
+    font-size: 14px;
+  }
+
+  .sync-modal-body {
+    padding: 14px 16px;
+  }
+
+  .sidebar {
+    width: 260px;
+    max-width: 75%;
+  }
+
+  .notif-panel {
+    width: calc(100% - 8px);
+    max-width: 300px;
+    right: -4px;
+  }
+
+  .period-dropdown {
+    max-height: 260px;
   }
 }
 
