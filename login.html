@@ -155,8 +155,9 @@
         alert('Password minimal 6 karakter.');
         return;
       }
-      alert('Pendaftaran berhasil! Silakan masuk.');
-      closeRegisterModal();
+      localStorage.setItem('aksaLoggedIn', 'true');
+      localStorage.setItem('aksaPassword', password);
+      window.location.href = 'business-profile.html';
     }
   </script>
 </body>

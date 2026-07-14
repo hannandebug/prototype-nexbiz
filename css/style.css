@@ -3691,9 +3691,9 @@ img {
 
 .notif-panel {
   position: absolute;
-  top: 100%;
-  right: 0;
-  width: calc(100% - 16px);
+  top: 96px;
+  right: 20px;
+  width: calc(100% - 40px);
   max-width: 320px;
   max-height: 400px;
   background: var(--card);
@@ -3706,7 +3706,6 @@ img {
   pointer-events: none;
   transform: translateY(-8px);
   transition: all 0.25s ease;
-  margin-top: 8px;
 }
 
 .notif-panel.open {
@@ -4101,9 +4100,10 @@ img {
   }
 
   .notif-panel {
-    width: calc(100% - 8px);
+    top: 88px;
+    right: 16px;
+    width: calc(100% - 32px);
     max-width: 300px;
-    right: -4px;
   }
 
   .period-dropdown {

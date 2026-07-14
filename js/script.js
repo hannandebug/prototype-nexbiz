@@ -1499,25 +1499,27 @@ function handleLogin(e) {
     return false;
   }
 
+  localStorage.setItem('aksaLoggedIn', 'true');
+  localStorage.setItem('aksaPassword', password);
+
   if (!localStorage.getItem('aksaOnboarded')) {
-    window.location.href = 'onboarding.html';
+    window.location.href = 'business-profile.html';
   } else {
     window.location.href = 'dashboard.html';
   }
-  localStorage.setItem('aksaLoggedIn', 'true');
-  localStorage.setItem('aksaPassword', password);
   return false;
 }
 
 function handleGoogleLogin() {
-  if (!localStorage.getItem('aksaOnboarded')) {
-    window.location.href = 'onboarding.html';
-  } else {
-    window.location.href = 'dashboard.html';
-  }
   localStorage.setItem('aksaLoggedIn', 'true');
   if (!localStorage.getItem('aksaPassword')) {
     localStorage.setItem('aksaPassword', '123456');
+  }
+
+  if (!localStorage.getItem('aksaOnboarded')) {
+    window.location.href = 'business-profile.html';
+  } else {
+    window.location.href = 'dashboard.html';
   }
 }
 
