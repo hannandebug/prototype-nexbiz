@@ -40,28 +40,12 @@
 
       <div class="chart-card">
         <div class="chart-title" id="chartTitle">Pertumbuhan 3 Bulan Terakhir</div>
-        <div class="pct-blocks">
-          <div class="pct-block">
-            <div class="pct-value" style="color:var(--danger);">-8%</div>
-            <div class="pct-month">Jan</div>
-            <div class="pct-arrow down"><i class="fas fa-arrow-down"></i> Kritis</div>
-          </div>
-          <div class="pct-block">
-            <div class="pct-value" style="color:var(--warning);">+7%</div>
-            <div class="pct-month">Feb</div>
-            <div class="pct-arrow up"><i class="fas fa-arrow-up"></i> Pemulihan</div>
-          </div>
-          <div class="pct-block">
-            <div class="pct-value" style="color:var(--secondary);">+10%</div>
-            <div class="pct-month">Mar</div>
-            <div class="pct-arrow up"><i class="fas fa-arrow-up"></i> Sehat</div>
-          </div>
-        </div>
+        <div id="detailChart"></div>
         <div class="chart-source">
           <i class="fas fa-database"></i>
           <span>Sumber data: Kasir Pintar (Tersinkronisasi)</span>
         </div>
-        <div class="chart-insight">Pertumbuhan menunjukkan tren <strong>recovery</strong> yang konsisten: dari kontraksi -8% di Januari, pulih ke +7% di Februari, dan mencapai +10% di Maret. Tren ini didorong oleh strategi promosi yang efektif.</div>
+        <div class="chart-insight" id="chartInsight">Pertumbuhan menunjukkan tren <strong>recovery</strong> yang konsisten: dari kontraksi -8% di Januari, pulih ke +7% di Februari, dan mencapai +10% di Maret. Tren ini didorong oleh strategi promosi yang efektif.</div>
       </div>
 
       <div class="detail-summary">
