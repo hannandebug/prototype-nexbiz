@@ -41,6 +41,71 @@
   --phone-height: 844px;
 }
 
+.dark-mode {
+  --bg: #0F172A;
+  --card: #1E293B;
+  --text: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-light: #64748B;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.2);
+  --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.5), 0 4px 10px -2px rgba(0,0,0,0.3);
+  --shadow-xl: 0 20px 40px -5px rgba(0,0,0,0.6), 0 10px 20px -5px rgba(0,0,0,0.3);
+  --primary-bg: rgba(37, 99, 235, 0.15);
+  --secondary-bg: rgba(16, 185, 129, 0.15);
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --danger-bg: rgba(239, 68, 68, 0.15);
+}
+
+.dark-mode .phone {
+  box-shadow: 0 0 0 2px #1a1a2e, 0 0 0 4px #0F172A, var(--shadow-xl);
+}
+.dark-mode .onboarding { background: var(--bg); }
+.dark-mode .onboarding-content { background: var(--bg); }
+.dark-mode input, .dark-mode textarea {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+.dark-mode .stat-card, .dark-mode .detail-card, .dark-mode .passport-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+.dark-mode .sidebar { background: var(--card); }
+.dark-mode .sidebar-header { background: var(--primary); }
+.dark-mode .nav-bar { background: var(--card); border-color: var(--border); }
+.dark-mode .bottom-sheet { background: var(--card); }
+.dark-mode .modal { background: var(--card); }
+.dark-mode .notif-panel { background: var(--card); border-color: var(--border); }
+.dark-mode .sync-modal { background: var(--card); }
+.dark-mode .premium-overlay { background: rgba(15, 23, 42, 0.85); }
+.dark-mode .chat-input-area { background: var(--card); border-color: var(--border); }
+.dark-mode .chat-input { background: var(--bg); color: var(--text); border-color: var(--border); }
+.dark-mode .user-msg { background: var(--primary); }
+.dark-mode .msg-time { color: var(--text-light); }
+.dark-mode .detail-summary { background: var(--card); border-color: var(--border); }
+.dark-mode .detail-insight { background: var(--card); border-color: var(--border); }
+.dark-mode .chart-container { background: var(--card); border-color: var(--border); }
+.dark-mode .stat-detail { background: var(--card); border-color: var(--border); }
+.dark-mode .priority-card { background: var(--card); border-color: var(--border); }
+.dark-mode .rec-card { background: var(--card); border-color: var(--border); }
+.dark-mode .report-card { background: var(--card); border-color: var(--border); }
+.dark-mode .profile-menu-item { border-color: var(--border); }
+.dark-mode .health-indicator { background: var(--card); border-color: var(--border); }
+.dark-mode .interpretation-box { background: var(--card); border-color: var(--border); }
+.dark-mode .manual-entry-item { background: var(--card); border-color: var(--border); }
+.dark-mode .upload-status { background: var(--card); border-color: var(--border); }
+.dark-mode .faq-item { background: var(--card); border-color: var(--border); }
+.dark-mode .setting-toggle { background: var(--card); }
+.dark-mode .ai-msg { background: var(--card); border-color: var(--border); }
+.dark-mode .passport-verified { background: var(--card); border-color: var(--border); }
+.dark-mode .premium-lock { background: var(--card); border-color: var(--border); }
+.dark-mode .ai-preview { background: var(--card); border-color: var(--border); }
+.dark-mode .passport-summary-desc { background: var(--card); border-color: var(--border); }
+.dark-mode .health-card { background: var(--card); }
+.dark-mode .passport-card { background: var(--card); }
+
 /* ----- Reset & Base ----- */
 *, *::before, *::after {
   margin: 0;
@@ -766,7 +831,7 @@ img {
   padding: 2px 12px;
   border-radius: 20px;
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: var(--secondary);
   margin-left: 8px;
   vertical-align: middle;
 }
@@ -1044,7 +1109,7 @@ img {
 
 /* ----- Passport Page ----- */
 .passport-card {
-  background: white;
+  background: var(--card);
   border-radius: var(--radius-lg);
   padding: 32px 24px;
   box-shadow: var(--shadow-lg);
@@ -2379,7 +2444,7 @@ img {
 
 .priority-card p {
   font-size: 13px;
-  color: #92400E;
+  color: var(--warning);
   line-height: 1.6;
   font-weight: 500;
 }
@@ -3531,6 +3596,340 @@ img {
   background: var(--bg);
   border-color: var(--text-light);
 }
+
+/* ==========================================
+   MODAL & OVERLAY SYSTEM
+   ========================================== */
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 301;
+  max-height: 85%;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-bottom: 20px;
+}
+
+.modal.open {
+  transform: translateY(0);
+}
+
+.modal::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  z-index: 1;
+}
+
+.modal-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-body p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* ==========================================
+   NOTIFICATION PANEL (Dashboard)
+   ========================================== */
+
+.notif-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  z-index: 250;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+  margin-top: 8px;
+}
+
+.notif-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.notif-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.notif-panel-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.notif-panel-header span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+.notif-item:hover {
+  background: var(--bg);
+}
+
+.notif-item .notif-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.notif-item .notif-icon.warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.notif-item .notif-icon.success {
+  background: var(--secondary-bg);
+  color: var(--secondary);
+}
+
+.notif-item .notif-icon.info {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.notif-item .notif-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-item .notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.notif-item .notif-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.notif-item .notif-time {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   FAQ ACCORDION (Help Modal)
+   ========================================== */
+
+.faq-item {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.faq-item:hover {
+  border-color: var(--text-light);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: background 0.15s;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.faq-question:hover {
+  background: var(--primary-bg);
+}
+
+.faq-question span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.faq-question i {
+  color: var(--text-light);
+  font-size: 12px;
+  transition: transform 0.25s ease;
+}
+
+.faq-item.open .faq-question i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-answer p {
+  padding: 0 16px 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 200px;
+}
+
+/* ==========================================
+   SETTING TOGGLE ROW
+   ========================================== */
+
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.setting-toggle:last-child {
+  border-bottom: none;
+}
+
+.setting-toggle .setting-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.setting-toggle .setting-label h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.setting-toggle .setting-label p {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   QR PLACEHOLDER
+   ========================================== */
+
+.qr-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--card);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  margin: 0 auto;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
 
 /* ----- Responsive ----- */
 @media (max-width: 420px) {

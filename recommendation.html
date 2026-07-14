@@ -46,5 +46,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

@@ -39,7 +39,7 @@
       </div>
 
       <div class="chart-card">
-        <div class="chart-title">Perkembangan Keuntungan 7 Hari Terakhir</div>
+        <div class="chart-title" id="chartTitle">Perkembangan Keuntungan 7 Hari Terakhir</div>
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="profitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -55,12 +55,12 @@
 
       <div class="detail-summary">
         <h4>Ringkasan Performa</h4>
-        <p>Keuntungan minggu ini mencapai <strong>Rp 980.000</strong>, naik 8% dibandingkan minggu lalu. Meskipun omzet naik 12%, margin keuntungan sedikit tertekan oleh kenaikan harga bahan baku sebesar 8% (susu dan gula).</p>
+        <p id="detailSummary">Keuntungan minggu ini mencapai <strong>Rp 980.000</strong>, naik 8% dibandingkan minggu lalu. Meskipun omzet naik 12%, margin keuntungan sedikit tertekan oleh kenaikan harga bahan baku sebesar 8% (susu dan gula).</p>
       </div>
 
       <div class="detail-insight">
         <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
-        <p>Keuntungan naik 8% karena efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi seperti <strong>Kopi Susu</strong>. Namun kenaikan harga bahan baku menggerus margin. Disarankan evaluasi harga jual atau cari supplier alternatif.</p>
+        <p id="detailInsight">Keuntungan naik 8% karena efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi seperti <strong>Kopi Susu</strong>. Namun kenaikan harga bahan baku menggerus margin. Disarankan evaluasi harga jual atau cari supplier alternatif.</p>
       </div>
 
       <a href="analysis.html" class="btn btn-secondary-soft btn-full">
@@ -71,5 +71,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

@@ -39,7 +39,7 @@
       </div>
 
       <div class="chart-card">
-        <div class="chart-title">Perkembangan Arus Kas 7 Hari Terakhir</div>
+        <div class="chart-title" id="chartTitle">Perkembangan Arus Kas 7 Hari Terakhir</div>
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="cashGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -55,12 +55,12 @@
 
       <div class="detail-summary">
         <h4>Ringkasan Performa</h4>
-        <p>Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.750.000. Pemasukan harian rata-rata Rp 3.250.000 dan pengeluaran Rp 2.270.000, sehingga terdapat surplus sekitar Rp 980.000 per hari.</p>
+        <p id="detailSummary">Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.750.000. Pemasukan harian rata-rata Rp 3.250.000 dan pengeluaran Rp 2.270.000, sehingga terdapat surplus sekitar Rp 980.000 per hari.</p>
       </div>
 
       <div class="detail-insight">
         <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
-        <p>Arus kas dalam kondisi sehat karena pemasukan lebih besar 25% dibandingkan pengeluaran. Disarankan menyisihkan <strong>20% dari surplus</strong> untuk dana cadangan darurat dan sisanya dapat diinvestasikan untuk pengembangan usaha.</p>
+        <p id="detailInsight">Arus kas dalam kondisi sehat karena pemasukan lebih besar 25% dibandingkan pengeluaran. Disarankan menyisihkan <strong>20% dari surplus</strong> untuk dana cadangan darurat dan sisanya dapat diinvestasikan untuk pengembangan usaha.</p>
       </div>
 
       <a href="analysis.html" class="btn btn-secondary-soft btn-full">
@@ -71,5 +71,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

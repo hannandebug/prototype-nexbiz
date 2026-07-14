@@ -39,7 +39,7 @@
       </div>
 
       <div class="chart-card">
-        <div class="chart-title">Perkembangan Pendapatan 7 Hari Terakhir</div>
+        <div class="chart-title" id="chartTitle">Perkembangan Pendapatan 7 Hari Terakhir</div>
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="revGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -55,12 +55,12 @@
 
       <div class="detail-summary">
         <h4>Ringkasan Performa</h4>
-        <p>Pendapatan hari ini mencapai <strong>Rp 3.250.000</strong>, naik 12% dibandingkan kemarin (Rp 2.900.000). Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Tren pendapatan terus meningkat dalam 7 hari terakhir.</p>
+        <p id="detailSummary">Pendapatan hari ini mencapai <strong>Rp 3.250.000</strong>, naik 12% dibandingkan kemarin (Rp 2.900.000). Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Tren pendapatan terus meningkat dalam 7 hari terakhir.</p>
       </div>
 
       <div class="detail-insight">
         <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
-        <p>Pendapatan meningkat 12% karena penjualan <strong>Kopi Susu</strong> naik 25% selama akhir pekan. Cuaca dingin mendorong pelanggan memilih minuman hangat. Disarankan mempertahankan stok bahan baku untuk mengantisipasi tren ini.</p>
+        <p id="detailInsight">Pendapatan meningkat 12% karena penjualan <strong>Kopi Susu</strong> naik 25% selama akhir pekan. Cuaca dingin mendorong pelanggan memilih minuman hangat. Disarankan mempertahankan stok bahan baku untuk mengantisipasi tren ini.</p>
       </div>
 
       <a href="analysis.html" class="btn btn-secondary-soft btn-full">
@@ -71,5 +71,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>
