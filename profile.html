@@ -693,6 +693,17 @@
       return days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ', ' + String(d.getHours()).padStart(2,'0') + '.' + String(d.getMinutes()).padStart(2,'0') + ' WIB';
     }
 
+    function formatTimeAgo(isoString) {
+      if (!isoString) return '';
+      var now = new Date();
+      var then = new Date(isoString);
+      var diff = Math.floor((now - then) / 1000);
+      if (diff < 60) return 'Baru saja';
+      if (diff < 3600) return Math.floor(diff / 60) + ' menit lalu';
+      if (diff < 86400) return Math.floor(diff / 3600) + ' jam lalu';
+      return Math.floor(diff / 86400) + ' hari lalu';
+    }
+
     function loadSyncTime() {
       var ts = localStorage.getItem('aksaSyncTime');
       var el1 = document.getElementById('syncTimeValue');
@@ -701,7 +712,8 @@
         var d = new Date(ts);
         var h = String(d.getHours()).padStart(2,'0');
         var m = String(d.getMinutes()).padStart(2,'0');
-        if (el1) el1.textContent = h + '.' + m + ' WIB';
+        var timeAgo = formatTimeAgo(ts);
+        if (el1) el1.textContent = h + '.' + m + ' WIB' + (timeAgo ? ' (' + timeAgo + ')' : '');
         if (el2) el2.textContent = formatSyncTime(ts);
       }
     }

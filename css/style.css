@@ -1103,11 +1103,11 @@ img {
 .passport-card {
   background: var(--card);
   border-radius: var(--radius-lg);
-  padding: 32px 24px;
+  padding: 24px 20px;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .passport-card::before {
@@ -1116,7 +1116,7 @@ img {
   top: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 100px;
   background: linear-gradient(135deg, #1E3A5F 0%, #0F1B2D 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
@@ -1155,12 +1155,14 @@ img {
 .passport-card .passport-body {
   position: relative;
   z-index: 1;
-  padding-top: 16px;
+  padding-top: 12px;
+  padding-bottom: 4px;
+  text-align: center;
 }
 
 .passport-card .passport-photo {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: var(--primary-bg);
   border: 3px solid white;
@@ -1168,84 +1170,62 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--primary);
-  margin-bottom: 16px;
+  margin: 0 auto 12px;
 }
 
 .passport-card .passport-name {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 2px;
 }
 
 .passport-card .passport-type {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
-.passport-card .passport-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.passport-card .passport-detail {
+.passport-card .passport-metrics {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 18px;
+  padding: 14px 12px;
   background: var(--bg);
-  border-radius: var(--radius-sm);
-  padding: 12px;
+  border-radius: var(--radius);
 }
 
-.passport-detail .detail-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 2px;
+.passport-metric {
+  flex: 1;
+  text-align: center;
 }
 
-.passport-detail .detail-value {
+.passport-metric-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.passport-metric .metric-value {
   font-size: 16px;
   font-weight: 700;
   color: var(--text);
 }
 
-.passport-detail .detail-value.green { color: var(--secondary); }
-.passport-detail .detail-value.blue { color: var(--primary); }
-.passport-detail .detail-value.orange { color: var(--warning); }
-.passport-detail .detail-value.red { color: var(--danger); }
+.passport-metric .metric-value.green { color: var(--secondary); }
+.passport-metric .metric-value.blue { color: var(--primary); }
 
-.passport-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.passport-stat {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.passport-stat .stat-value {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.passport-stat .stat-value.green { color: var(--secondary); }
-.passport-stat .stat-value.blue { color: var(--primary); }
-
-.passport-stat .stat-label {
-  font-size: 11px;
-  color: var(--text-light);
+.passport-metric .metric-label {
+  font-size: 10px;
   font-weight: 500;
+  color: var(--text-light);
   margin-top: 2px;
 }
 
@@ -3192,31 +3172,6 @@ img {
   font-size: 11px;
   color: var(--text-light);
   text-align: center;
-}
-
-/* ----- Passport Summary Description ----- */
-.passport-summary-desc {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 14px 16px;
-  background: var(--primary-bg);
-  border-radius: var(--radius);
-  border: 1px solid rgba(37, 99, 235, 0.12);
-  margin-bottom: 20px;
-}
-
-.passport-summary-desc i {
-  color: var(--primary);
-  font-size: 14px;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.passport-summary-desc p {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.6;
 }
 
 /* ----- Passport Details Grid ----- */
