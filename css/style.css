@@ -777,27 +777,26 @@ img {
 .score-circle {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  border: 3px solid rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   flex-shrink: 0;
 }
 
-.score-circle .number {
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 1;
+.score-circle .gauge-svg {
+  width: 80px;
+  height: 80px;
 }
 
-.score-circle .label {
-  font-size: 10px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.6);
-  margin-top: 1px;
+.score-circle .gauge-text {
+  font-size: 20px;
+  fill: white;
+}
+
+.score-circle .gauge-sub {
+  font-size: 8px;
+  fill: rgba(255,255,255,0.6);
+}
+
+.score-circle .gauge-bg {
+  stroke: rgba(255,255,255,0.15);
 }
 
 .score-info {
@@ -1103,11 +1102,11 @@ img {
 .passport-card {
   background: var(--card);
   border-radius: var(--radius-lg);
-  padding: 24px 20px;
+  padding: 32px 24px;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .passport-card::before {
@@ -1116,7 +1115,7 @@ img {
   top: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 120px;
   background: linear-gradient(135deg, #1E3A5F 0%, #0F1B2D 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
@@ -1155,14 +1154,12 @@ img {
 .passport-card .passport-body {
   position: relative;
   z-index: 1;
-  padding-top: 12px;
-  padding-bottom: 4px;
-  text-align: center;
+  padding-top: 16px;
 }
 
 .passport-card .passport-photo {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: var(--primary-bg);
   border: 3px solid white;
@@ -1170,62 +1167,84 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 24px;
   color: var(--primary);
-  margin: 0 auto 12px;
+  margin-bottom: 16px;
 }
 
 .passport-card .passport-name {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 2px;
 }
 
 .passport-card .passport-type {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
-  margin-bottom: 0;
+  margin-bottom: 16px;
 }
 
-.passport-card .passport-metrics {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  margin-top: 18px;
-  padding: 14px 12px;
+.passport-card .passport-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.passport-card .passport-detail {
   background: var(--bg);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
+  padding: 12px;
 }
 
-.passport-metric {
-  flex: 1;
-  text-align: center;
+.passport-detail .detail-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
 }
 
-.passport-metric-divider {
-  width: 1px;
-  height: 28px;
-  background: var(--border);
-  flex-shrink: 0;
-}
-
-.passport-metric .metric-value {
+.passport-detail .detail-value {
   font-size: 16px;
   font-weight: 700;
   color: var(--text);
 }
 
-.passport-metric .metric-value.green { color: var(--secondary); }
-.passport-metric .metric-value.blue { color: var(--primary); }
+.passport-detail .detail-value.green { color: var(--secondary); }
+.passport-detail .detail-value.blue { color: var(--primary); }
+.passport-detail .detail-value.orange { color: var(--warning); }
+.passport-detail .detail-value.red { color: var(--danger); }
 
-.passport-metric .metric-label {
-  font-size: 10px;
-  font-weight: 500;
+.passport-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.passport-stat {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.passport-stat .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.passport-stat .stat-value.green { color: var(--secondary); }
+.passport-stat .stat-value.blue { color: var(--primary); }
+
+.passport-stat .stat-label {
+  font-size: 11px;
   color: var(--text-light);
+  font-weight: 500;
   margin-top: 2px;
 }
 
@@ -3174,6 +3193,31 @@ img {
   text-align: center;
 }
 
+/* ----- Passport Summary Description ----- */
+.passport-summary-desc {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--primary-bg);
+  border-radius: var(--radius);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  margin-bottom: 20px;
+}
+
+.passport-summary-desc i {
+  color: var(--primary);
+  font-size: 14px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.passport-summary-desc p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 /* ----- Passport Details Grid ----- */
 .passport-details-grid {
   display: flex;
@@ -4157,4 +4201,242 @@ img {
 
 .password-wrapper .pw-toggle:hover {
   color: var(--text);
+}
+
+/* ==========================================
+   CHART VARIANTS - Bar Chart (Vertical)
+   ========================================== */
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 120px;
+  gap: 6px;
+  padding: 0 4px;
+  margin-top: 8px;
+}
+
+.bar-chart .bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-chart .bar-fill {
+  width: 100%;
+  max-width: 36px;
+  border-radius: 4px 4px 2px 2px;
+  transition: height 0.5s ease;
+  position: relative;
+}
+
+.bar-chart .bar-fill .bar-val {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.bar-chart .bar-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.bar-fill.blue { background: linear-gradient(180deg, var(--primary) 0%, rgba(37,99,235,0.6) 100%); }
+.bar-fill.green { background: linear-gradient(180deg, var(--secondary) 0%, rgba(16,185,129,0.6) 100%); }
+.bar-fill.orange { background: linear-gradient(180deg, var(--warning) 0%, rgba(245,158,11,0.6) 100%); }
+.bar-fill.purple { background: linear-gradient(180deg, #8B5CF6 0%, rgba(139,92,246,0.6) 100%); }
+.bar-fill.red { background: linear-gradient(180deg, var(--danger) 0%, rgba(239,68,68,0.6) 100%); }
+
+/* ==========================================
+   CHART VARIANTS - Horizontal Bar Chart
+   ========================================== */
+
+.hbar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.hbar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hbar-label {
+  width: 90px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.hbar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hbar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+  position: relative;
+}
+
+.hbar-fill.blue { background: linear-gradient(90deg, var(--primary) 0%, rgba(37,99,235,0.7) 100%); }
+.hbar-fill.green { background: linear-gradient(90deg, var(--secondary) 0%, rgba(16,185,129,0.7) 100%); }
+.hbar-fill.orange { background: linear-gradient(90deg, var(--warning) 0%, rgba(245,158,11,0.7) 100%); }
+.hbar-fill.purple { background: linear-gradient(90deg, #8B5CF6 0%, rgba(139,92,246,0.7) 100%); }
+
+.hbar-pct {
+  width: 42px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   CHART VARIANTS - Gauge / Radial Progress
+   ========================================== */
+
+.gauge-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.gauge-svg {
+  width: 140px;
+  height: 140px;
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 10;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.gauge-text {
+  font-size: 26px;
+  font-weight: 800;
+  fill: var(--text);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.gauge-sub {
+  font-size: 10px;
+  fill: var(--text-light);
+  text-anchor: middle;
+}
+
+/* ==========================================
+   CHART VARIANTS - Percentage Blocks
+   ========================================== */
+
+.pct-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pct-block {
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.pct-block .pct-value {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.pct-block .pct-month {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+.pct-block .pct-arrow {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.pct-block .pct-arrow.up { color: var(--secondary); }
+.pct-block .pct-arrow.down { color: var(--danger); }
+
+/* ==========================================
+   CHART SOURCE & INSIGHT FOOTER
+   ========================================== */
+
+.chart-source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--text-light);
+}
+
+.chart-source i {
+  color: var(--primary);
+  font-size: 10px;
+}
+
+.chart-insight {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--primary-bg);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.chart-insight strong {
+  color: var(--text);
+}
+
+/* ==========================================
+   CHART VARIANTS - Forecast Dashed Line
+   ========================================== */
+
+.forecast-chart-svg line.forecast-prediction {
+  stroke-dasharray: 6 4;
 }

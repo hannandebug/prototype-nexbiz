@@ -40,17 +40,41 @@
 
       <div class="chart-card">
         <div class="chart-title" id="chartTitle">Perkembangan Arus Kas 7 Hari Terakhir</div>
-        <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="cashGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.15" />
-              <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0.01" />
-            </linearGradient>
-          </defs>
-          <path d="M0,100 L0,100 L10,85 L50,80 L90,75 L130,70 L170,65 L210,60 L250,55 L290,50 L300,48 L300,120 L0,120 Z" fill="url(#cashGrad)"/>
-          <polyline fill="none" stroke="#F59E0B" stroke-width="2" points="10,85 50,80 90,75 130,70 170,65 210,60 250,55 290,50" vector-effect="non-scaling-stroke"/>
-          <circle cx="290" cy="50" r="3" fill="#F59E0B"/>
-        </svg>
+        <div class="bar-chart">
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:78%"><span class="bar-val">1.6M</span></div>
+            <span class="bar-label">Sen</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:82%"><span class="bar-val">1.7M</span></div>
+            <span class="bar-label">Sel</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:80%"><span class="bar-val">1.65M</span></div>
+            <span class="bar-label">Rab</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:76%"><span class="bar-val">1.55M</span></div>
+            <span class="bar-label">Kam</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:83%"><span class="bar-val">1.72M</span></div>
+            <span class="bar-label">Jum</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:85%"><span class="bar-val">1.75M</span></div>
+            <span class="bar-label">Sab</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar-fill orange" style="height:81%"><span class="bar-val">1.68M</span></div>
+            <span class="bar-label">Min</span>
+          </div>
+        </div>
+        <div class="chart-source">
+          <i class="fas fa-database"></i>
+          <span>Sumber data: Kasir Pintar (Tersinkronisasi)</span>
+        </div>
+        <div class="chart-insight">Arus kas <strong>stabil</strong> selama 7 hari terakhir dengan rata-rata saldo Rp 1,68 juta. Pemasukan harian konsisten dari penjualan rutin, sedangkan pengeluaran terkontrol untuk bahan baku.</div>
       </div>
 
       <div class="detail-summary">

@@ -591,6 +591,21 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+/* ----- Animate Gauge Chart ----- */
+function animateGauge(score) {
+  const gaugeFill = document.querySelector('.gauge-fill');
+  const gaugeText = document.getElementById('gaugeScore');
+  if (!gaugeFill || !gaugeText) return;
+  const circumference = 2 * Math.PI * 58;
+  const offset = circumference * (1 - score / 100);
+  gaugeFill.style.strokeDasharray = circumference;
+  gaugeFill.style.strokeDashoffset = circumference;
+  setTimeout(() => {
+    gaugeFill.style.strokeDashoffset = offset;
+  }, 100);
+  animateCounter(gaugeText, score, '');
+}
+
 function updateDashboardMetrics() {
   const data = getData().dashboard;
   const metricCards = document.querySelectorAll('.metric-card');
@@ -655,15 +670,29 @@ function updateDashboardMetrics() {
   if (aiPreview) {
     aiPreview.innerHTML = getData().aiPreviewText || '';
   }
+
+  // Animate health score gauge
+  animateGauge(getData().healthScore);
 }
 
 function updateHealthReport() {
   const data = getData();
 
-  // Update score
-  const scoreEl = document.querySelector('.report-score');
+  // Update score (gauge)
+  const gaugeText = document.getElementById('healthGaugeScore');
+  const gaugeFill = document.querySelector('.report-overview .gauge-fill');
   const statusBadge = document.querySelector('.report-status-badge');
-  if (scoreEl) scoreEl.textContent = data.healthScore;
+  if (gaugeText) animateCounter(gaugeText, data.healthScore, '');
+  if (gaugeFill) {
+    const circumference = 2 * Math.PI * 58;
+    const offset = circumference * (1 - data.healthScore / 100);
+    gaugeFill.style.strokeDasharray = circumference;
+    gaugeFill.style.strokeDashoffset = offset;
+    if (data.healthScore >= 90) gaugeFill.setAttribute('stroke', 'var(--secondary)');
+    else if (data.healthScore >= 70) gaugeFill.setAttribute('stroke', 'var(--primary)');
+    else if (data.healthScore >= 50) gaugeFill.setAttribute('stroke', 'var(--warning)');
+    else gaugeFill.setAttribute('stroke', 'var(--danger)');
+  }
   if (statusBadge) {
     statusBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${data.healthStatus}`;
     statusBadge.className = 'report-status-badge';
