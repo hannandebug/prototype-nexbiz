@@ -24,7 +24,7 @@
           <button class="hamburger"><i class="fas fa-bars"></i></button>
           <h1>Profile</h1>
         </div>
-        <div class="header-right">
+        <div class="header-right" style="cursor:pointer;" onclick="openSettingsModal()">
           <i class="fas fa-gear" style="font-size: 20px; color: var(--text-secondary);"></i>
         </div>
       </div>
@@ -79,7 +79,7 @@
 
       <div class="profile-menu-group" id="premiumFeaturesGroup">
         <div class="menu-group-title">Fitur Premium</div>
-        <div class="profile-menu-item" style="cursor: default;">
+        <div class="profile-menu-item" onclick="window.location.href='forecast.html'">
           <div class="menu-icon orange-bg"><i class="fas fa-chart-simple"></i></div>
           <div class="menu-info">
             <h4>Prediksi Bisnis</h4>
@@ -87,7 +87,7 @@
           </div>
           <span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>
         </div>
-        <div class="profile-menu-item" style="cursor: default;">
+        <div class="profile-menu-item" onclick="window.location.href='assistant.html'">
           <div class="menu-icon orange-bg"><i class="fas fa-robot"></i></div>
           <div class="menu-info">
             <h4>AI Assistant</h4>
@@ -185,7 +185,7 @@
 
       <div class="profile-menu-group">
         <div class="menu-group-title">Pengaturan</div>
-        <div class="profile-menu-item">
+        <div class="profile-menu-item" onclick="openNotifSettingsModal()">
           <div class="menu-icon blue-bg"><i class="fas fa-bell"></i></div>
           <div class="menu-info">
             <h4>Notifikasi</h4>
@@ -193,7 +193,7 @@
           </div>
           <i class="fas fa-chevron-right menu-arrow"></i>
         </div>
-        <div class="profile-menu-item">
+        <div class="profile-menu-item" onclick="openPrivacyModal()">
           <div class="menu-icon blue-bg"><i class="fas fa-shield"></i></div>
           <div class="menu-info">
             <h4>Privasi & Keamanan</h4>
@@ -201,7 +201,7 @@
           </div>
           <i class="fas fa-chevron-right menu-arrow"></i>
         </div>
-        <div class="profile-menu-item">
+        <div class="profile-menu-item" onclick="openHelpModal()">
           <div class="menu-icon blue-bg"><i class="fas fa-circle-question"></i></div>
           <div class="menu-info">
             <h4>Bantuan</h4>
@@ -211,7 +211,7 @@
         </div>
       </div>
 
-      <button class="btn btn-danger-outline btn-full mt-8" onclick="if(confirm('Yakin ingin keluar?')){clearChatHistory();window.location.href='login.html'}">
+      <button class="btn btn-danger-outline btn-full mt-8" onclick="if(confirm('Yakin ingin keluar?')){clearChatHistory();localStorage.removeItem('aksaLoggedIn');localStorage.removeItem('aksaOnboarded');localStorage.removeItem('aksaSyncTime');window.location.href='login.html'}">
         <i class="fas fa-right-from-bracket"></i>
         Keluar
       </button>
@@ -220,10 +220,244 @@
         AKSA v1.0.0 &copy; <span id="currentYear"></span>
       </p>
     </div>
+
+    <!-- Notification Settings Modal -->
+      <div class="modal-overlay" id="notifSettingsOverlay" onclick="closeNotifSettingsModal()"></div>
+      <div class="modal" id="notifSettingsModal">
+        <div class="modal-header">
+          <h3>Pengaturan Notifikasi</h3>
+          <button class="modal-close" onclick="closeNotifSettingsModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-toggle">
+            <div class="setting-label">
+              <h4>Stok & Inventory</h4>
+              <p>Notifikasi saat stok hampir habis</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <div class="setting-label">
+              <h4>Rekomendasi AI</h4>
+              <p>Saran dan rekomendasi dari AKSA</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <div class="setting-label">
+              <h4>Laporan Harian</h4>
+              <p>Ringkasan omzet dan keuntungan harian</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <div class="setting-label">
+              <h4>Promo & Marketing</h4>
+              <p>Info promo dan strategi marketing</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Privacy & Security Modal -->
+      <div class="modal-overlay" id="privacyOverlay" onclick="closePrivacyModal()"></div>
+      <div class="modal" id="privacyModal">
+        <div class="modal-header">
+          <h3>Privasi & Keamanan</h3>
+          <button class="modal-close" onclick="closePrivacyModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <h4 style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;">Ubah Kata Sandi</h4>
+          <div class="form-group">
+            <label>Password Lama</label>
+            <input type="password" id="oldPassword" placeholder="Masukkan password lama">
+          </div>
+          <div class="form-group">
+            <label>Password Baru</label>
+            <input type="password" id="newPassword" placeholder="Masukkan password baru">
+          </div>
+          <button class="btn btn-primary btn-full" onclick="handleChangePassword()">
+            <i class="fas fa-lock"></i>
+            Ubah Password
+          </button>
+
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+            <h4 style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;">Ekspor Data</h4>
+            <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Download seluruh data transaksi dan analisis bisnis Anda dalam format CSV.</p>
+            <button class="btn btn-secondary btn-full" onclick="handleExportData()">
+              <i class="fas fa-download"></i>
+              Ekspor Data Saya
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help / FAQ Modal -->
+      <div class="modal-overlay" id="helpOverlay" onclick="closeHelpModal()"></div>
+      <div class="modal" id="helpModal">
+        <div class="modal-header">
+          <h3>Bantuan & FAQ</h3>
+          <button class="modal-close" onclick="closeHelpModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Apa itu AKSA?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>AKSA adalah AI Business Passport untuk UMKM yang membantu menganalisis kondisi bisnis Anda berdasarkan data transaksi, memberikan rekomendasi, dan prediksi masa depan secara otomatis.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Bagaimana cara menghubungkan data kasir?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Anda dapat menghubungkan data kasir melalui menu "Integrasi Data" di halaman Profile. Pilih sumber data yang tersedia, lalu ikuti langkah sinkronisasi yang ditampilkan.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Apakah data saya aman?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Ya, seluruh data Anda dienkripsi dan disimpan secara aman. AKSA hanya menggunakan data transaksi untuk analisis bisnis dan tidak membagikan data kepada pihak ketiga.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Bagaimana cara mengaktifkan Paket Premium?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Aktifkan Paket Premium melalui menu "Langganan" di halaman Profile. Aktifkan toggle Premium untuk menikmati fitur Prediksi Bisnis dan AI Assistant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Modal -->
+      <div class="modal-overlay" id="settingsOverlay" onclick="closeSettingsModal()"></div>
+      <div class="modal" id="settingsModal">
+        <div class="modal-header">
+          <h3>Pengaturan</h3>
+          <button class="modal-close" onclick="closeSettingsModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-toggle">
+            <div class="setting-label">
+              <h4><i class="fas fa-moon" style="margin-right:8px;color:var(--primary);"></i>Mode Gelap</h4>
+              <p>Ubah tema tampilan aplikasi</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div style="margin-top:20px;padding:16px;background:var(--bg);border-radius:var(--radius-sm);text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Tentang AKSA</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">AI Business Passport for UMKM</div>
+            <div style="font-size:11px;color:var(--text-light);">Versi 1.0.0 &copy; 2026 AKSA</div>
+          </div>
+        </div>
+      </div>
   </div>
 
   <script src="js/script.js"></script>
   <script>
+    /* --- Notification Settings Modal --- */
+    function openNotifSettingsModal() {
+      document.getElementById('notifSettingsOverlay').classList.add('open');
+      document.getElementById('notifSettingsModal').classList.add('open');
+    }
+    function closeNotifSettingsModal() {
+      document.getElementById('notifSettingsOverlay').classList.remove('open');
+      document.getElementById('notifSettingsModal').classList.remove('open');
+    }
+
+    /* --- Privacy & Security Modal --- */
+    function openPrivacyModal() {
+      document.getElementById('privacyOverlay').classList.add('open');
+      document.getElementById('privacyModal').classList.add('open');
+    }
+    function closePrivacyModal() {
+      document.getElementById('privacyOverlay').classList.remove('open');
+      document.getElementById('privacyModal').classList.remove('open');
+    }
+    function handleChangePassword() {
+      const oldPw = document.getElementById('oldPassword').value;
+      const newPw = document.getElementById('newPassword').value;
+      if (!oldPw || !newPw) {
+        alert('Semua field wajib diisi.');
+        return;
+      }
+      if (newPw.length < 6) {
+        alert('Password baru minimal 6 karakter.');
+        return;
+      }
+      alert('Password berhasil diubah!');
+      document.getElementById('oldPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      closePrivacyModal();
+    }
+    function handleExportData() {
+      alert('Ekspor data akan segera dikirim ke email Anda.');
+    }
+
+    /* --- Help / FAQ Modal --- */
+    function openHelpModal() {
+      document.getElementById('helpOverlay').classList.add('open');
+      document.getElementById('helpModal').classList.add('open');
+    }
+    function closeHelpModal() {
+      document.getElementById('helpOverlay').classList.remove('open');
+      document.getElementById('helpModal').classList.remove('open');
+    }
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      if (item) item.classList.toggle('open');
+    }
+
+    /* --- Settings Modal --- */
+    function openSettingsModal() {
+      document.getElementById('settingsOverlay').classList.add('open');
+      document.getElementById('settingsModal').classList.add('open');
+    }
+    function closeSettingsModal() {
+      document.getElementById('settingsOverlay').classList.remove('open');
+      document.getElementById('settingsModal').classList.remove('open');
+    }
+
+    /* --- Dark Mode --- */
+    function toggleDarkMode() {
+      const isDark = document.getElementById('darkModeToggle').checked;
+      document.body.classList.toggle('dark-mode', isDark);
+      localStorage.setItem('aksadarkmode', isDark ? 'true' : 'false');
+    }
+    function loadDarkMode() {
+      const isDark = localStorage.getItem('aksadarkmode') === 'true';
+      document.body.classList.toggle('dark-mode', isDark);
+      const toggle = document.getElementById('darkModeToggle');
+      if (toggle) toggle.checked = isDark;
+    }
+    loadDarkMode();
+
     function formatSyncTime(isoString) {
       if (!isoString) return '—';
       const d = new Date(isoString);

@@ -1,3 +1,12 @@
+// Auth Guard - redirect to login if not authenticated
+(function() {
+  const publicPages = ['index.html', 'login.html', 'business-profile.html', 'onboarding.html', 'data-source.html', ''];
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  if (!publicPages.includes(currentPage) && !localStorage.getItem('aksaLoggedIn')) {
+    window.location.href = 'login.html';
+  }
+})();
+
 /* ==========================================
    AKSA - AI Business Passport for UMKM
    Main JavaScript
@@ -57,11 +66,51 @@ const monthData = {
       perputaranStok: { score: 85, color: 'orange' },
       pertumbuhan: { score: 94, color: 'green' }
     },
+    passport: {
+      healthScore: 92,
+      healthLabel: 'Sangat Sehat',
+      growth: '+15%',
+      risk: 'Rendah',
+      riskColor: 'var(--secondary)',
+      verified: true,
+      stats: [
+        { label: 'Total Transaksi', value: '1.284' },
+        { label: 'Rata-rata/Hari', value: 'Rp 189K' },
+        { label: 'Produk Terlaris', value: 'Kopi Susu' },
+        { label: 'Rating Pelanggan', value: '4.8 ★' }
+      ],
+      details: [
+        { icon: 'fa-chart-line', label: 'Pendapatan', value: 'Rp 3.250.000', change: '+12%', changeDir: 'up' },
+        { icon: 'fa-wallet', label: 'Keuntungan', value: 'Rp 975.000', change: '+8%', changeDir: 'up' },
+        { icon: 'fa-exchange-alt', label: 'Arus Kas', value: 'Positif', change: 'Stabil', changeDir: 'up' },
+        { icon: 'fa-chart-bar', label: 'Pertumbuhan', value: '+15%', change: 'Bulan ini', changeDir: 'up' }
+      ]
+    },
     dashboard: {
-      revenue: { value: 'Rp 3.250.000', change: '+12%', label: 'hari ini' },
-      profit: { value: 'Rp 980.000', change: '+8%', label: 'minggu ini' },
-      cashflow: { value: 'Rp 1.750.000', status: 'Stabil', change: '', label: 'saat ini' },
-      growth: { value: '+15%', change: 'Meningkat', label: 'Bulan ini' }
+      revenue: {
+        value: 'Rp 3.250.000', change: '+12%', label: 'hari ini',
+        summary: 'Pendapatan hari ini mencapai <strong>Rp 3.250.000</strong>, naik 12% dibandingkan kemarin (Rp 2.900.000). Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Tren pendapatan terus meningkat dalam 7 hari terakhir.',
+        insight: 'Pendapatan meningkat 12% karena penjualan <strong>Kopi Susu</strong> naik 25% selama akhir pekan. Cuaca dingin mendorong pelanggan memilih minuman hangat. Disarankan mempertahankan stok bahan baku untuk mengantisipasi tren ini.',
+        chartTitle: 'Perkembangan Pendapatan Keseluruhan'
+      },
+      profit: {
+        value: 'Rp 980.000', change: '+8%', label: 'minggu ini',
+        summary: 'Keuntungan minggu ini mencapai <strong>Rp 980.000</strong>, naik 8% dibandingkan minggu lalu. Meskipun omzet naik 12%, margin keuntungan sedikit tertekan oleh kenaikan harga bahan baku sebesar 8% (susu dan gula).',
+        insight: 'Keuntungan naik 8% karena efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi seperti <strong>Kopi Susu</strong>. Namun kenaikan harga bahan baku menggerus margin. Disarankan evaluasi harga jual atau cari supplier alternatif.',
+        chartTitle: 'Perkembangan Keuntungan Keseluruhan'
+      },
+      cashflow: {
+        value: 'Rp 1.750.000', status: 'Stabil', change: '', label: 'saat ini',
+        summary: 'Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.750.000. Pemasukan harian rata-rata Rp 3.250.000 dan pengeluaran Rp 2.270.000, sehingga terdapat surplus sekitar Rp 980.000 per hari.',
+        insight: 'Arus kas dalam kondisi sehat karena pemasukan lebih besar 25% dibandingkan pengeluaran. Disarankan menyisihkan <strong>20% dari surplus</strong> untuk dana cadangan darurat dan sisanya dapat diinvestasikan untuk pengembangan usaha.',
+        chartTitle: 'Perkembangan Arus Kas Keseluruhan'
+      },
+      growth: {
+        value: '+15%', change: 'Meningkat', label: 'Bulan ini',
+        summary: 'Bisnis tumbuh <strong>15%</strong> bulan ini — tertinggi dalam 6 bulan terakhir. Pertumbuhan didorong oleh peningkatan pelanggan baru (8%) dan strategi promo bundling yang efektif.',
+        insight: 'Pertumbuhan 15% merupakan capaian positif yang didorong oleh peningkatan penjualan produk unggulan dan efektivitas promo. Untuk mempertahankan tren ini, AKSA merekomendasikan untuk terus berinovasi pada menu dan mempertahankan kualitas layanan.',
+        chartTitle: 'Perkembangan Pertumbuhan Keseluruhan'
+      }
     },
     aiAnalysis: 'Skor bisnis Anda mencapai <strong>92</strong> karena penjualan stabil (95), keuntungan meningkat (90), arus kas sehat (91), dan pertumbuhan bisnis kuat (94). Namun <strong>perputaran stok</strong> (85) perlu perhatian — beberapa bahan baku seperti teh masih menumpuk di gudang. Disarankan untuk menyesuaikan jumlah pembelian dengan permintaan aktual agar tidak terjadi pemborosan.',
     insight: 'Omzet hari ini naik 12% dibandingkan kemarin. Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Cuaca dingin meningkatkan permintaan minuman hangat.',
@@ -80,6 +129,7 @@ const monthData = {
       { icon: 'down', title: 'Pelanggan Berkurang di Jam Sepi', desc: 'Terjadi penurunan pengunjung pada pukul 14.00-16.00. Rata-rata hanya 3-4 pelanggan per jam. Ini adalah jam sepi yang konsisten setiap hari. Disarankan membuat promo <strong>bundling</strong> atau diskon khusus di jam tersebut.', reason: 'Pola perilaku pelanggan menunjukkan penurunan aktivitas di jam istirahat siang.', urgency: 'important', confidence: 88 },
       { icon: 'up', title: 'Produk Terlaris: Kopi Susu', desc: '<strong>Kopi Susu</strong> menyumbang 40% dari total penjualan dengan rata-rata 45 porsi per hari. Disusul <strong>Es Teh</strong> (25%) dan <strong>Roti Bakar</strong> (20%). Fokus promosi pada produk terlaris untuk hasil maksimal.', reason: 'Kopi Susu memiliki nilai jual tertinggi dan paling konsisten diminati pelanggan.', urgency: 'normal', confidence: 96 }
     ],
+    analysisScore: 92,
     forecast: [
       { icon: 'fa-cube', title: 'Stok Gula Habis dalam 4 Hari', desc: 'Berdasarkan rata-rata konsumsi 2 kg per hari, stok gula Anda saat ini (8 kg) diperkirakan habis pada hari Sabtu. Segera lakukan pemesanan ulang untuk mengantisipasi lonjakan akhir pekan.', confidence: 92, color: 'orange', reason: 'Konsumsi harian rata-rata 2 kg dengan stok tersisa 8 kg = 4 hari habis.', urgency: 'urgent' },
       { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Naik 25%', desc: 'Akhir pekan ini diprediksi permintaan Kopi Susu meningkat 25% disebabkan cuaca dingin dan hari libur. Pastikan stok susu, gula, dan biji kopi mencukupi.', confidence: 88, color: '', reason: 'Pola musiman menunjukkan lonjakan permintaan saat cuaca dingin dan weekend.', urgency: 'important' },
@@ -96,11 +146,51 @@ const monthData = {
       perputaranStok: { score: 40, color: 'orange' },
       pertumbuhan: { score: 18, color: 'red' }
     },
+    passport: {
+      healthScore: 28,
+      healthLabel: 'Kritis',
+      growth: '-10%',
+      risk: 'Tinggi',
+      riskColor: 'var(--danger)',
+      verified: false,
+      stats: [
+        { label: 'Total Transaksi', value: '342' },
+        { label: 'Rata-rata/Hari', value: 'Rp 45K' },
+        { label: 'Produk Terlaris', value: 'Es Teh' },
+        { label: 'Rating Pelanggan', value: '3.2 ★' }
+      ],
+      details: [
+        { icon: 'fa-chart-line', label: 'Pendapatan', value: 'Rp 850.000', change: '-15%', changeDir: 'down' },
+        { icon: 'fa-wallet', label: 'Keuntungan', value: 'Rp 75.000', change: '-40%', changeDir: 'down' },
+        { icon: 'fa-exchange-alt', label: 'Arus Kas', value: 'Negatif', change: 'Kritis', changeDir: 'down' },
+        { icon: 'fa-chart-bar', label: 'Pertumbuhan', value: '-10%', change: 'Bulan ini', changeDir: 'down' }
+      ]
+    },
     dashboard: {
-      revenue: { value: 'Rp 850.000', change: '-15%', label: 'hari ini' },
-      profit: { value: 'Rp 75.000', change: '-40%', label: 'minggu ini' },
-      cashflow: { value: 'Rp 200.000', status: 'Negatif', change: '', label: 'sangat terbatas' },
-      growth: { value: '-8%', change: 'Menurun', label: 'Bulan ini' }
+      revenue: {
+        value: 'Rp 850.000', change: '-15%', label: 'hari ini',
+        summary: 'Pendapatan bulan ini sangat rendah, hanya <strong>Rp 850.000</strong> — turun 15% dibanding periode sebelumnya. Produk <strong>Kopi Susu</strong> hanya terjual 12 porsi per hari. Volume penjualan anjlok secara signifikan.',
+        insight: 'Omzet anjlok 35% karena kombinasi harga tidak kompetitif dan munculnya pesaing baru di sekitar lokasi. Disarankan segera lakukan evaluasi harga, buat promosi agresif, dan survei pelanggan untuk memahami akar masalah.',
+        chartTitle: 'Perkembangan Pendapatan Januari 2026'
+      },
+      profit: {
+        value: 'Rp 75.000', change: '-40%', label: 'minggu ini',
+        summary: 'Keuntungan hampir nol, hanya <strong>Rp 75.000</strong> dengan margin sangat tipis. Biaya operasional tetap (sewa, gaji) lebih besar dari pendapatan. Bisnis mengalami <strong>kerugian</strong> bersih setiap hari.',
+        insight: 'Keuntungan turun 40% karena biaya operasional tetap tidak berkurang meskipun pendapatan menurun drastis. Kenaikan harga bahan baku memperparah kondisi. Segera audit pengeluaran dan negosiasi ulang dengan supplier.',
+        chartTitle: 'Perkembangan Keuntungan Januari 2026'
+      },
+      cashflow: {
+        value: 'Rp 200.000', status: 'Negatif', change: '', label: 'sangat terbatas',
+        summary: 'Arus kas dalam kondisi <strong>kritis</strong> dengan saldo hanya Rp 200.000. Arus kas negatif karena pendapatan harian tidak mencukupi biaya operasional. <strong>Butuh injeksi dana segera.</strong>',
+        insight: 'Arus kas negatif dengan saldo sangat terbatas. Dengan pengeluaran harian rata-rata Rp 150.000, kas diperkirakan habis dalam 7 hari. Segera cari solusi pendanaan darurat atau kurangi pengeluaran secara agresif.',
+        chartTitle: 'Perkembangan Arus Kas Januari 2026'
+      },
+      growth: {
+        value: '-8%', change: 'Menurun', label: 'Bulan ini',
+        summary: 'Bisnis mengalami kontraksi <strong>-8%</strong> bulan ini. Semua indikator pertumbuhan menunjukkan tren negatif. Pelanggan harian turun 60% dari 40 menjadi hanya 15 orang.',
+        insight: 'Pertumbuhan negatif 8% dipicu oleh hilangnya pelanggan setia akibat persaingan harga. Disarankan fokus pada program loyalitas pelanggan dan promosi darurat untuk membalikkan tren negatif ini.',
+        chartTitle: 'Perkembangan Pertumbuhan Januari 2026'
+      }
     },
     aiAnalysis: 'Skor bisnis Anda berada di <strong>28</strong> (Kritis). Penjualan sangat rendah (30), keuntungan hampir tidak ada (22), dan arus kas negatif (25). Bisnis mengalami defisit karena biaya operasional lebih besar dari pendapatan. Disarankan segera lakukan evaluasi besar-besaran — cek ulang harga jual, kurangi pengeluaran tidak perlu, dan cari strategi promosi darurat untuk meningkatkan omzet.',
     insight: 'Omzet bulan ini sangat rendah, turun 15% dibanding periode sebelumnya. Produk <strong>Kopi Susu</strong> hanya terjual 12 porsi per hari. Biaya operasional masih tinggi dan perlu segera dievaluasi.',
@@ -119,6 +209,7 @@ const monthData = {
       { icon: 'down', title: 'Arus Kas Negatif', desc: 'Arus kas dalam kondisi negatif dengan saldo sangat terbatas (Rp 200.000). Tidak cukup untuk membeli stok baru atau membayar kewajiban minggu depan. <strong>Butuh injeksi dana segera.</strong>', reason: 'Pendapatan harian tidak mencukupi untuk menutup pengeluaran operasional wajib.', urgency: 'urgent', confidence: 96 },
       { icon: 'down', title: 'Pelanggan Berkurang 60%', desc: 'Jumlah pelanggan harian turun dari 40 menjadi hanya 15 orang. Kemungkinan disebabkan oleh harga yang tidak kompetitif atau kemunculan pesaing baru. Survey pelanggan sangat disarankan.', reason: 'Hilangnya pelanggan setia akibat perubahan preferensi dan persaingan harga.', urgency: 'urgent', confidence: 89 }
     ],
+    analysisScore: 65,
     forecast: [
       { icon: 'fa-triangle-exclamation', title: 'Risiko Kehabisan Kas dalam 7 Hari', desc: 'Dengan arus kas saat ini (Rp 200.000) dan pengeluaran harian rata-rata Rp 150.000, kas diperkirakan habis dalam 7 hari. <strong>Segera cari solusi pendanaan darurat.</strong>', confidence: 96, color: 'red', reason: 'Arus kas negatif dengan rasio pengeluaran/pendapatan > 1.', urgency: 'urgent' },
       { icon: 'fa-chart-line', title: 'Omzet Diprediksi Turun Lagi 10%', desc: 'Jika tidak ada perubahan strategi, omzet diperkirakan terus turun 10% di minggu depan. Promo besar-besaran diperlukan untuk membalikkan tren negatif ini.', confidence: 88, color: 'orange', reason: 'Tren penurunan 3 bulan beruntun menunjukkan pola yang berkelanjutan.', urgency: 'urgent' },
@@ -135,11 +226,51 @@ const monthData = {
       perputaranStok: { score: 55, color: 'orange' },
       pertumbuhan: { score: 60, color: 'orange' }
     },
+    passport: {
+      healthScore: 65,
+      healthLabel: 'Moderat',
+      growth: '+5%',
+      risk: 'Sedang',
+      riskColor: 'var(--warning)',
+      verified: true,
+      stats: [
+        { label: 'Total Transaksi', value: '680' },
+        { label: 'Rata-rata/Hari', value: 'Rp 105K' },
+        { label: 'Produk Terlaris', value: 'Kopi Susu' },
+        { label: 'Rating Pelanggan', value: '4.2 ★' }
+      ],
+      details: [
+        { icon: 'fa-chart-line', label: 'Pendapatan', value: 'Rp 1.850.000', change: '+8%', changeDir: 'up' },
+        { icon: 'fa-wallet', label: 'Keuntungan', value: 'Rp 420.000', change: '+5%', changeDir: 'up' },
+        { icon: 'fa-exchange-alt', label: 'Arus Kas', value: 'Cukup', change: 'Mulai pulih', changeDir: 'up' },
+        { icon: 'fa-chart-bar', label: 'Pertumbuhan', value: '+5%', change: 'Bulan ini', changeDir: 'up' }
+      ]
+    },
     dashboard: {
-      revenue: { value: 'Rp 1.850.000', change: '+8%', label: 'hari ini' },
-      profit: { value: 'Rp 420.000', change: '+5%', label: 'minggu ini' },
-      cashflow: { value: 'Rp 850.000', status: 'Cukup', change: '', label: 'mulai pulih' },
-      growth: { value: '+7%', change: 'Mulai naik', label: 'Bulan ini' }
+      revenue: {
+        value: 'Rp 1.850.000', change: '+8%', label: 'hari ini',
+        summary: 'Omzet mulai naik <strong>Rp 1.850.000</strong>, naik 8% dibanding bulan lalu. Produk <strong>Kopi Susu</strong> mulai diminati kembali dengan 25 porsi per hari. Tren pemulihan sudah terlihat jelas.',
+        insight: 'Pemulihan omzet 8% didorong oleh strategi promosi Kopi Susu yang mulai membuahkan hasil dan kembalinya pelanggan. Namun biaya bahan baku masih perlu dikendalikan untuk meningkatkan margin keuntungan.',
+        chartTitle: 'Perkembangan Pendapatan Februari 2026'
+      },
+      profit: {
+        value: 'Rp 420.000', change: '+5%', label: 'minggu ini',
+        summary: 'Keuntungan mulai membaik menjadi <strong>Rp 420.000</strong>, naik 5% dibanding bulan lalu. Meskipun masih tipis, ini menunjukkan arah yang benar. Volume penjualan mulai menutup biaya operasional tetap.',
+        insight: 'Keuntungan naik 5% karena peningkatan volume penjualan mulai menutup biaya operasional. Fokus pada efisiensi biaya dan cari supplier alternatif untuk meningkatkan margin keuntungan.',
+        chartTitle: 'Perkembangan Keuntungan Februari 2026'
+      },
+      cashflow: {
+        value: 'Rp 850.000', status: 'Cukup', change: '', label: 'mulai pulih',
+        summary: 'Arus kas membaik dengan status <strong>Cukup</strong> dan saldo Rp 850.000. Mulai ada dana untuk pembelian stok. Pemulihan penjualan meningkatkan pemasukan kas secara bertahap.',
+        insight: 'Arus kas mulai pulih dari kondisi negatif. Pemulihan penjualan meningkatkan pemasukan kas. Tetap disarankan mengatur pengeluaran dengan hati-hati dan menyisihkan dana cadangan.',
+        chartTitle: 'Perkembangan Arus Kas Februari 2026'
+      },
+      growth: {
+        value: '+7%', change: 'Mulai naik', label: 'Bulan ini',
+        summary: 'Bisnis mulai tumbuh <strong>+7%</strong> setelah mengalami kontraksi di bulan sebelumnya. Pertumbuhan didorong oleh kembalinya pelanggan dan efektivitas strategi promosi Kopi Susu.',
+        insight: 'Pertumbuhan 7% menandakan awal pemulihan. Untuk mempercepat laju pertumbuhan, disarankan optimalkan jam sibuk dan kendalikan biaya bahan baku agar margin keuntungan meningkat.',
+        chartTitle: 'Perkembangan Pertumbuhan Februari 2026'
+      }
     },
     aiAnalysis: 'Skor bisnis Anda <strong>62</strong> (Perlu Perhatian). Penjualan mulai membaik (65) dibanding bulan lalu, namun keuntungan masih tipis (58). Arus kas cukup (70) namun perputaran stok lambat (55). Disarankan untuk fokus pada produk yang cepat laku, kurangi stok barang yang bergerak lambat, dan tingkatkan promosi untuk mendorong penjualan.',
     insight: 'Omzet mulai naik 8% dibanding bulan lalu. Produk <strong>Kopi Susu</strong> mulai diminati kembali dengan 25 porsi per hari. Namun biaya bahan baku masih perlu dikendalikan.',
@@ -158,6 +289,7 @@ const monthData = {
       { icon: 'up', title: 'Arus Kas Cukup Stabil', desc: 'Arus kas membaik dengan status "Cukup" dan saldo Rp 850.000. Mulai ada dana untuk pembelian stok. Namun tetap disarankan mengatur pengeluaran dengan hati-hati.', reason: 'Pemulihan penjualan meningkatkan pemasukan kas secara bertahap.', urgency: 'normal', confidence: 85 },
       { icon: 'down', title: 'Perputaran Stok Masih Lambat', desc: 'Perputaran stok masih lambat (skor 55). Stok teh dan beberapa bahan masih menumpuk. Percepat penjualan dengan promo bundling atau diskon terbatas.', reason: 'Stok berlebih dari periode sebelumnya belum terserap dengan baik.', urgency: 'important', confidence: 88 }
     ],
+    analysisScore: 78,
     forecast: [
       { icon: 'fa-mug-hot', title: 'Permintaan Kopi Susu Bakal Naik 20%', desc: 'Berdasarkan tren pemulihan, permintaan Kopi Susu diprediksi naik 20% dalam 2 minggu ke depan. Siapkan stok susu dan biji kopi tambahan.', confidence: 90, color: '', reason: 'Tren peningkatan penjualan Kopi Susu konsisten selama 2 minggu terakhir.', urgency: 'important' },
       { icon: 'fa-cube', title: 'Stok Gula Cukup untuk 10 Hari', desc: 'Dengan konsumsi saat ini, stok gula aman untuk 10 hari. Namun antisipasi kenaikan permintaan akhir pekan dengan menambah stok 20% lebih banyak.', confidence: 87, color: 'blue', reason: 'Konsumsi stabil dan stok tersisa masih dalam batas aman.', urgency: 'normal' },
@@ -174,11 +306,51 @@ const monthData = {
       perputaranStok: { score: 70, color: 'blue' },
       pertumbuhan: { score: 78, color: 'blue' }
     },
+    passport: {
+      healthScore: 92,
+      healthLabel: 'Sangat Sehat',
+      growth: '+15%',
+      risk: 'Rendah',
+      riskColor: 'var(--secondary)',
+      verified: true,
+      stats: [
+        { label: 'Total Transaksi', value: '1.284' },
+        { label: 'Rata-rata/Hari', value: 'Rp 189K' },
+        { label: 'Produk Terlaris', value: 'Kopi Susu' },
+        { label: 'Rating Pelanggan', value: '4.8 ★' }
+      ],
+      details: [
+        { icon: 'fa-chart-line', label: 'Pendapatan', value: 'Rp 3.250.000', change: '+12%', changeDir: 'up' },
+        { icon: 'fa-wallet', label: 'Keuntungan', value: 'Rp 975.000', change: '+8%', changeDir: 'up' },
+        { icon: 'fa-exchange-alt', label: 'Arus Kas', value: 'Positif', change: 'Stabil', changeDir: 'up' },
+        { icon: 'fa-chart-bar', label: 'Pertumbuhan', value: '+15%', change: 'Bulan ini', changeDir: 'up' }
+      ]
+    },
     dashboard: {
-      revenue: { value: 'Rp 2.450.000', change: '+10%', label: 'hari ini' },
-      profit: { value: 'Rp 720.000', change: '+6%', label: 'minggu ini' },
-      cashflow: { value: 'Rp 1.250.000', status: 'Stabil', change: '', label: 'cukup' },
-      growth: { value: '+10%', change: 'Meningkat', label: 'Bulan ini' }
+      revenue: {
+        value: 'Rp 2.450.000', change: '+10%', label: 'hari ini',
+        summary: 'Pendapatan bulan ini mencapai <strong>Rp 2.450.000</strong>, tumbuh 10% dari bulan lalu. <strong>Kopi Susu</strong> tetap menjadi andalan dengan 32 porsi per hari. Pola pertumbuhan konsisten dan stabil.',
+        insight: 'Pertumbuhan 10% didorong oleh kombinasi strategi promosi yang tepat dan peningkatan loyalitas pelanggan. Untuk mempertahankan tren ini, disarankan ekspansi variasi menu dan optimalkan promo bundling.',
+        chartTitle: 'Perkembangan Pendapatan Maret 2026'
+      },
+      profit: {
+        value: 'Rp 720.000', change: '+6%', label: 'minggu ini',
+        summary: 'Keuntungan stabil di <strong>Rp 720.000</strong> dengan margin yang terjaga. Biaya bahan baku sudah terkendali dan harga jual optimal. Pertahankan strategi pengelolaan biaya saat ini.',
+        insight: 'Keuntungan stabil karena efisiensi pengadaan bahan baku dan penyesuaian harga jual membuahkan hasil. Evaluasi harga jual untuk peningkatan margin lebih lanjut sudah bisa dilakukan.',
+        chartTitle: 'Perkembangan Keuntungan Maret 2026'
+      },
+      cashflow: {
+        value: 'Rp 1.250.000', status: 'Stabil', change: '', label: 'cukup',
+        summary: 'Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.250.000. Bisnis memiliki likuiditas yang cukup untuk operasional dan pengembangan. Pemasukan konsisten dari penjualan harian.',
+        insight: 'Arus kas sehat dan stabil karena pemasukan konsisten. Disarankan menyisihkan sebagian surplus untuk dana cadangan dan persiapan investasi pengembangan usaha di masa depan.',
+        chartTitle: 'Perkembangan Arus Kas Maret 2026'
+      },
+      growth: {
+        value: '+10%', change: 'Meningkat', label: 'Bulan ini',
+        summary: 'Bisnis tumbuh <strong>+10%</strong> secara stabil bulan ini. Pertumbuhan konsisten dari bulan ke bulan menunjukkan tren positif yang berkelanjutan. Semua indikator berada di zona sehat.',
+        insight: 'Pertumbuhan 10% stabil menunjukkan bisnis dalam kondisi sehat. Untuk percepatan pertumbuhan, disarankan tambah varian minuman hangat untuk musim hujan dan persiapkan stok untuk akhir pekan.',
+        chartTitle: 'Perkembangan Pertumbuhan Maret 2026'
+      }
     },
     aiAnalysis: 'Skor bisnis Anda <strong>78</strong> (Sehat). Penjualan cukup baik (80), keuntungan stabil (75), dan arus kas terkendali (82). Perputaran stok (70) masih perlu ditingkatkan — beberapa produk seperti teh perlu strategi promosi agar lebih cepat terjual. Pertumbuhan bisnis (78) menunjukkan tren positif yang perlu dipertahankan.',
     insight: 'Omzet bulan ini tumbuh 10%. Produk <strong>Kopi Susu</strong> masih menjadi andalan dengan 32 porsi per hari. Kondisi bisnis cukup stabil dan menunjukkan perbaikan.',
@@ -197,6 +369,7 @@ const monthData = {
       { icon: 'up', title: 'Arus Kas Stabil dan Sehat', desc: 'Arus kas dalam kondisi stabil dengan status "Stabil" dan saldo Rp 1.250.000. Bisnis memiliki likuiditas yang cukup untuk operasional dan pengembangan.', reason: 'Pemasukan konsisten dari penjualan harian menjamin kelancaran arus kas.', urgency: 'normal', confidence: 91 },
       { icon: 'down', title: 'Perputaran Stok Butuh Peningkatan', desc: 'Skor perputaran stok 70 — masih di bawah kategori ideal. Fokus pada strategi promosi untuk produk yang lambat bergerak seperti teh dan beberapa bahan kue.', reason: 'Beberapa item stok memiliki permintaan musiman yang belum dioptimalkan.', urgency: 'important', confidence: 86 }
     ],
+    analysisScore: 92,
     forecast: [
       { icon: 'fa-mug-hot', title: 'Permintaan Minuman Hangat Naik 30%', desc: 'Musim hujan diprediksi meningkatkan permintaan minuman hangat hingga 30%. Siapkan stok kopi, susu, cokelat, dan jahe untuk mengantisipasi lonjakan.', confidence: 93, color: '', reason: 'Pola musiman konsisten menunjukkan kenaikan permintaan saat musim hujan.', urgency: 'important' },
       { icon: 'fa-cart-plus', title: 'Omzet Diprediksi Tembus Rp 3 Juta', desc: 'Dengan strategi yang tepat, omzet bulan depan diprediksi tembus Rp 3 juta untuk pertama kalinya. Fokus pada promosi bundling dan varian baru.', confidence: 89, color: 'green', reason: 'Tren pertumbuhan 10% per bulan mendekati target Rp 3 juta.', urgency: 'normal' },
@@ -234,6 +407,74 @@ function updateStatusBarTime() {
 }
 
 /* ----- Initialize Page ----- */
+function renderPassport() {
+  const period = getStoredPeriod();
+  const data = monthData[period];
+  if (!data || !data.passport) return;
+  const p = data.passport;
+
+  const score = document.getElementById('passportScore');
+  if (score) score.textContent = p.healthScore;
+  const label = document.getElementById('passportScoreLabel');
+  if (label) label.textContent = p.healthLabel;
+  const growth = document.getElementById('passportGrowth');
+  if (growth) growth.textContent = p.growth;
+  const risk = document.getElementById('passportRisk');
+  if (risk) {
+    risk.textContent = p.risk;
+    risk.style.background = p.riskColor;
+    risk.style.color = '#fff';
+  }
+  const verified = document.getElementById('passportVerified');
+  if (verified) verified.style.display = p.verified ? 'flex' : 'none';
+
+  const statsEl = document.getElementById('passportStats');
+  if (statsEl && p.stats) {
+    statsEl.innerHTML = p.stats.map(s => `
+      <div class="passport-stat">
+        <div class="stat-value green">${s.value}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>
+    `).join('');
+  }
+
+  const detailsEl = document.getElementById('passportDetails');
+  if (detailsEl && p.details) {
+    detailsEl.innerHTML = p.details.map(d => `
+      <div class="passport-detail-card">
+        <div class="pdc-icon blue"><i class="fas ${d.icon}"></i></div>
+        <div class="pdc-info">
+          <span class="pdc-label">${d.label}</span>
+          <span class="pdc-value">${d.value}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function applyManualData() {
+  const saved = localStorage.getItem('aksaManualData');
+  const source = localStorage.getItem('aksaDataSource');
+  if (!saved || source !== 'manual') return;
+  try {
+    const entries = JSON.parse(saved);
+    if (!Array.isArray(entries) || entries.length === 0) return;
+    let totalRevenue = 0;
+    entries.forEach(e => {
+      const qty = parseInt(e.quantity) || 0;
+      const price = parseInt(e.price) || 0;
+      totalRevenue += qty * price;
+    });
+    if (totalRevenue > 0) {
+      const formatted = 'Rp ' + totalRevenue.toLocaleString('id-ID');
+      const revEl = document.querySelector('.metric-card[data-metric="revenue"] .metric-value');
+      if (revEl) revEl.textContent = formatted;
+    }
+  } catch(e) {
+    console.warn('Failed to parse manual data:', e);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   updateStatusBarTime();
   setInterval(updateStatusBarTime, 30000);
@@ -323,6 +564,14 @@ document.addEventListener('DOMContentLoaded', function() {
     animateConfidence('.conf-fill', 92);
   }
   }
+
+  // --- Passport Page ---
+  if (document.getElementById('passportScore')) {
+    renderPassport();
+  }
+
+  // --- Apply Manual Data if exists ---
+  applyManualData();
 
   // --- Assistant Page ---
   setupChat();
@@ -584,6 +833,14 @@ function updateAnalysisPage() {
       if (target) el.style.width = target + '%';
     });
   }, 200);
+
+  // Update confidence score based on period
+  const score = data.analysisScore || 92;
+  const confScoreEl = document.getElementById('confScore');
+  if (confScoreEl) {
+    animateCounter(confScoreEl, score, '%');
+    animateConfidence('.conf-fill', score);
+  }
 }
 
 function updateForecastPage() {
@@ -653,51 +910,66 @@ function updateDetailPage() {
 
   function hasNeg(str) { return str && str.startsWith('-'); }
 
+  let metric = '';
   if (pageTitle.includes('pendapatan')) {
-    const val = document.querySelector('.detail-big-value');
-    const change = document.querySelector('.detail-big-change');
-    const label = document.querySelector('.detail-big-label');
-    if (val) val.textContent = data.revenue.value;
-    if (change) {
-      const neg = hasNeg(data.revenue.change);
-      change.innerHTML = `<i class="fas fa-arrow-${neg ? 'down' : 'up'}"></i> ${data.revenue.change} ${data.revenue.label}`;
-      change.className = `detail-big-change ${neg ? 'negative' : 'positive'}`;
-    }
-    if (label) label.textContent = 'Total pendapatan ' + data.revenue.label;
+    metric = 'revenue';
   } else if (pageTitle.includes('keuntungan')) {
-    const val = document.querySelector('.detail-big-value');
-    const change = document.querySelector('.detail-big-change');
-    const label = document.querySelector('.detail-big-label');
-    if (val) val.textContent = data.profit.value;
+    metric = 'profit';
+  } else if (pageTitle.includes('kas')) {
+    metric = 'cashflow';
+  } else if (pageTitle.includes('tumbuhan')) {
+    metric = 'growth';
+  }
+
+  if (!metric) return;
+  const metricData = data[metric];
+
+  // Update big value / change / label
+  const val = document.querySelector('.detail-big-value');
+  const change = document.querySelector('.detail-big-change');
+  const label = document.querySelector('.detail-big-label');
+
+  if (metric === 'revenue') {
+    if (val) val.textContent = metricData.value;
     if (change) {
-      const neg = hasNeg(data.profit.change);
-      change.innerHTML = `<i class="fas fa-arrow-${neg ? 'down' : 'up'}"></i> ${data.profit.change} ${data.profit.label}`;
+      const neg = hasNeg(metricData.change);
+      change.innerHTML = `<i class="fas fa-arrow-${neg ? 'down' : 'up'}"></i> ${metricData.change} ${metricData.label}`;
       change.className = `detail-big-change ${neg ? 'negative' : 'positive'}`;
     }
-    if (label) label.textContent = 'Total keuntungan ' + data.profit.label;
-  } else if (pageTitle.includes('kas')) {
-    const val = document.querySelector('.detail-big-value');
-    const change = document.querySelector('.detail-big-change');
-    const label = document.querySelector('.detail-big-label');
-    if (val) val.textContent = data.cashflow.value;
+    if (label) label.textContent = 'Total pendapatan ' + metricData.label;
+  } else if (metric === 'profit') {
+    if (val) val.textContent = metricData.value;
     if (change) {
-      const isNeg = data.cashflow.status === 'Negatif';
-      change.innerHTML = `<i class="fas fa-${isNeg ? 'arrow-down' : 'minus'}"></i> ${data.cashflow.status}`;
+      const neg = hasNeg(metricData.change);
+      change.innerHTML = `<i class="fas fa-arrow-${neg ? 'down' : 'up'}"></i> ${metricData.change} ${metricData.label}`;
+      change.className = `detail-big-change ${neg ? 'negative' : 'positive'}`;
+    }
+    if (label) label.textContent = 'Total keuntungan ' + metricData.label;
+  } else if (metric === 'cashflow') {
+    if (val) val.textContent = metricData.value;
+    if (change) {
+      const isNeg = metricData.status === 'Negatif';
+      change.innerHTML = `<i class="fas fa-${isNeg ? 'arrow-down' : 'minus'}"></i> ${metricData.status}`;
       change.className = `detail-big-change ${isNeg ? 'negative' : 'positive'}`;
     }
-    if (label) label.textContent = 'Saldo arus kas ' + data.cashflow.label;
-  } else if (pageTitle.includes('tumbuhan')) {
-    const val = document.querySelector('.detail-big-value');
-    const change = document.querySelector('.detail-big-change');
-    const label = document.querySelector('.detail-big-label');
-    if (val) val.textContent = data.growth.value;
+    if (label) label.textContent = 'Saldo arus kas ' + metricData.label;
+  } else if (metric === 'growth') {
+    if (val) val.textContent = metricData.value;
     if (change) {
-      const isDown = hasNeg(data.growth.value);
-      change.innerHTML = `<i class="fas fa-arrow-${isDown ? 'down' : 'up'}"></i> ${data.growth.change} ${data.growth.label}`;
+      const isDown = hasNeg(metricData.value);
+      change.innerHTML = `<i class="fas fa-arrow-${isDown ? 'down' : 'up'}"></i> ${metricData.change} ${metricData.label}`;
       change.className = `detail-big-change ${isDown ? 'negative' : 'positive'}`;
     }
-    if (label) label.textContent = 'Pertumbuhan bisnis ' + data.growth.label;
+    if (label) label.textContent = 'Pertumbuhan bisnis ' + metricData.label;
   }
+
+  // Update summary, insight, and chart title
+  const summaryEl = document.getElementById('detailSummary');
+  const insightEl = document.getElementById('detailInsight');
+  const chartTitleEl = document.getElementById('chartTitle');
+  if (summaryEl && metricData.summary) summaryEl.innerHTML = metricData.summary;
+  if (insightEl && metricData.insight) insightEl.innerHTML = metricData.insight;
+  if (chartTitleEl && metricData.chartTitle) chartTitleEl.textContent = metricData.chartTitle;
 }
 
 function showEmptyState() {
@@ -828,6 +1100,76 @@ function initPeriodSelector() {
 function closeAllPeriodDropdowns() {
   document.querySelectorAll('.period-dropdown.open').forEach(d => d.classList.remove('open'));
   document.querySelectorAll('.period-trigger.open').forEach(t => t.classList.remove('open'));
+}
+
+function renderPassport() {
+  const data = getData();
+  if (!data || !data.passport) return;
+  const p = data.passport;
+
+  const score = document.getElementById('passportScore');
+  if (score) score.textContent = p.healthScore;
+  const label = document.getElementById('passportScoreLabel');
+  if (label) label.textContent = p.healthLabel;
+  const growth = document.getElementById('passportGrowth');
+  if (growth) growth.textContent = p.growth;
+  const risk = document.getElementById('passportRisk');
+  if (risk) {
+    risk.textContent = p.risk;
+    risk.style.background = p.riskColor;
+    risk.style.color = '#fff';
+  }
+  const verified = document.getElementById('passportVerified');
+  if (verified) verified.style.display = p.verified ? 'flex' : 'none';
+
+  const statsEl = document.getElementById('passportStats');
+  if (statsEl && p.stats) {
+    statsEl.innerHTML = p.stats.map(s => `
+      <div class="passport-stat">
+        <div class="stat-value">${s.value}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>
+    `).join('');
+  }
+
+  const detailsEl = document.getElementById('passportDetails');
+  if (detailsEl && p.details) {
+    detailsEl.innerHTML = p.details.map(d => `
+      <div class="passport-detail-card">
+        <div class="pdc-icon ${d.changeDir === 'up' ? 'green' : 'orange'}"><i class="fas ${d.icon}"></i></div>
+        <div class="pdc-info">
+          <span class="pdc-label">${d.label}</span>
+          <span class="pdc-value">${d.value}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function applyManualData() {
+  const saved = localStorage.getItem('aksaManualData');
+  const source = localStorage.getItem('aksaDataSource');
+  if (!saved || source !== 'manual') return;
+
+  try {
+    const entries = JSON.parse(saved);
+    if (!Array.isArray(entries) || entries.length === 0) return;
+
+    let totalRevenue = 0;
+    entries.forEach(e => {
+      const qty = parseInt(e.quantity) || 0;
+      const price = parseInt(e.price) || 0;
+      totalRevenue += qty * price;
+    });
+
+    if (totalRevenue > 0) {
+      const formatted = 'Rp ' + totalRevenue.toLocaleString('id-ID');
+      const revEl = document.querySelector('.metric-card[data-metric="revenue"] .metric-value');
+      if (revEl) revEl.textContent = formatted;
+    }
+  } catch(e) {
+    console.warn('Failed to parse manual data:', e);
+  }
 }
 
 /* ==========================================
@@ -1053,7 +1395,9 @@ function saveChatHistory() {
       text: msg.textContent
     });
   });
-  localStorage.setItem('aksaChatHistory', JSON.stringify(messages));
+  // Limit to last 50 messages
+  const limited = messages.slice(-50);
+  localStorage.setItem('aksaChatHistory', JSON.stringify(limited));
 }
 
 function loadChatHistory() {
@@ -1155,12 +1499,22 @@ function handleLogin(e) {
     return false;
   }
 
-  window.location.href = 'business-profile.html';
+  if (!localStorage.getItem('aksaOnboarded')) {
+    window.location.href = 'onboarding.html';
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+  localStorage.setItem('aksaLoggedIn', 'true');
   return false;
 }
 
 function handleGoogleLogin() {
-  window.location.href = 'business-profile.html';
+  if (!localStorage.getItem('aksaOnboarded')) {
+    window.location.href = 'onboarding.html';
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+  localStorage.setItem('aksaLoggedIn', 'true');
 }
 
 /* ==========================================

@@ -40,7 +40,7 @@
         <i class="fas fa-crown"></i>
         <h3>Buka Prediksi Premium</h3>
         <p>Dapatkan akses ke prediksi AI yang lebih akurat, analisis tren musiman, dan rekomendasi stok otomatis dengan AKSA Premium.</p>
-        <button class="btn-premium" onclick="document.getElementById('premiumToggle')?.click(); window.location.href='profile.html'"><i class="fas fa-crown"></i> Upgrade ke Premium</button>
+        <button class="btn-premium" onclick="window.location.href='profile.html'"><i class="fas fa-crown"></i> Upgrade ke Premium</button>
       </div>
 
       <div class="mt-16">
@@ -53,5 +53,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

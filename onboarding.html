@@ -85,6 +85,12 @@
   </div>
 
   <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+  <script>
     // Instant redirect if already onboarded — prevents flash/ghost
     if (localStorage.getItem('aksaOnboarded') === 'true') {
       document.documentElement.style.display = 'none';

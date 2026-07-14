@@ -39,7 +39,7 @@
       </div>
 
       <div class="chart-card">
-        <div class="chart-title">Perkembangan Pertumbuhan 6 Bulan Terakhir</div>
+        <div class="chart-title" id="chartTitle">Perkembangan Pertumbuhan 6 Bulan Terakhir</div>
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="growthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -55,12 +55,12 @@
 
       <div class="detail-summary">
         <h4>Ringkasan Performa</h4>
-        <p>Bisnis tumbuh <strong>15%</strong> bulan ini — tertinggi dalam 6 bulan terakhir. Pertumbuhan didorong oleh peningkatan pelanggan baru (8%) dan strategi promo bundling yang efektif.</p>
+        <p id="detailSummary">Bisnis tumbuh <strong>15%</strong> bulan ini — tertinggi dalam 6 bulan terakhir. Pertumbuhan didorong oleh peningkatan pelanggan baru (8%) dan strategi promo bundling yang efektif.</p>
       </div>
 
       <div class="detail-insight">
         <div class="insight-label"><i class="fas fa-robot"></i> Insight AI</div>
-        <p>Pertumbuhan 15% merupakan capaian positif yang didorong oleh peningkatan penjualan produk unggulan dan efektivitas promo. Untuk mempertahankan tren ini, AKSA merekomendasikan untuk terus berinovasi pada menu dan mempertahankan kualitas layanan.</p>
+        <p id="detailInsight">Pertumbuhan 15% merupakan capaian positif yang didorong oleh peningkatan penjualan produk unggulan dan efektivitas promo. Untuk mempertahankan tren ini, AKSA merekomendasikan untuk terus berinovasi pada menu dan mempertahankan kualitas layanan.</p>
       </div>
 
       <a href="analysis.html" class="btn btn-secondary-soft btn-full">
@@ -71,5 +71,11 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    // Load dark mode
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

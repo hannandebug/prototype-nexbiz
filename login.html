@@ -40,7 +40,7 @@
           </div>
 
           <div class="forgot-password">
-            <a href="#">Lupa Password?</a>
+            <a href="#" onclick="openForgotModal(event)">Lupa Password?</a>
           </div>
 
           <button type="submit" class="btn btn-primary btn-full">
@@ -56,12 +56,108 @@
         </form>
 
         <div class="login-footer">
-          Belum punya akun? <a href="#">Daftar sekarang</a>
+          Belum punya akun? <a href="#" onclick="openRegisterModal(event)">Daftar sekarang</a>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay" id="forgotOverlay" onclick="closeForgotModal()"></div>
+  <div class="modal" id="forgotModal">
+    <div class="modal-header">
+      <h3>Lupa Password</h3>
+      <button class="modal-close" onclick="closeForgotModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p>Masukkan email yang terdaftar untuk menerima link reset password.</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="resetEmail" placeholder="Masukkan email Anda">
+      </div>
+      <button class="btn btn-primary btn-full mt-12" onclick="handleResetPassword()">
+        <i class="fas fa-paper-plane"></i>
+        Kirim Link Reset
+      </button>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal-overlay" id="registerOverlay" onclick="closeRegisterModal()"></div>
+  <div class="modal" id="registerModal">
+    <div class="modal-header">
+      <h3>Daftar Akun Baru</h3>
+      <button class="modal-close" onclick="closeRegisterModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p>Isi data berikut untuk membuat akun AKSA baru.</p>
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="regName" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="Masukkan email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Buat password baru">
+      </div>
+      <button class="btn btn-primary btn-full mt-12" onclick="handleRegister()">
+        <i class="fas fa-user-plus"></i>
+        Daftar
+      </button>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
+  <script>
+    function openForgotModal(e) {
+      e.preventDefault();
+      document.getElementById('forgotOverlay').classList.add('open');
+      document.getElementById('forgotModal').classList.add('open');
+    }
+    function closeForgotModal() {
+      document.getElementById('forgotOverlay').classList.remove('open');
+      document.getElementById('forgotModal').classList.remove('open');
+    }
+    function handleResetPassword() {
+      const email = document.getElementById('resetEmail').value;
+      if (!email || !email.includes('@')) {
+        alert('Masukkan email yang valid.');
+        return;
+      }
+      alert('Link reset password telah dikirim ke ' + email);
+      closeForgotModal();
+    }
+    function openRegisterModal(e) {
+      e.preventDefault();
+      document.getElementById('registerOverlay').classList.add('open');
+      document.getElementById('registerModal').classList.add('open');
+    }
+    function closeRegisterModal() {
+      document.getElementById('registerOverlay').classList.remove('open');
+      document.getElementById('registerModal').classList.remove('open');
+    }
+    function handleRegister() {
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      if (!name || !email || !password) {
+        alert('Semua field wajib diisi.');
+        return;
+      }
+      if (!email.includes('@')) {
+        alert('Masukkan email yang valid.');
+        return;
+      }
+      if (password.length < 6) {
+        alert('Password minimal 6 karakter.');
+        return;
+      }
+      alert('Pendaftaran berhasil! Silakan masuk.');
+      closeRegisterModal();
+    }
+  </script>
 </body>
 </html>
