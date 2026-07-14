@@ -33,8 +33,15 @@
       <div class="period-selector" id="periodSelector"></div>
 
       <div class="report-overview">
-        <div class="report-score">92</div>
-        <div class="report-score-label">dari 100 — Business Health Score</div>
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" viewBox="0 0 140 140">
+            <circle class="gauge-bg" cx="70" cy="70" r="58"/>
+            <circle class="gauge-fill" cx="70" cy="70" r="58" stroke="var(--secondary)" stroke-dasharray="364.4" stroke-dashoffset="29.2"/>
+            <text class="gauge-text" x="70" y="66" id="healthGaugeScore">92</text>
+            <text class="gauge-sub" x="70" y="84">dari 100</text>
+          </svg>
+        </div>
+        <div class="report-score-label">Business Health Score</div>
         <div class="report-status-badge"><i class="fas fa-check-circle"></i> Sangat Sehat</div>
       </div>
 
@@ -64,6 +71,11 @@
           <div class="cat-score">94</div>
           <div class="cat-bar"><div class="cat-fill green" style="width:94%"></div></div>
         </div>
+      </div>
+
+      <div class="chart-source" style="margin-top:12px;">
+        <i class="fas fa-database"></i>
+        <span>Sumber data: Kasir Pintar (1.284 transaksi dianalisis)</span>
       </div>
 
       <div class="report-interpretation">
@@ -106,7 +118,11 @@
   <script>
     // Load dark mode
     if (localStorage.getItem('aksadarkmode') === 'true') {
+<<<<<<< HEAD
       document.body.classList.add('dark-mode');
+=======
+      document.querySelector('.phone').classList.add('dark-mode');
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     }
   </script>
 </body>

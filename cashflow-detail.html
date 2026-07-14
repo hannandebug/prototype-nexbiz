@@ -40,6 +40,7 @@
 
       <div class="chart-card">
         <div class="chart-title" id="chartTitle">Perkembangan Arus Kas 7 Hari Terakhir</div>
+<<<<<<< HEAD
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="cashGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -51,6 +52,14 @@
           <polyline fill="none" stroke="#F59E0B" stroke-width="2" points="10,85 50,80 90,75 130,70 170,65 210,60 250,55 290,50" vector-effect="non-scaling-stroke"/>
           <circle cx="290" cy="50" r="3" fill="#F59E0B"/>
         </svg>
+=======
+        <div id="detailChart"></div>
+        <div class="chart-source">
+          <i class="fas fa-database"></i>
+          <span>Sumber data: Kasir Pintar (Tersinkronisasi)</span>
+        </div>
+        <div class="chart-insight" id="chartInsight">Arus kas <strong>stabil</strong> selama 7 hari terakhir dengan rata-rata saldo Rp 1,68 juta. Pemasukan harian konsisten dari penjualan rutin, sedangkan pengeluaran terkontrol untuk bahan baku.</div>
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       </div>
 
       <div class="detail-summary">
@@ -74,7 +83,11 @@
   <script>
     // Load dark mode
     if (localStorage.getItem('aksadarkmode') === 'true') {
+<<<<<<< HEAD
       document.body.classList.add('dark-mode');
+=======
+      document.querySelector('.phone').classList.add('dark-mode');
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     }
   </script>
 </body>

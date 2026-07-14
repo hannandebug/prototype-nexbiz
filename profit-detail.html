@@ -40,6 +40,7 @@
 
       <div class="chart-card">
         <div class="chart-title" id="chartTitle">Perkembangan Keuntungan 7 Hari Terakhir</div>
+<<<<<<< HEAD
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="profitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -51,6 +52,14 @@
           <polyline fill="none" stroke="#10B981" stroke-width="2" points="10,90 50,85 90,70 130,75 170,55 210,50 250,35 290,30" vector-effect="non-scaling-stroke"/>
           <circle cx="290" cy="30" r="3" fill="#10B981"/>
         </svg>
+=======
+        <div id="detailChart"></div>
+        <div class="chart-source">
+          <i class="fas fa-database"></i>
+          <span>Sumber data: Kasir Pintar (Tersinkronisasi)</span>
+        </div>
+        <div class="chart-insight" id="chartInsight">Keuntungan fluktuatif karena dipengaruhi <strong>biaya operasional</strong> yang bervariasi — kenaikan harga bahan baku (susu & gula) mendorong penurunan di pertengahan minggu.</div>
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       </div>
 
       <div class="detail-summary">
@@ -74,7 +83,11 @@
   <script>
     // Load dark mode
     if (localStorage.getItem('aksadarkmode') === 'true') {
+<<<<<<< HEAD
       document.body.classList.add('dark-mode');
+=======
+      document.querySelector('.phone').classList.add('dark-mode');
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     }
   </script>
 </body>

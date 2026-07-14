@@ -39,6 +39,7 @@
       </div>
 
       <div class="chart-card">
+<<<<<<< HEAD
         <div class="chart-title" id="chartTitle">Perkembangan Pertumbuhan 6 Bulan Terakhir</div>
         <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
           <defs>
@@ -51,6 +52,15 @@
           <polyline fill="none" stroke="#8B5CF6" stroke-width="2" points="10,95 50,90 90,80 130,70 170,50 210,40 250,30 290,20" vector-effect="non-scaling-stroke"/>
           <circle cx="290" cy="20" r="3" fill="#8B5CF6"/>
         </svg>
+=======
+        <div class="chart-title" id="chartTitle">Pertumbuhan 3 Bulan Terakhir</div>
+        <div id="detailChart"></div>
+        <div class="chart-source">
+          <i class="fas fa-database"></i>
+          <span>Sumber data: Kasir Pintar (Tersinkronisasi)</span>
+        </div>
+        <div class="chart-insight" id="chartInsight">Pertumbuhan menunjukkan tren <strong>recovery</strong> yang konsisten: dari kontraksi -8% di Januari, pulih ke +7% di Februari, dan mencapai +10% di Maret. Tren ini didorong oleh strategi promosi yang efektif.</div>
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       </div>
 
       <div class="detail-summary">
@@ -74,7 +84,11 @@
   <script>
     // Load dark mode
     if (localStorage.getItem('aksadarkmode') === 'true') {
+<<<<<<< HEAD
       document.body.classList.add('dark-mode');
+=======
+      document.querySelector('.phone').classList.add('dark-mode');
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     }
   </script>
 </body>

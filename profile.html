@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="phone">
+    <div class="toast-container"></div>
     <div class="status-bar">
       <span class="time">09:41</span>
       <div class="status-icons">
@@ -34,7 +35,7 @@
           <i class="fas fa-store"></i>
         </div>
         <div class="profile-name">Warung Kopi Senja</div>
-        <div class="profile-type">Kedai Kopi & Minuman</div>
+        <div class="profile-type">F&B</div>
       </div>
 
       <div class="profile-menu-group">
@@ -50,7 +51,7 @@
           <div class="menu-icon green-bg"><i class="fas fa-store"></i></div>
           <div class="menu-info">
             <h4>Jenis Usaha</h4>
-            <p>Kedai Kopi & Minuman</p>
+            <p>F&B</p>
           </div>
         </div>
         <div class="profile-menu-item" style="cursor: default;">
@@ -235,7 +236,11 @@
               <p>Notifikasi saat stok hampir habis</p>
             </div>
             <label class="toggle-switch">
+<<<<<<< HEAD
               <input type="checkbox" checked>
+=======
+              <input type="checkbox" id="notifStock" onchange="toggleNotifSetting(this,'notif_stock')">
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -245,7 +250,11 @@
               <p>Saran dan rekomendasi dari AKSA</p>
             </div>
             <label class="toggle-switch">
+<<<<<<< HEAD
               <input type="checkbox" checked>
+=======
+              <input type="checkbox" id="notifRekomendasi" onchange="toggleNotifSetting(this,'notif_rekomendasi')">
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -255,7 +264,11 @@
               <p>Ringkasan omzet dan keuntungan harian</p>
             </div>
             <label class="toggle-switch">
+<<<<<<< HEAD
               <input type="checkbox" checked>
+=======
+              <input type="checkbox" id="notifLaporan" onchange="toggleNotifSetting(this,'notif_laporan')">
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -265,7 +278,11 @@
               <p>Info promo dan strategi marketing</p>
             </div>
             <label class="toggle-switch">
+<<<<<<< HEAD
               <input type="checkbox">
+=======
+              <input type="checkbox" id="notifPromo" onchange="toggleNotifSetting(this,'notif_promo')">
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -283,11 +300,25 @@
           <h4 style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;">Ubah Kata Sandi</h4>
           <div class="form-group">
             <label>Password Lama</label>
+<<<<<<< HEAD
             <input type="password" id="oldPassword" placeholder="Masukkan password lama">
           </div>
           <div class="form-group">
             <label>Password Baru</label>
             <input type="password" id="newPassword" placeholder="Masukkan password baru">
+=======
+            <div class="password-wrapper">
+              <input type="password" id="oldPassword" placeholder="Masukkan password lama">
+              <button class="pw-toggle" type="button" onclick="togglePwVisibility('oldPassword',this)"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Password Baru</label>
+            <div class="password-wrapper">
+              <input type="password" id="newPassword" placeholder="Masukkan password baru (min. 6 karakter)">
+              <button class="pw-toggle" type="button" onclick="togglePwVisibility('newPassword',this)"><i class="fas fa-eye"></i></button>
+            </div>
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
           </div>
           <button class="btn btn-primary btn-full" onclick="handleChangePassword()">
             <i class="fas fa-lock"></i>
@@ -361,8 +392,14 @@
         </div>
         <div class="modal-body">
           <div class="setting-toggle">
+<<<<<<< HEAD
             <div class="setting-label">
               <h4><i class="fas fa-moon" style="margin-right:8px;color:var(--primary);"></i>Mode Gelap</h4>
+=======
+            <div class="setting-icon" style="background:var(--primary-bg);color:var(--primary);"><i class="fas fa-moon"></i></div>
+            <div class="setting-label">
+              <h4>Mode Gelap</h4>
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <p>Ubah tema tampilan aplikasi</p>
             </div>
             <label class="toggle-switch">
@@ -381,8 +418,86 @@
 
   <script src="js/script.js"></script>
   <script>
+<<<<<<< HEAD
     /* --- Notification Settings Modal --- */
     function openNotifSettingsModal() {
+=======
+    /* ============================================
+       TOAST NOTIFICATION
+       ============================================ */
+    function showToast(message, type) {
+      type = type || 'info';
+      var container = document.querySelector('.phone .toast-container') || document.querySelector('.toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        var phone = document.querySelector('.phone');
+        if (phone) {
+          phone.appendChild(container);
+        } else {
+          document.body.appendChild(container);
+        }
+      }
+      var iconMap = {
+        success: 'fa-circle-check',
+        error: 'fa-circle-xmark',
+        info: 'fa-circle-info',
+        warning: 'fa-triangle-exclamation'
+      };
+      var toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML =
+        '<div class="toast-icon ' + type + '"><i class="fas ' + (iconMap[type] || iconMap.info) + '"></i></div>' +
+        '<span class="toast-msg">' + message + '</span>';
+      container.appendChild(toast);
+      setTimeout(function() {
+        toast.classList.add('toast-out');
+        setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+      }, 2500);
+    }
+
+    /* ============================================
+       PASSWORD VISIBILITY TOGGLE
+       ============================================ */
+    function togglePwVisibility(inputId, btn) {
+      var input = document.getElementById(inputId);
+      var icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    }
+
+    /* ============================================
+       NOTIFICATION SETTINGS
+       ============================================ */
+    var notifDefaults = { notif_stock: true, notif_rekomendasi: true, notif_laporan: true, notif_promo: false };
+    var notifLabels = { notif_stock: 'Stok & Inventory', notif_rekomendasi: 'Rekomendasi AI', notif_laporan: 'Laporan Harian', notif_promo: 'Promo & Marketing' };
+
+    function loadNotifSettings() {
+      Object.keys(notifDefaults).forEach(function(key) {
+        var saved = localStorage.getItem(key);
+        var val = saved !== null ? saved === 'true' : notifDefaults[key];
+        var el = document.getElementById(key === 'notif_stock' ? 'notifStock' :
+                  key === 'notif_rekomendasi' ? 'notifRekomendasi' :
+                  key === 'notif_laporan' ? 'notifLaporan' : 'notifPromo');
+        if (el) el.checked = val;
+      });
+    }
+
+    function toggleNotifSetting(el, key) {
+      localStorage.setItem(key, el.checked);
+      var label = notifLabels[key] || key;
+      showToast(label + (el.checked ? ' diaktifkan' : ' dinonaktifkan'), el.checked ? 'success' : 'info');
+    }
+
+    /* --- Notification Settings Modal --- */
+    function openNotifSettingsModal() {
+      loadNotifSettings();
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       document.getElementById('notifSettingsOverlay').classList.add('open');
       document.getElementById('notifSettingsModal').classList.add('open');
     }
@@ -391,7 +506,13 @@
       document.getElementById('notifSettingsModal').classList.remove('open');
     }
 
+<<<<<<< HEAD
     /* --- Privacy & Security Modal --- */
+=======
+    /* ============================================
+       PRIVACY & SECURITY
+       ============================================ */
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openPrivacyModal() {
       document.getElementById('privacyOverlay').classList.add('open');
       document.getElementById('privacyModal').classList.add('open');
@@ -400,6 +521,7 @@
       document.getElementById('privacyOverlay').classList.remove('open');
       document.getElementById('privacyModal').classList.remove('open');
     }
+<<<<<<< HEAD
     function handleChangePassword() {
       const oldPw = document.getElementById('oldPassword').value;
       const newPw = document.getElementById('newPassword').value;
@@ -421,6 +543,165 @@
     }
 
     /* --- Help / FAQ Modal --- */
+=======
+
+    function initDefaultPassword() {
+      if (!localStorage.getItem('aksaPassword')) {
+        localStorage.setItem('aksaPassword', '123456');
+      }
+    }
+
+    function handleChangePassword() {
+      initDefaultPassword();
+      var oldPw = document.getElementById('oldPassword').value;
+      var newPw = document.getElementById('newPassword').value;
+
+      if (!oldPw || !newPw) {
+        showToast('Semua field wajib diisi.', 'error');
+        return;
+      }
+      var storedPw = localStorage.getItem('aksaPassword') || '123456';
+      if (oldPw !== storedPw) {
+        showToast('Password lama tidak sesuai.', 'error');
+        return;
+      }
+      if (newPw.length < 6) {
+        showToast('Password baru minimal 6 karakter.', 'error');
+        return;
+      }
+      if (newPw === oldPw) {
+        showToast('Password baru harus berbeda dari password lama.', 'warning');
+        return;
+      }
+      localStorage.setItem('aksaPassword', newPw);
+      document.getElementById('oldPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      var oldPwInput = document.getElementById('oldPassword');
+      var newPwInput = document.getElementById('newPassword');
+      if (oldPwInput) oldPwInput.type = 'password';
+      if (newPwInput) newPwInput.type = 'password';
+      var pwToggles = document.querySelectorAll('.pw-toggle i');
+      pwToggles.forEach(function(ic) { ic.className = 'fas fa-eye'; });
+      closePrivacyModal();
+      showToast('Password berhasil diubah!', 'success');
+    }
+
+    /* ============================================
+       EXPORT DATA (CSV)
+       ============================================ */
+    function handleExportData() {
+      try {
+        var lines = [];
+        lines.push('=== DATA BISNIS AKSA ===');
+        lines.push('');
+        lines.push('--- PROFIL USAHA ---');
+        lines.push('Nama Usaha,Warung Kopi Senja');
+        lines.push('Jenis Usaha,Kedai Kopi & Minuman');
+        lines.push('Lama Berdiri,3 tahun (sejak 2021)');
+        lines.push('');
+        lines.push('--- RINGKASAN KEUANGAN ---');
+        lines.push('Bulan,Pendapatan,Keuntungan,Arus Kas,Pertumbuhan,Skor Kesehatan');
+        var periods = ['keseluruhan','januari','februari','maret','april','mei','juni'];
+        var periodLabels = {
+          keseluruhan: 'Keseluruhan',
+          januari: 'Januari 2026',
+          februari: 'Februari 2026',
+          maret: 'Maret 2026',
+          april: 'April 2026',
+          mei: 'Mei 2026',
+          juni: 'Juni 2026'
+        };
+
+        if (typeof monthData !== 'undefined') {
+          periods.forEach(function(p) {
+            var d = monthData[p];
+            if (!d) return;
+            var rev = d.dashboard ? d.dashboard.revenue.value : '-';
+            var prof = d.dashboard ? d.dashboard.profit.value : '-';
+            var cf = d.dashboard ? d.dashboard.cashflow.value : '-';
+            var gr = d.dashboard ? d.dashboard.growth.value : '-';
+            var hs = d.healthScore || '-';
+            lines.push((periodLabels[p] || p) + ',' + rev + ',' + prof + ',' + cf + ',' + gr + ',' + hs);
+          });
+        }
+
+        lines.push('');
+        lines.push('--- REKOMENDASI AI ---');
+        lines.push('Prioritas,Judul,Deskripsi,Confidence');
+        if (typeof monthData !== 'undefined' && monthData.keseluruhan) {
+          var recs = monthData.keseluruhan.recommendations || [];
+          recs.forEach(function(r) {
+            var badge = r.badge || r.urgency || '-';
+            var title = (r.title || '').replace(/,/g, ';');
+            var desc = (r.desc || '').replace(/<[^>]+>/g, '').replace(/,/g, ';');
+            lines.push(badge + ',' + title + ',"' + desc + '",' + (r.confidence || '-') + '%');
+          });
+        }
+
+        lines.push('');
+        lines.push('--- PREDIKSI BISNIS ---');
+        lines.push('Judul,Deskripsi,Confidence');
+        if (typeof monthData !== 'undefined' && monthData.keseluruhan) {
+          var forecasts = monthData.keseluruhan.forecast || [];
+          forecasts.forEach(function(f) {
+            var title = (f.title || '').replace(/,/g, ';');
+            var desc = (f.desc || '').replace(/<[^>]+>/g, '').replace(/,/g, ';');
+            lines.push(title + ',"' + desc + '",' + (f.confidence || '-') + '%');
+          });
+        }
+
+        lines.push('');
+        lines.push('--- ANALISIS ---');
+        lines.push('Judul,Insight,Confidence');
+        if (typeof monthData !== 'undefined' && monthData.keseluruhan) {
+          var analyses = monthData.keseluruhan.analysis || [];
+          analyses.forEach(function(a) {
+            var title = (a.title || '').replace(/,/g, ';');
+            var desc = (a.desc || '').replace(/<[^>]+>/g, '').replace(/,/g, ';');
+            lines.push(title + ',"' + desc + '",' + (a.confidence || '-') + '%');
+          });
+        }
+
+        lines.push('');
+        lines.push('--- PENDAPATAN PER BULAN ---');
+        lines.push('Bulan,Nilai,Perubahan');
+        var monthOrder = ['januari','februari','maret','april','mei','juni'];
+        var monthName = { januari:'Januari', februari:'Februari', maret:'Maret', april:'April', mei:'Mei', juni:'Juni' };
+        if (typeof monthData !== 'undefined') {
+          monthOrder.forEach(function(p) {
+            var d = monthData[p];
+            if (!d || !d.dashboard || !d.dashboard.revenue) return;
+            lines.push((monthName[p] || p) + ',' + d.dashboard.revenue.value + ',' + d.dashboard.revenue.change);
+          });
+        }
+
+        lines.push('');
+        lines.push('Diekspor pada: ' + new Date().toLocaleString('id-ID'));
+        lines.push('Dari: AKSA - AI Business Passport for UMKM');
+
+        var csvContent = '\uFEFF' + lines.join('\n');
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        var now = new Date();
+        var dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+        link.href = url;
+        link.download = 'AKSA_Data_Bisnis_' + dateStr + '.csv';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        showToast('Data berhasil diekspor sebagai file CSV!', 'success');
+      } catch (e) {
+        showToast('Gagal mengekspor data. Coba lagi.', 'error');
+      }
+    }
+
+    /* ============================================
+       HELP / FAQ MODAL
+       ============================================ */
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openHelpModal() {
       document.getElementById('helpOverlay').classList.add('open');
       document.getElementById('helpModal').classList.add('open');
@@ -430,11 +711,21 @@
       document.getElementById('helpModal').classList.remove('open');
     }
     function toggleFaq(el) {
+<<<<<<< HEAD
       const item = el.closest('.faq-item');
       if (item) item.classList.toggle('open');
     }
 
     /* --- Settings Modal --- */
+=======
+      var item = el.closest('.faq-item');
+      if (item) item.classList.toggle('open');
+    }
+
+    /* ============================================
+       SETTINGS MODAL (Dark Mode)
+       ============================================ */
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openSettingsModal() {
       document.getElementById('settingsOverlay').classList.add('open');
       document.getElementById('settingsModal').classList.add('open');
@@ -446,6 +737,7 @@
 
     /* --- Dark Mode --- */
     function toggleDarkMode() {
+<<<<<<< HEAD
       const isDark = document.getElementById('darkModeToggle').checked;
       document.body.classList.toggle('dark-mode', isDark);
       localStorage.setItem('aksadarkmode', isDark ? 'true' : 'false');
@@ -457,30 +749,55 @@
       if (toggle) toggle.checked = isDark;
     }
     loadDarkMode();
+=======
+      var isDark = document.getElementById('darkModeToggle').checked;
+      document.querySelector('.phone').classList.toggle('dark-mode', isDark);
+      localStorage.setItem('aksadarkmode', isDark ? 'true' : 'false');
+    }
+    function loadDarkMode() {
+      var isDark = localStorage.getItem('aksadarkmode') === 'true';
+      document.querySelector('.phone').classList.toggle('dark-mode', isDark);
+      var toggle = document.getElementById('darkModeToggle');
+      if (toggle) toggle.checked = isDark;
+    }
+
+    /* ============================================
+       INIT
+       ============================================ */
+    initDefaultPassword();
+    loadDarkMode();
+    loadNotifSettings();
+>>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 
     function formatSyncTime(isoString) {
       if (!isoString) return '—';
-      const d = new Date(isoString);
-      const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-      const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-      const day = days[d.getDay()];
-      const date = d.getDate();
-      const month = months[d.getMonth()];
-      const year = d.getFullYear();
-      const hours = String(d.getHours()).padStart(2, '0');
-      const mins = String(d.getMinutes()).padStart(2, '0');
-      return day + ', ' + date + ' ' + month + ' ' + year + ', ' + hours + '.' + mins + ' WIB';
+      var d = new Date(isoString);
+      var days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+      var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+      return days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ', ' + String(d.getHours()).padStart(2,'0') + '.' + String(d.getMinutes()).padStart(2,'0') + ' WIB';
+    }
+
+    function formatTimeAgo(isoString) {
+      if (!isoString) return '';
+      var now = new Date();
+      var then = new Date(isoString);
+      var diff = Math.floor((now - then) / 1000);
+      if (diff < 60) return 'Baru saja';
+      if (diff < 3600) return Math.floor(diff / 60) + ' menit lalu';
+      if (diff < 86400) return Math.floor(diff / 3600) + ' jam lalu';
+      return Math.floor(diff / 86400) + ' hari lalu';
     }
 
     function loadSyncTime() {
-      const ts = localStorage.getItem('aksaSyncTime');
-      const el1 = document.getElementById('syncTimeValue');
-      const el2 = document.getElementById('syncTimeDetail');
+      var ts = localStorage.getItem('aksaSyncTime');
+      var el1 = document.getElementById('syncTimeValue');
+      var el2 = document.getElementById('syncTimeDetail');
       if (ts) {
-        const d = new Date(ts);
-        const h = String(d.getHours()).padStart(2, '0');
-        const m = String(d.getMinutes()).padStart(2, '0');
-        if (el1) el1.textContent = h + '.' + m + ' WIB';
+        var d = new Date(ts);
+        var h = String(d.getHours()).padStart(2,'0');
+        var m = String(d.getMinutes()).padStart(2,'0');
+        var timeAgo = formatTimeAgo(ts);
+        if (el1) el1.textContent = h + '.' + m + ' WIB' + (timeAgo ? ' (' + timeAgo + ')' : '');
         if (el2) el2.textContent = formatSyncTime(ts);
       }
     }
