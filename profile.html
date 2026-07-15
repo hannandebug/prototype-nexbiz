@@ -120,7 +120,7 @@
               </div>
               <div class="sync-meta-item">
                 <span class="sync-meta-label">Total Transaksi</span>
-                <span class="sync-meta-value">1.284</span>
+                <span class="sync-meta-value" id="profileTotalTx">1.284</span>
               </div>
             </div>
           </div>
@@ -162,7 +162,7 @@
             <div class="sync-detail-icon orange"><i class="fas fa-receipt"></i></div>
             <div class="sync-detail-text">
               <span class="sync-detail-label">Total Transaksi Dianalisis</span>
-              <span class="sync-detail-value">1.284 transaksi</span>
+              <span class="sync-detail-value" id="profileTotalTxDetail">1.284 transaksi</span>
             </div>
           </div>
 
@@ -535,7 +535,7 @@
         lines.push('');
         lines.push('--- PROFIL USAHA ---');
         lines.push('Nama Usaha,Warung Kopi Senja');
-        lines.push('Jenis Usaha,Kedai Kopi & Minuman');
+        lines.push('Jenis Usaha,F&B');
         lines.push('Lama Berdiri,3 tahun (sejak 2021)');
         lines.push('');
         lines.push('--- RINGKASAN KEUANGAN ---');
@@ -719,6 +719,23 @@
     }
 
     loadSyncTime();
+  </script>
+  <script>
+    (function() {
+      try {
+        var raw = localStorage.getItem('aksaTransactionData');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var cnt = parsed.length.toLocaleString('id-ID');
+            var el1 = document.getElementById('profileTotalTx');
+            var el2 = document.getElementById('profileTotalTxDetail');
+            if (el1) el1.textContent = cnt;
+            if (el2) el2.textContent = cnt + ' transaksi';
+          }
+        }
+      } catch(e) {}
+    })();
   </script>
 </body>
 </html>

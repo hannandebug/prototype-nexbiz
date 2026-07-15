@@ -49,7 +49,7 @@
         <div class="dt-summary-grid">
           <div class="dt-summary-card">
             <div class="dt-label">Total Transaksi</div>
-            <div class="dt-val">1.284</div>
+            <div class="dt-val" id="dtTotalTransaksi">-</div>
           </div>
           <div class="dt-summary-card">
             <div class="dt-label">Rentang Tanggal</div>
@@ -61,11 +61,12 @@
           </div>
           <div class="dt-summary-card">
             <div class="dt-label">Rata-rata/Hari</div>
-            <div class="dt-val">Rp 189K</div>
+            <div class="dt-val" id="dtAvgPerDay">-</div>
           </div>
         </div>
 
-        <div class="dt-table-wrap">
+        <div class="data-table-scroll-wrapper">
+          <div class="scroll-hint">Geser untuk lihat kolom lainnya &rarr;</div>
           <table class="dt-table">
             <thead>
               <tr>
@@ -77,171 +78,11 @@
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>12 Jul</td>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>45</td>
-                <td>Rp 18.000</td>
-                <td>Rp 810.000</td>
-              </tr>
-              <tr>
-                <td>12 Jul</td>
-                <td>Es Kopi Susu</td>
-                <td>Minuman</td>
-                <td>32</td>
-                <td>Rp 20.000</td>
-                <td>Rp 640.000</td>
-              </tr>
-              <tr>
-                <td>12 Jul</td>
-                <td>Croissant</td>
-                <td>Makanan</td>
-                <td>18</td>
-                <td>Rp 15.000</td>
-                <td>Rp 270.000</td>
-              </tr>
-              <tr>
-                <td>11 Jul</td>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>42</td>
-                <td>Rp 18.000</td>
-                <td>Rp 756.000</td>
-              </tr>
-              <tr>
-                <td>11 Jul</td>
-                <td>Americano</td>
-                <td>Minuman</td>
-                <td>25</td>
-                <td>Rp 15.000</td>
-                <td>Rp 375.000</td>
-              </tr>
-              <tr>
-                <td>11 Jul</td>
-                <td>Roti Bakar</td>
-                <td>Makanan</td>
-                <td>14</td>
-                <td>Rp 12.000</td>
-                <td>Rp 168.000</td>
-              </tr>
-              <tr>
-                <td>11 Jul</td>
-                <td>Matcha Latte</td>
-                <td>Minuman</td>
-                <td>20</td>
-                <td>Rp 22.000</td>
-                <td>Rp 440.000</td>
-              </tr>
-              <tr>
-                <td>10 Jul</td>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>38</td>
-                <td>Rp 18.000</td>
-                <td>Rp 684.000</td>
-              </tr>
-              <tr>
-                <td>10 Jul</td>
-                <td>Es Teh Manis</td>
-                <td>Minuman</td>
-                <td>28</td>
-                <td>Rp 10.000</td>
-                <td>Rp 280.000</td>
-              </tr>
-              <tr>
-                <td>10 Jul</td>
-                <td>Pisang Goreng</td>
-                <td>Makanan</td>
-                <td>22</td>
-                <td>Rp 8.000</td>
-                <td>Rp 176.000</td>
-              </tr>
-              <tr>
-                <td>10 Jul</td>
-                <td>Croissant</td>
-                <td>Makanan</td>
-                <td>15</td>
-                <td>Rp 15.000</td>
-                <td>Rp 225.000</td>
-              </tr>
-              <tr>
-                <td>9 Jul</td>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>40</td>
-                <td>Rp 18.000</td>
-                <td>Rp 720.000</td>
-              </tr>
-              <tr>
-                <td>9 Jul</td>
-                <td>Americano</td>
-                <td>Minuman</td>
-                <td>22</td>
-                <td>Rp 15.000</td>
-                <td>Rp 330.000</td>
-              </tr>
-              <tr>
-                <td>9 Jul</td>
-                <td>Sandwich</td>
-                <td>Makanan</td>
-                <td>12</td>
-                <td>Rp 20.000</td>
-                <td>Rp 240.000</td>
-              </tr>
-              <tr>
-                <td>9 Jul</td>
-                <td>Matcha Latte</td>
-                <td>Minuman</td>
-                <td>18</td>
-                <td>Rp 22.000</td>
-                <td>Rp 396.000</td>
-              </tr>
-              <tr>
-                <td>8 Jul</td>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>36</td>
-                <td>Rp 18.000</td>
-                <td>Rp 648.000</td>
-              </tr>
-              <tr>
-                <td>8 Jul</td>
-                <td>Es Kopi Susu</td>
-                <td>Minuman</td>
-                <td>30</td>
-                <td>Rp 20.000</td>
-                <td>Rp 600.000</td>
-              </tr>
-              <tr>
-                <td>8 Jul</td>
-                <td>Roti Bakar</td>
-                <td>Makanan</td>
-                <td>16</td>
-                <td>Rp 12.000</td>
-                <td>Rp 192.000</td>
-              </tr>
-              <tr>
-                <td>8 Jul</td>
-                <td>Pisang Goreng</td>
-                <td>Makanan</td>
-                <td>20</td>
-                <td>Rp 8.000</td>
-                <td>Rp 160.000</td>
-              </tr>
-              <tr>
-                <td>8 Jul</td>
-                <td>Es Teh Manis</td>
-                <td>Minuman</td>
-                <td>25</td>
-                <td>Rp 10.000</td>
-                <td>Rp 250.000</td>
-              </tr>
-            </tbody>
+            <tbody id="transaksiTableBody"></tbody>
           </table>
         </div>
-        <div class="dt-footnote">Menampilkan data transaksi terbaru. Total keseluruhan: 1.284 transaksi.</div>
+        <div id="transaksiPagination"></div>
+        <div class="dt-footnote" id="dtFootnote">Memuat data transaksi...</div>
       </div>
 
       <!-- TAB STOK -->
@@ -249,7 +90,8 @@
         <button class="btn btn-secondary-soft btn-full" onclick="openStokModal()" style="margin-bottom:14px;">
           <i class="fas fa-plus"></i> Tambah Produk
         </button>
-        <div class="dt-table-wrap">
+        <div class="data-table-scroll-wrapper">
+          <div class="scroll-hint">Geser untuk lihat kolom lainnya &rarr;</div>
           <table class="dt-table">
             <thead>
               <tr>
@@ -309,9 +151,128 @@
       document.getElementById('dtStok').classList.toggle('active', tab === 'stok');
     }
 
-    /* ==============================
-       STOK MANAGEMENT (CRUD)
-       ============================== */
+    /* ============================================================
+       TASK B — Seeded transaction data generator (1,284 rows)
+       ============================================================ */
+    var txProducts = [
+      { name: 'Kopi Susu',     cat: 'Minuman', price: 18000 },
+      { name: 'Es Kopi Susu',  cat: 'Minuman', price: 20000 },
+      { name: 'Americano',     cat: 'Minuman', price: 15000 },
+      { name: 'Matcha Latte',  cat: 'Minuman', price: 22000 },
+      { name: 'Es Teh Manis',  cat: 'Minuman', price: 10000 },
+      { name: 'Cappuccino',    cat: 'Minuman', price: 20000 },
+      { name: 'Croissant',     cat: 'Makanan', price: 15000 },
+      { name: 'Roti Bakar',    cat: 'Makanan', price: 12000 },
+      { name: 'Pisang Goreng', cat: 'Makanan', price: 8000  },
+      { name: 'Sandwich',      cat: 'Makanan', price: 20000 }
+    ];
+
+    var txSeedState = 42;
+    function txRand() {
+      txSeedState = (txSeedState * 1664525 + 1013904223) & 0x7FFFFFFF;
+      return txSeedState / 0x7FFFFFFF;
+    }
+
+    var txPage = 0;
+    var TX_PER_PAGE = 25;
+
+    var txMonths = [31,28,31,30,31,30,31,31,30,31,30,31];
+    var txMonthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+    function txGenerateSeed() {
+      var data = [];
+      var startDate = new Date(2026, 0, 1);
+      var endDate = new Date(2026, 6, 12);
+      var totalDays = Math.round((endDate - startDate) / 86400000) + 1;
+      var count = 1284;
+      var perDay = Math.floor(count / totalDays);
+      var remainder = count - perDay * totalDays;
+
+      for (var d = 0; d < totalDays && data.length < count; d++) {
+        var dt = new Date(startDate.getTime() + d * 86400000);
+        var dayCount = perDay + (d < remainder ? 1 : 0);
+        for (var j = 0; j < dayCount && data.length < count; j++) {
+          var prod = txProducts[Math.floor(txRand() * txProducts.length)];
+          var qty = Math.floor(txRand() * 40) + 5;
+          data.push({
+            date: dt,
+            dateStr: dt.getDate() + ' ' + txMonthNames[dt.getMonth()],
+            product: prod.name,
+            category: prod.cat,
+            qty: qty,
+            price: prod.price,
+            total: qty * prod.price
+          });
+        }
+      }
+      return data;
+    }
+
+    function txLoadData() {
+      try {
+        var raw = localStorage.getItem('aksaTransactionData');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            parsed.forEach(function(r) { r.date = new Date(r.date); });
+            return parsed;
+          }
+        }
+      } catch(e) {}
+      var seed = txGenerateSeed();
+      localStorage.setItem('aksaTransactionData', JSON.stringify(seed));
+      return seed;
+    }
+
+    function txFormatNum(n) {
+      return n.toLocaleString('id-ID');
+    }
+
+    function txRenderPage() {
+      var data = txLoadData();
+      var total = data.length;
+      document.getElementById('dtTotalTransaksi').textContent = txFormatNum(total);
+      var avg = total > 0 ? Math.round(data.reduce(function(s,r){return s+r.total;},0) / 192) : 0;
+      document.getElementById('dtAvgPerDay').textContent = 'Rp ' + txFormatNum(avg);
+
+      var shown = Math.min((txPage + 1) * TX_PER_PAGE, total);
+      var rows = data.slice(0, shown);
+
+      var tbody = document.getElementById('transaksiTableBody');
+      var html = '';
+      for (var i = 0; i < rows.length; i++) {
+        var r = rows[i];
+        html += '<tr>' +
+          '<td>' + r.dateStr + '</td>' +
+          '<td>' + r.product + '</td>' +
+          '<td>' + r.category + '</td>' +
+          '<td>' + r.qty + '</td>' +
+          '<td>Rp ' + txFormatNum(r.price) + '</td>' +
+          '<td>Rp ' + txFormatNum(r.total) + '</td>' +
+          '</tr>';
+      }
+      tbody.innerHTML = html;
+
+      var pagination = document.getElementById('transaksiPagination');
+      var footnote = document.getElementById('dtFootnote');
+      if (shown < total) {
+        pagination.innerHTML = '<button class="dt-load-more" onclick="txLoadMore()">Muat Lebih Banyak (' + txFormatNum(total - shown) + ' lagi)</button>';
+      } else {
+        pagination.innerHTML = '';
+      }
+      footnote.textContent = 'Menampilkan ' + txFormatNum(shown) + ' dari ' + txFormatNum(total) + ' transaksi. Total keseluruhan: ' + txFormatNum(total) + ' transaksi.';
+    }
+
+    function txLoadMore() {
+      txPage++;
+      txRenderPage();
+    }
+
+    txRenderPage();
+
+    /* ============================================================
+       STOK MANAGEMENT (CRUD) — unchanged from original
+       ============================================================ */
     var stokSeed = [
       { id: 1, name: 'Kopi Susu', category: 'Minuman', stock: 120 },
       { id: 2, name: 'Es Kopi Susu', category: 'Minuman', stock: 85 },

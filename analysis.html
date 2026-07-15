@@ -67,7 +67,7 @@
         </div>
         <div class="chart-source">
           <i class="fas fa-database"></i>
-          <span>Sumber data: Kasir Pintar (1.284 transaksi dianalisis)</span>
+          <span>Sumber data: Kasir Pintar (<span id="analysisTotalTx">1.284</span> transaksi dianalisis)</span>
         </div>
         <div class="chart-insight"><strong>Kopi Susu</strong> menyumbang 40% total penjualan — produk paling konsisten diminati selama 3 bulan terakhir. Disusul Es Teh (25%) dan Roti Bakar (20%).</div>
       </div>
@@ -99,6 +99,18 @@
     if (localStorage.getItem('aksadarkmode') === 'true') {
       document.querySelector('.phone').classList.add('dark-mode');
     }
+    (function() {
+      try {
+        var raw = localStorage.getItem('aksaTransactionData');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var el = document.getElementById('analysisTotalTx');
+            if (el) el.textContent = parsed.length.toLocaleString('id-ID');
+          }
+        }
+      } catch(e) {}
+    })();
   </script>
 </body>
 </html>

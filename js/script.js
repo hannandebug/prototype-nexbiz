@@ -17,6 +17,18 @@ function formatRupiah(amount) {
   return 'Rp ' + amount.toLocaleString('id-ID');
 }
 
+/* ----- Get Transaction Count from localStorage ----- */
+function getTransactionCount() {
+  try {
+    var raw = localStorage.getItem('aksaTransactionData');
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed.length;
+    }
+  } catch(e) {}
+  return 1284;
+}
+
 /* ----- Animate Counter (Health Score, etc.) ----- */
 function animateCounter(element, target, suffix) {
   let current = 0;
@@ -74,7 +86,7 @@ const monthData = {
       riskColor: 'var(--secondary)',
       verified: true,
       stats: [
-        { label: 'Total Transaksi', value: '1.284' },
+        { label: 'Total Transaksi', value: getTransactionCount().toLocaleString('id-ID') },
         { label: 'Rata-rata/Hari', value: 'Rp 189K' },
         { label: 'Produk Terlaris', value: 'Kopi Susu' },
         { label: 'Rating Pelanggan', value: '4.8 ★' }
@@ -359,7 +371,7 @@ const monthData = {
       riskColor: 'var(--secondary)',
       verified: true,
       stats: [
-        { label: 'Total Transaksi', value: '1.284' },
+        { label: 'Total Transaksi', value: getTransactionCount().toLocaleString('id-ID') },
         { label: 'Rata-rata/Hari', value: 'Rp 189K' },
         { label: 'Produk Terlaris', value: 'Kopi Susu' },
         { label: 'Rating Pelanggan', value: '4.8 ★' }

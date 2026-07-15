@@ -786,12 +786,13 @@ img {
 }
 
 .score-circle .gauge-text {
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: 800;
   fill: white;
 }
 
 .score-circle .gauge-sub {
-  font-size: 10px;
+  font-size: 11px;
   fill: rgba(255,255,255,0.6);
 }
 
@@ -2656,8 +2657,8 @@ img {
 }
 
 .report-category .cat-score {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 800;
   color: var(--text);
 }
 
@@ -4346,7 +4347,7 @@ img {
 }
 
 .gauge-text {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 800;
   fill: var(--text);
   text-anchor: middle;
@@ -4354,7 +4355,7 @@ img {
 }
 
 .gauge-sub {
-  font-size: 10px;
+  font-size: 11px;
   fill: var(--text-light);
   text-anchor: middle;
 }
@@ -4632,4 +4633,128 @@ img {
 
 .stok-del-btn:hover {
   color: var(--danger);
+}
+
+/* ==========================================
+   SCROLL WRAPPER — Horizontal scroll for tables on mobile
+   ========================================== */
+
+.data-table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 12px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.data-table-scroll-wrapper .dt-table {
+  min-width: 620px;
+}
+
+.data-table-scroll-wrapper .dt-table thead th:first-child,
+.data-table-scroll-wrapper .dt-table tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--card);
+}
+
+.data-table-scroll-wrapper .dt-table thead th:first-child {
+  background: var(--bg);
+}
+
+.scroll-hint {
+  font-size: 10px;
+  color: var(--text-light);
+  text-align: right;
+  padding: 6px 12px 0;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Pagination load-more button */
+.dt-load-more {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 4px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.dt-load-more:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.dt-load-more:active {
+  transform: scale(0.98);
+}
+
+.dt-page-info {
+  font-size: 10px;
+  color: var(--text-light);
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* ==========================================
+   STOK TABLE ALIGNMENT FIXES (scoped)
+   ========================================== */
+
+#stokTableBody tr {
+  vertical-align: middle;
+}
+
+#stokTableBody td:nth-child(3) {
+  text-align: center;
+}
+
+.stok-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.stok-qty-val {
+  min-width: 80px;
+  width: 80px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#stokTableBody td:nth-child(4) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+#stokTableBody td:nth-child(4) .dt-status {
+  display: inline-block;
+  text-align: center;
+}
+
+#dtStok .dt-table thead th:nth-child(3),
+#dtStok .dt-table thead th:nth-child(4) {
+  text-align: center;
+}
+
+#stokTableBody td:last-child {
+  text-align: center;
+  width: 40px;
+}
+
+#stokTableBody td:last-child .stok-del-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

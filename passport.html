@@ -43,7 +43,7 @@
             <i class="fas fa-store"></i>
           </div>
           <div class="passport-name">Warung Kopi Senja</div>
-          <div class="passport-type">Kedai Kopi & Minuman</div>
+          <div class="passport-type">F&B</div>
 
           <div class="passport-details">
             <div class="passport-detail">
@@ -86,7 +86,7 @@
           <div class="pdc-icon blue"><i class="fas fa-receipt"></i></div>
           <div class="pdc-info">
             <span class="pdc-label">Total Transaksi</span>
-            <span class="pdc-value">1.284</span>
+            <span class="pdc-value" id="passportTotalTx">1.284</span>
           </div>
         </div>
         <div class="passport-detail-card">
@@ -256,6 +256,18 @@
     if (localStorage.getItem('aksadarkmode') === 'true') {
       document.querySelector('.phone').classList.add('dark-mode');
     }
+    (function() {
+      try {
+        var raw = localStorage.getItem('aksaTransactionData');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            var el = document.getElementById('passportTotalTx');
+            if (el) el.textContent = parsed.length.toLocaleString('id-ID');
+          }
+        }
+      } catch(e) {}
+    })();
   </script>
   <script>
     function openQrModal() {
