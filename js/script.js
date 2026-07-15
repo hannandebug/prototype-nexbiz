@@ -1726,6 +1726,7 @@ const sidebarConfig = {
   items: [
     { icon: 'fa-house', label: 'Dashboard', href: 'dashboard.html', premium: false },
     { icon: 'fa-chart-bar', label: 'Analisis Bisnis', href: 'analysis.html', premium: false },
+    { icon: 'fa-database', label: 'Data Transaksi & Stok', href: 'data-transaksi.html', premium: false },
     { icon: 'fa-heart-pulse', label: 'Health Report', href: 'health-report.html', premium: false },
     { icon: 'fa-passport', label: 'Business Passport', href: 'passport.html', premium: false },
     { icon: 'fa-list-check', label: 'Rekomendasi', href: 'recommendation.html', premium: false },
@@ -1919,5 +1920,160 @@ function updateSidebarPremium() {
 
   sidebar.querySelectorAll('.premium-tag').forEach(tag => {
     tag.style.display = isPremium ? 'none' : '';
+  });
+}
+
+function generatePassportPDF() {
+  var phone = document.querySelector('.phone');
+  if (!phone) return;
+
+  var passportData = null;
+  try { passportData = getData().passport; } catch(e) {}
+  if (!passportData) return;
+
+  var businessName = (phone.querySelector('.passport-name') || {}).textContent || 'Business';
+  businessName = businessName.trim();
+  var businessType = (phone.querySelector('.passport-type') || {}).textContent || '';
+  businessType = businessType.trim();
+
+  var statEls = phone.querySelectorAll('#passportStats .passport-detail-card');
+  var stats = {};
+  statEls.forEach(function(card) {
+    var lbl = (card.querySelector('.pdc-label') || {}).textContent || '';
+    var val = (card.querySelector('.pdc-value') || {}).textContent || '';
+    stats[lbl.trim()] = val.trim();
+  });
+
+  var detailEls = phone.querySelectorAll('#passportDetails .passport-detail-card');
+  var details = {};
+  detailEls.forEach(function(card) {
+    var lbl = (card.querySelector('.pdc-label') || {}).textContent || '';
+    var val = (card.querySelector('.pdc-value') || {}).textContent || '';
+    details[lbl.trim()] = val.trim();
+  });
+
+  var statusText = '';
+  var insightCard = phone.querySelector('.insight-card p');
+  if (insightCard) statusText = insightCard.textContent.trim();
+
+  var now = new Date();
+  var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  var issued = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  var expiryDate = new Date(now);
+  expiryDate.setMonth(expiryDate.getMonth() + 3);
+  var expiry = expiryDate.getDate() + ' ' + months[expiryDate.getMonth()] + ' ' + expiryDate.getFullYear();
+  var passportId = 'AKSA-' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + Math.random().toString(36).substring(2,8).toUpperCase();
+
+  var score = passportData.healthScore || details['Business Health Score'] || '92';
+  var growth = passportData.growth || details['Growth Rate'] || '+15%';
+  var risk = passportData.risk || details['Risk Level'] || 'Rendah';
+  var cashFlow = details['Cash Flow Status'] || 'Healthy';
+  var registered = (phone.querySelector('.passport-detail:last-child .detail-value') || {}).textContent || '2021';
+
+  var container = document.createElement('div');
+  container.style.cssText = 'position:fixed;top:0;left:0;width:794px;opacity:0.001;pointer-events:none;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:#1E293B;background:#fff;padding:0;margin:0;';
+
+  container.innerHTML = '' +
+    '<div style="width:794px;margin:0 auto;background:#fff;">' +
+
+    /* 1. HEADER */
+    '<div style="background:linear-gradient(135deg,#1E3A5F 0%,#0F1B2D 100%);padding:28px 36px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 12px 12px;">' +
+      '<div>' +
+        '<div style="color:#fff;font-size:22px;font-weight:800;letter-spacing:0.5px;">AKSA Business Passport</div>' +
+        '<div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:6px;">No. Passport: ' + passportId + '</div>' +
+        '<div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:2px;">Diterbitkan: ' + issued + ' &middot; Berlaku s/d ' + expiry + '</div>' +
+      '</div>' +
+      '<div style="background:#fff;border-radius:8px;padding:10px;display:flex;align-items:center;justify-content:center;">' +
+        '<i class="fas fa-qrcode" style="font-size:36px;color:#1E293B;"></i>' +
+      '</div>' +
+    '</div>' +
+
+    /* 2. IDENTITAS USAHA */
+    '<div style="padding:22px 36px 18px;border-bottom:1px solid #E2E8F0;">' +
+      '<div style="font-size:18px;font-weight:700;color:#1E293B;">' + businessName + '</div>' +
+      '<div style="font-size:12px;color:#64748B;margin-top:3px;">' + businessType + ' &middot; Terdaftar sejak ' + registered + '</div>' +
+    '</div>' +
+
+    /* 3. GRID METRIK UTAMA — 4 kolom */
+    '<div style="padding:18px 36px;display:flex;gap:14px;">' +
+      '<div style="flex:1;background:#F8FAFC;border-radius:12px;padding:16px 14px;border:1px solid #E2E8F0;">' +
+        '<div style="font-size:10px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Health Score</div>' +
+        '<div style="font-size:24px;font-weight:800;color:#10B981;">' + score + '</div>' +
+      '</div>' +
+      '<div style="flex:1;background:#F8FAFC;border-radius:12px;padding:16px 14px;border:1px solid #E2E8F0;">' +
+        '<div style="font-size:10px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Growth</div>' +
+        '<div style="font-size:24px;font-weight:800;color:#10B981;">' + growth + '</div>' +
+      '</div>' +
+      '<div style="flex:1;background:#F8FAFC;border-radius:12px;padding:16px 14px;border:1px solid #E2E8F0;">' +
+        '<div style="font-size:10px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Risk</div>' +
+        '<div style="font-size:24px;font-weight:800;color:#10B981;">' + risk + '</div>' +
+      '</div>' +
+      '<div style="flex:1;background:#F8FAFC;border-radius:12px;padding:16px 14px;border:1px solid #E2E8F0;">' +
+        '<div style="font-size:10px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Cash Flow</div>' +
+        '<div style="font-size:18px;font-weight:800;color:#2563EB;">' + cashFlow + '</div>' +
+      '</div>' +
+    '</div>' +
+
+    /* 4. RINGKASAN BISNIS — 2 kolom label:nilai */
+    '<div style="padding:0 36px 18px;">' +
+      '<div style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #E2E8F0;">Ringkasan Bisnis</div>' +
+      '<table style="width:100%;border-collapse:collapse;font-size:12px;">' +
+        '<tr><td style="padding:6px 0;color:#64748B;width:50%;">Total Transaksi</td><td style="padding:6px 0;font-weight:700;text-align:right;">' + (stats['Total Transaksi'] || '-') + '</td></tr>' +
+        '<tr style="background:#F8FAFC;"><td style="padding:6px 10px;color:#64748B;border-radius:6px 0 0 6px;">Rata-rata/Hari</td><td style="padding:6px 10px;font-weight:700;text-align:right;border-radius:0 6px 6px 0;">' + (stats['Rata-rata/Hari'] || '-') + '</td></tr>' +
+        '<tr><td style="padding:6px 0;color:#64748B;">Produk Terlaris</td><td style="padding:6px 0;font-weight:700;text-align:right;">' + (stats['Produk Terlaris'] || '-') + '</td></tr>' +
+        '<tr style="background:#F8FAFC;"><td style="padding:6px 10px;color:#64748B;border-radius:6px 0 0 6px;">Rating Pelanggan</td><td style="padding:6px 10px;font-weight:700;text-align:right;border-radius:0 6px 6px 0;">' + (stats['Rating Pelanggan'] || '-') + '</td></tr>' +
+        '<tr><td style="padding:6px 0;color:#64748B;">Pendapatan</td><td style="padding:6px 0;font-weight:700;text-align:right;">' + (details['Pendapatan'] || '-') + '</td></tr>' +
+        '<tr style="background:#F8FAFC;"><td style="padding:6px 10px;color:#64748B;border-radius:6px 0 0 6px;">Keuntungan</td><td style="padding:6px 10px;font-weight:700;text-align:right;border-radius:0 6px 6px 0;">' + (details['Keuntungan'] || '-') + '</td></tr>' +
+        '<tr><td style="padding:6px 0;color:#64748B;">Arus Kas</td><td style="padding:6px 0;font-weight:700;text-align:right;">' + (details['Arus Kas'] || '-') + '</td></tr>' +
+        '<tr style="background:#F8FAFC;"><td style="padding:6px 10px;color:#64748B;border-radius:6px 0 0 6px;">Pertumbuhan</td><td style="padding:6px 10px;font-weight:700;text-align:right;border-radius:0 6px 6px 0;">' + (details['Pertumbuhan'] || '-') + '</td></tr>' +
+      '</table>' +
+    '</div>' +
+
+    /* 5. BADGE VERIFIED */
+    '<div style="padding:0 36px 18px;">' +
+      '<div style="background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border:1px solid rgba(16,185,129,0.15);border-radius:12px;padding:14px 18px;text-align:center;">' +
+        '<div style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#10B981 0%,#34D399 100%);color:#fff;padding:6px 18px;border-radius:20px;font-size:12px;font-weight:600;">' +
+          '<i class="fas fa-award" style="font-size:14px;"></i> Verified by AKSA AI' +
+        '</div>' +
+        '<div style="font-size:11px;color:#64748B;margin-top:8px;">Passport ini divalidasi oleh sistem kecerdasan buatan AKSA berdasarkan analisis data transaksi bisnis Anda.</div>' +
+      '</div>' +
+    '</div>' +
+
+    /* 6. STATUS BISNIS */
+    '<div style="padding:0 36px 18px;">' +
+      '<div style="background:#F8FAFC;border-left:3px solid #10B981;border-radius:0 12px 12px 0;padding:16px 18px;">' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+          '<i class="fas fa-shield-check" style="color:#10B981;font-size:14px;"></i>' +
+          '<span style="font-size:13px;font-weight:700;color:#1E293B;">Status Bisnis</span>' +
+        '</div>' +
+        '<p style="margin:0;font-size:12px;color:#64748B;line-height:1.6;">' + statusText + '</p>' +
+      '</div>' +
+    '</div>' +
+
+    /* 7. FOOTER */
+    '<div style="padding:14px 36px;border-top:1px solid #E2E8F0;">' +
+      '<div style="font-size:10px;color:#94A3B8;text-align:center;">Dokumen ini hasil generate otomatis, sah tanpa tanda tangan basah.</div>' +
+    '</div>' +
+
+    '</div>';
+
+  document.body.appendChild(container);
+
+  var sanitized = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'business';
+
+  var opt = {
+    margin: [0, 0, 0, 0],
+    filename: 'business-passport-' + sanitized + '.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, width: 794, windowWidth: 794 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      html2pdf().set(opt).from(container).save().then(function() {
+        document.body.removeChild(container);
+      });
+    });
   });
 }

@@ -4440,3 +4440,143 @@ img {
 .forecast-chart-svg line.forecast-prediction {
   stroke-dasharray: 6 4;
 }
+
+/* ==========================================
+   DATA TRANSAKSI & STOK PAGE
+   ========================================== */
+
+.dt-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dt-tab {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dt-tab:hover {
+  border-color: var(--primary);
+}
+
+.dt-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.dt-section {
+  display: none;
+}
+
+.dt-section.active {
+  display: block;
+}
+
+.dt-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.dt-summary-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.dt-summary-card .dt-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.dt-summary-card .dt-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.dt-table-wrap {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.dt-table thead th {
+  background: var(--bg);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dt-table tbody td {
+  padding: 10px 12px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.dt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dt-table tbody tr:hover {
+  background: var(--primary-bg);
+}
+
+.dt-footnote {
+  font-size: 11px;
+  color: var(--text-light);
+  text-align: center;
+  padding: 10px 0 4px;
+}
+
+.dt-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.dt-status.aman {
+  background: var(--secondary-bg);
+  color: var(--secondary);
+}
+
+.dt-status.menipis {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.dt-status.habis {
+  background: var(--danger-bg);
+  color: var(--danger);
+}

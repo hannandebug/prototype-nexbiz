@@ -173,6 +173,11 @@
         <p>Bisnis Anda dalam kondisi <strong>sangat baik</strong>. Pertumbuhan konsisten, arus kas sehat, dan risiko rendah. AKSA merekomendasikan untuk mempertahankan strategi saat ini dan fokus pada peningkatan penjualan di jam sepi.</p>
       </div>
 
+      <button class="btn btn-secondary btn-full" style="margin-bottom:12px;" onclick="generatePassportPDF()">
+        <i class="fas fa-file-pdf"></i>
+        Unduh Passport (PDF)
+      </button>
+
       <a href="recommendation.html" class="btn btn-primary btn-full">
         <i class="fas fa-list-check"></i>
         Lihat Rekomendasi
@@ -244,6 +249,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="js/script.js"></script>
   <script>
     // Load dark mode
