@@ -236,11 +236,7 @@
               <p>Notifikasi saat stok hampir habis</p>
             </div>
             <label class="toggle-switch">
-<<<<<<< HEAD
-              <input type="checkbox" checked>
-=======
               <input type="checkbox" id="notifStock" onchange="toggleNotifSetting(this,'notif_stock')">
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -250,11 +246,7 @@
               <p>Saran dan rekomendasi dari AKSA</p>
             </div>
             <label class="toggle-switch">
-<<<<<<< HEAD
-              <input type="checkbox" checked>
-=======
               <input type="checkbox" id="notifRekomendasi" onchange="toggleNotifSetting(this,'notif_rekomendasi')">
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -264,11 +256,7 @@
               <p>Ringkasan omzet dan keuntungan harian</p>
             </div>
             <label class="toggle-switch">
-<<<<<<< HEAD
-              <input type="checkbox" checked>
-=======
               <input type="checkbox" id="notifLaporan" onchange="toggleNotifSetting(this,'notif_laporan')">
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -278,11 +266,7 @@
               <p>Info promo dan strategi marketing</p>
             </div>
             <label class="toggle-switch">
-<<<<<<< HEAD
-              <input type="checkbox">
-=======
               <input type="checkbox" id="notifPromo" onchange="toggleNotifSetting(this,'notif_promo')">
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <span class="toggle-slider"></span>
             </label>
           </div>
@@ -300,13 +284,6 @@
           <h4 style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;">Ubah Kata Sandi</h4>
           <div class="form-group">
             <label>Password Lama</label>
-<<<<<<< HEAD
-            <input type="password" id="oldPassword" placeholder="Masukkan password lama">
-          </div>
-          <div class="form-group">
-            <label>Password Baru</label>
-            <input type="password" id="newPassword" placeholder="Masukkan password baru">
-=======
             <div class="password-wrapper">
               <input type="password" id="oldPassword" placeholder="Masukkan password lama">
               <button class="pw-toggle" type="button" onclick="togglePwVisibility('oldPassword',this)"><i class="fas fa-eye"></i></button>
@@ -318,7 +295,6 @@
               <input type="password" id="newPassword" placeholder="Masukkan password baru (min. 6 karakter)">
               <button class="pw-toggle" type="button" onclick="togglePwVisibility('newPassword',this)"><i class="fas fa-eye"></i></button>
             </div>
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
           </div>
           <button class="btn btn-primary btn-full" onclick="handleChangePassword()">
             <i class="fas fa-lock"></i>
@@ -392,14 +368,9 @@
         </div>
         <div class="modal-body">
           <div class="setting-toggle">
-<<<<<<< HEAD
-            <div class="setting-label">
-              <h4><i class="fas fa-moon" style="margin-right:8px;color:var(--primary);"></i>Mode Gelap</h4>
-=======
             <div class="setting-icon" style="background:var(--primary-bg);color:var(--primary);"><i class="fas fa-moon"></i></div>
             <div class="setting-label">
               <h4>Mode Gelap</h4>
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
               <p>Ubah tema tampilan aplikasi</p>
             </div>
             <label class="toggle-switch">
@@ -418,10 +389,6 @@
 
   <script src="js/script.js"></script>
   <script>
-<<<<<<< HEAD
-    /* --- Notification Settings Modal --- */
-    function openNotifSettingsModal() {
-=======
     /* ============================================
        TOAST NOTIFICATION
        ============================================ */
@@ -497,7 +464,6 @@
     /* --- Notification Settings Modal --- */
     function openNotifSettingsModal() {
       loadNotifSettings();
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       document.getElementById('notifSettingsOverlay').classList.add('open');
       document.getElementById('notifSettingsModal').classList.add('open');
     }
@@ -506,13 +472,9 @@
       document.getElementById('notifSettingsModal').classList.remove('open');
     }
 
-<<<<<<< HEAD
-    /* --- Privacy & Security Modal --- */
-=======
     /* ============================================
        PRIVACY & SECURITY
        ============================================ */
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openPrivacyModal() {
       document.getElementById('privacyOverlay').classList.add('open');
       document.getElementById('privacyModal').classList.add('open');
@@ -521,29 +483,6 @@
       document.getElementById('privacyOverlay').classList.remove('open');
       document.getElementById('privacyModal').classList.remove('open');
     }
-<<<<<<< HEAD
-    function handleChangePassword() {
-      const oldPw = document.getElementById('oldPassword').value;
-      const newPw = document.getElementById('newPassword').value;
-      if (!oldPw || !newPw) {
-        alert('Semua field wajib diisi.');
-        return;
-      }
-      if (newPw.length < 6) {
-        alert('Password baru minimal 6 karakter.');
-        return;
-      }
-      alert('Password berhasil diubah!');
-      document.getElementById('oldPassword').value = '';
-      document.getElementById('newPassword').value = '';
-      closePrivacyModal();
-    }
-    function handleExportData() {
-      alert('Ekspor data akan segera dikirim ke email Anda.');
-    }
-
-    /* --- Help / FAQ Modal --- */
-=======
 
     function initDefaultPassword() {
       if (!localStorage.getItem('aksaPassword')) {
@@ -701,7 +640,6 @@
     /* ============================================
        HELP / FAQ MODAL
        ============================================ */
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openHelpModal() {
       document.getElementById('helpOverlay').classList.add('open');
       document.getElementById('helpModal').classList.add('open');
@@ -711,13 +649,6 @@
       document.getElementById('helpModal').classList.remove('open');
     }
     function toggleFaq(el) {
-<<<<<<< HEAD
-      const item = el.closest('.faq-item');
-      if (item) item.classList.toggle('open');
-    }
-
-    /* --- Settings Modal --- */
-=======
       var item = el.closest('.faq-item');
       if (item) item.classList.toggle('open');
     }
@@ -725,7 +656,6 @@
     /* ============================================
        SETTINGS MODAL (Dark Mode)
        ============================================ */
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
     function openSettingsModal() {
       document.getElementById('settingsOverlay').classList.add('open');
       document.getElementById('settingsModal').classList.add('open');
@@ -737,19 +667,6 @@
 
     /* --- Dark Mode --- */
     function toggleDarkMode() {
-<<<<<<< HEAD
-      const isDark = document.getElementById('darkModeToggle').checked;
-      document.body.classList.toggle('dark-mode', isDark);
-      localStorage.setItem('aksadarkmode', isDark ? 'true' : 'false');
-    }
-    function loadDarkMode() {
-      const isDark = localStorage.getItem('aksadarkmode') === 'true';
-      document.body.classList.toggle('dark-mode', isDark);
-      const toggle = document.getElementById('darkModeToggle');
-      if (toggle) toggle.checked = isDark;
-    }
-    loadDarkMode();
-=======
       var isDark = document.getElementById('darkModeToggle').checked;
       document.querySelector('.phone').classList.toggle('dark-mode', isDark);
       localStorage.setItem('aksadarkmode', isDark ? 'true' : 'false');
@@ -767,7 +684,6 @@
     initDefaultPassword();
     loadDarkMode();
     loadNotifSettings();
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 
     function formatSyncTime(isoString) {
       if (!isoString) return '—';

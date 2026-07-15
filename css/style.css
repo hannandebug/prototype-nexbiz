@@ -41,11 +41,7 @@
   --phone-height: 844px;
 }
 
-<<<<<<< HEAD
-.dark-mode {
-=======
 .phone.dark-mode {
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   --bg: #0F172A;
   --card: #1E293B;
   --text: #F1F5F9;
@@ -62,61 +58,13 @@
   --danger-bg: rgba(239, 68, 68, 0.15);
 }
 
-<<<<<<< HEAD
-.dark-mode .phone {
-  box-shadow: 0 0 0 2px #1a1a2e, 0 0 0 4px #0F172A, var(--shadow-xl);
-}
-.dark-mode .onboarding { background: var(--bg); }
-.dark-mode .onboarding-content { background: var(--bg); }
-.dark-mode input, .dark-mode textarea {
-=======
 .phone.dark-mode .onboarding { background: var(--bg); }
 .phone.dark-mode .onboarding-content { background: var(--bg); }
 .phone.dark-mode input, .phone.dark-mode textarea {
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   background: var(--bg);
   color: var(--text);
   border-color: var(--border);
 }
-<<<<<<< HEAD
-.dark-mode .stat-card, .dark-mode .detail-card, .dark-mode .passport-card {
-  background: var(--card);
-  border-color: var(--border);
-}
-.dark-mode .sidebar { background: var(--card); }
-.dark-mode .sidebar-header { background: var(--primary); }
-.dark-mode .nav-bar { background: var(--card); border-color: var(--border); }
-.dark-mode .bottom-sheet { background: var(--card); }
-.dark-mode .modal { background: var(--card); }
-.dark-mode .notif-panel { background: var(--card); border-color: var(--border); }
-.dark-mode .sync-modal { background: var(--card); }
-.dark-mode .premium-overlay { background: rgba(15, 23, 42, 0.85); }
-.dark-mode .chat-input-area { background: var(--card); border-color: var(--border); }
-.dark-mode .chat-input { background: var(--bg); color: var(--text); border-color: var(--border); }
-.dark-mode .user-msg { background: var(--primary); }
-.dark-mode .msg-time { color: var(--text-light); }
-.dark-mode .detail-summary { background: var(--card); border-color: var(--border); }
-.dark-mode .detail-insight { background: var(--card); border-color: var(--border); }
-.dark-mode .chart-container { background: var(--card); border-color: var(--border); }
-.dark-mode .stat-detail { background: var(--card); border-color: var(--border); }
-.dark-mode .priority-card { background: var(--card); border-color: var(--border); }
-.dark-mode .rec-card { background: var(--card); border-color: var(--border); }
-.dark-mode .report-card { background: var(--card); border-color: var(--border); }
-.dark-mode .profile-menu-item { border-color: var(--border); }
-.dark-mode .health-indicator { background: var(--card); border-color: var(--border); }
-.dark-mode .interpretation-box { background: var(--card); border-color: var(--border); }
-.dark-mode .manual-entry-item { background: var(--card); border-color: var(--border); }
-.dark-mode .upload-status { background: var(--card); border-color: var(--border); }
-.dark-mode .faq-item { background: var(--card); border-color: var(--border); }
-.dark-mode .setting-toggle { background: var(--card); }
-.dark-mode .ai-msg { background: var(--card); border-color: var(--border); }
-.dark-mode .passport-verified { background: var(--card); border-color: var(--border); }
-.dark-mode .premium-lock { background: var(--card); border-color: var(--border); }
-.dark-mode .ai-preview { background: var(--card); border-color: var(--border); }
-.dark-mode .passport-summary-desc { background: var(--card); border-color: var(--border); }
-.dark-mode .health-card { background: var(--card); }
-.dark-mode .passport-card { background: var(--card); }
-=======
 .phone.dark-mode .stat-card, .phone.dark-mode .detail-card, .phone.dark-mode .passport-card {
   background: var(--card);
   border-color: var(--border);
@@ -148,7 +96,6 @@
 .phone.dark-mode .interpretation-box { background: var(--bg); border-color: var(--border); }
 .phone.dark-mode .manual-entry-item { background: var(--bg); border-color: var(--border); }
 .phone.dark-mode .upload-status { background: var(--bg); border-color: var(--border); }
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 
 /* ----- Reset & Base ----- */
 *, *::before, *::after {
@@ -3672,19 +3619,11 @@ img {
   background: var(--card);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   z-index: 301;
-<<<<<<< HEAD
-  max-height: 85%;
-  overflow-y: auto;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding-bottom: 20px;
-=======
   max-height: 80%;
   overflow-y: auto;
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding-bottom: 16px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 }
 
 .modal.open {
@@ -3700,11 +3639,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-<<<<<<< HEAD
-  padding: 18px 20px 14px;
-=======
   padding: 16px 18px 12px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -3713,23 +3648,14 @@ img {
 }
 
 .modal-header h3 {
-<<<<<<< HEAD
-  font-size: 16px;
-=======
   font-size: 15px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   font-weight: 700;
   color: var(--text);
 }
 
 .modal-close {
-<<<<<<< HEAD
-  width: 32px;
-  height: 32px;
-=======
   width: 28px;
   height: 28px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   border-radius: 50%;
   border: none;
   background: var(--bg);
@@ -3738,11 +3664,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
-  font-size: 14px;
-=======
   font-size: 13px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   transition: all 0.2s;
 }
 
@@ -3752,16 +3674,6 @@ img {
 }
 
 .modal-body {
-<<<<<<< HEAD
-  padding: 20px;
-}
-
-.modal-body p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 12px;
-=======
   padding: 16px 18px;
 }
 
@@ -3770,7 +3682,6 @@ img {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 10px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 }
 
 /* ==========================================
@@ -3779,16 +3690,10 @@ img {
 
 .notif-panel {
   position: absolute;
-<<<<<<< HEAD
-  top: 100%;
-  right: 0;
-  width: 320px;
-=======
   top: 96px;
   right: 20px;
   width: calc(100% - 40px);
   max-width: 320px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   max-height: 400px;
   background: var(--card);
   border-radius: var(--radius);
@@ -3800,10 +3705,6 @@ img {
   pointer-events: none;
   transform: translateY(-8px);
   transition: all 0.25s ease;
-<<<<<<< HEAD
-  margin-top: 8px;
-=======
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 }
 
 .notif-panel.open {
@@ -3976,25 +3877,6 @@ img {
 .setting-toggle {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  justify-content: space-between;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.setting-toggle:last-child {
-  border-bottom: none;
-}
-
-.setting-toggle .setting-label {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.setting-toggle .setting-label h4 {
-  font-size: 13px;
-=======
   gap: 14px;
   padding: 14px 16px;
   background: var(--card);
@@ -4021,20 +3903,14 @@ img {
 
 .setting-toggle .setting-label h4 {
   font-size: 14px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   font-weight: 600;
   color: var(--text);
 }
 
 .setting-toggle .setting-label p {
-<<<<<<< HEAD
-  font-size: 11px;
-  color: var(--text-light);
-=======
   font-size: 12px;
   color: var(--text-light);
   margin-top: 1px;
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   margin-bottom: 0;
 }
 

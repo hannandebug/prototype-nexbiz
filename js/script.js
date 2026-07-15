@@ -92,55 +92,39 @@ const monthData = {
         summary: 'Pendapatan hari ini mencapai <strong>Rp 3.250.000</strong>, naik 12% dibandingkan kemarin (Rp 2.900.000). Produk <strong>Kopi Susu</strong> menjadi kontributor utama dengan penjualan 45 porsi. Tren pendapatan terus meningkat dalam 7 hari terakhir.',
         insight: 'Pendapatan meningkat 12% karena penjualan <strong>Kopi Susu</strong> naik 25% selama akhir pekan. Cuaca dingin mendorong pelanggan memilih minuman hangat. Disarankan mempertahankan stok bahan baku untuk mengantisipasi tren ini.',
         chartTitle: 'Perkembangan Pendapatan Keseluruhan',
-<<<<<<< HEAD
-        chartPoints: [95, 80, 85, 60, 40, 45, 25, 15]
-=======
         chartY: [95, 80, 85, 60, 40, 45, 25, 15],
         chartInsight: 'Pendapatan meningkat <strong>12%</strong> dalam 7 hari terakhir. Tren naik didorong oleh penjualan <strong>Kopi Susu</strong> yang naik 25% selama akhir pekan karena cuaca dingin.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       profit: {
         value: 'Rp 980.000', change: '+8%', label: 'minggu ini',
         summary: 'Keuntungan minggu ini mencapai <strong>Rp 980.000</strong>, naik 8% dibandingkan minggu lalu. Meskipun omzet naik 12%, margin keuntungan sedikit tertekan oleh kenaikan harga bahan baku sebesar 8% (susu dan gula).',
         insight: 'Keuntungan naik 8% karena efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi seperti <strong>Kopi Susu</strong>. Namun kenaikan harga bahan baku menggerus margin. Disarankan evaluasi harga jual atau cari supplier alternatif.',
         chartTitle: 'Perkembangan Keuntungan Keseluruhan',
-<<<<<<< HEAD
-        chartPoints: [90, 85, 70, 75, 55, 50, 35, 30]
-=======
         chartY: [60, 35, 55, 30, 50, 38, 48, 30],
         chartInsight: 'Keuntungan fluktuatif karena dipengaruhi <strong>biaya operasional</strong> yang bervariasi — kenaikan harga bahan baku (susu & gula) mendorong penurunan di pertengahan minggu.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       cashflow: {
         value: 'Rp 1.750.000', status: 'Stabil', change: '', label: 'saat ini',
         summary: 'Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.750.000. Pemasukan harian rata-rata Rp 3.250.000 dan pengeluaran Rp 2.270.000, sehingga terdapat surplus sekitar Rp 980.000 per hari.',
         insight: 'Arus kas dalam kondisi sehat karena pemasukan lebih besar 25% dibandingkan pengeluaran. Disarankan menyisihkan <strong>20% dari surplus</strong> untuk dana cadangan darurat dan sisanya dapat diinvestasikan untuk pengembangan usaha.',
         chartTitle: 'Perkembangan Arus Kas Keseluruhan',
-<<<<<<< HEAD
-        chartPoints: [55, 50, 48, 45, 42, 40, 38, 35]
-=======
         chartBars: [
           { val: '1.6M', pct: 78 }, { val: '1.7M', pct: 82 }, { val: '1.65M', pct: 80 },
           { val: '1.55M', pct: 76 }, { val: '1.72M', pct: 83 }, { val: '1.75M', pct: 85 }, { val: '1.68M', pct: 81 }
         ],
         chartInsight: 'Arus kas <strong>stabil</strong> selama 7 hari terakhir dengan rata-rata saldo Rp 1,68 juta. Pemasukan harian konsisten dari penjualan rutin, sedangkan pengeluaran terkontrol untuk bahan baku.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       growth: {
         value: '+15%', change: 'Meningkat', label: 'Bulan ini',
         summary: 'Bisnis tumbuh <strong>15%</strong> bulan ini — tertinggi dalam 6 bulan terakhir. Pertumbuhan didorong oleh peningkatan pelanggan baru (8%) dan strategi promo bundling yang efektif.',
         insight: 'Pertumbuhan 15% merupakan capaian positif yang didorong oleh peningkatan penjualan produk unggulan dan efektivitas promo. Untuk mempertahankan tren ini, AKSA merekomendasikan untuk terus berinovasi pada menu dan mempertahankan kualitas layanan.',
         chartTitle: 'Perkembangan Pertumbuhan Keseluruhan',
-<<<<<<< HEAD
-        chartPoints: [95, 90, 80, 70, 50, 40, 30, 20]
-=======
         chartBlocks: [
           { value: '-8%', month: 'Jan', arrow: 'down', label: 'Kritis', color: 'danger' },
           { value: '+7%', month: 'Feb', arrow: 'up', label: 'Pemulihan', color: 'warning' },
           { value: '+10%', month: 'Mar', arrow: 'up', label: 'Sehat', color: 'secondary' }
         ],
         chartInsight: 'Pertumbuhan menunjukkan tren <strong>recovery</strong> yang konsisten: dari kontraksi -8% di Januari, pulih ke +7% di Februari, dan mencapai +10% di Maret.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       }
     },
     aiAnalysis: 'Skor bisnis Anda mencapai <strong>92</strong> karena penjualan stabil (95), keuntungan meningkat (90), arus kas sehat (91), dan pertumbuhan bisnis kuat (94). Namun <strong>perputaran stok</strong> (85) perlu perhatian — beberapa bahan baku seperti teh masih menumpuk di gudang. Disarankan untuk menyesuaikan jumlah pembelian dengan permintaan aktual agar tidak terjadi pemborosan.',
@@ -203,55 +187,39 @@ const monthData = {
         summary: 'Pendapatan bulan ini sangat rendah, hanya <strong>Rp 850.000</strong> — turun 15% dibanding periode sebelumnya. Produk <strong>Kopi Susu</strong> hanya terjual 12 porsi per hari. Volume penjualan anjlok secara signifikan.',
         insight: 'Omzet anjlok 35% karena kombinasi harga tidak kompetitif dan munculnya pesaing baru di sekitar lokasi. Disarankan segera lakukan evaluasi harga, buat promosi agresif, dan survei pelanggan untuk memahami akar masalah.',
         chartTitle: 'Perkembangan Pendapatan Januari 2026',
-<<<<<<< HEAD
-        chartPoints: [50, 55, 65, 70, 80, 85, 90, 95]
-=======
         chartY: [105, 108, 112, 115, 118, 116, 114, 118],
         chartInsight: 'Pendapatan <strong>sangat rendah</strong> dan cenderung menurun sepanjang minggu. Omzet anjlok 35% karena pesaing baru dan harga tidak kompetitif.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       profit: {
         value: 'Rp 75.000', change: '-40%', label: 'minggu ini',
         summary: 'Keuntungan hampir nol, hanya <strong>Rp 75.000</strong> dengan margin sangat tipis. Biaya operasional tetap (sewa, gaji) lebih besar dari pendapatan. Bisnis mengalami <strong>kerugian</strong> bersih setiap hari.',
         insight: 'Keuntungan turun 40% karena biaya operasional tetap tidak berkurang meskipun pendapatan menurun drastis. Kenaikan harga bahan baku memperparah kondisi. Segera audit pengeluaran dan negosiasi ulang dengan supplier.',
         chartTitle: 'Perkembangan Keuntungan Januari 2026',
-<<<<<<< HEAD
-        chartPoints: [40, 50, 60, 70, 80, 90, 100, 105]
-=======
         chartY: [100, 105, 108, 110, 107, 112, 115, 118],
         chartInsight: 'Keuntungan <strong>hampir nol</strong> sepanjang minggu. Biaya operasional tetap melebihi pendapatan, menyebabkan kerugian bersih setiap hari.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       cashflow: {
         value: 'Rp 200.000', status: 'Negatif', change: '', label: 'sangat terbatas',
         summary: 'Arus kas dalam kondisi <strong>kritis</strong> dengan saldo hanya Rp 200.000. Arus kas negatif karena pendapatan harian tidak mencukupi biaya operasional. <strong>Butuh injeksi dana segera.</strong>',
         insight: 'Arus kas negatif dengan saldo sangat terbatas. Dengan pengeluaran harian rata-rata Rp 150.000, kas diperkirakan habis dalam 7 hari. Segera cari solusi pendanaan darurat atau kurangi pengeluaran secara agresif.',
         chartTitle: 'Perkembangan Arus Kas Januari 2026',
-<<<<<<< HEAD
-        chartPoints: [60, 70, 78, 85, 92, 98, 105, 110]
-=======
         chartBars: [
           { val: '250K', pct: 22 }, { val: '220K', pct: 18 }, { val: '200K', pct: 15 },
           { val: '180K', pct: 12 }, { val: '150K', pct: 10 }, { val: '130K', pct: 8 }, { val: '100K', pct: 5 }
         ],
         chartInsight: 'Arus kas <strong>negatif</strong> dan terus menurun. Dengan saldo Rp 200.000 dan pengeluaran Rp 150.000/hari, kas diperkirakan habis dalam 7 hari.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       growth: {
         value: '-8%', change: 'Menurun', label: 'Bulan ini',
         summary: 'Bisnis mengalami kontraksi <strong>-8%</strong> bulan ini. Semua indikator pertumbuhan menunjukkan tren negatif. Pelanggan harian turun 60% dari 40 menjadi hanya 15 orang.',
         insight: 'Pertumbuhan negatif 8% dipicu oleh hilangnya pelanggan setia akibat persaingan harga. Disarankan fokus pada program loyalitas pelanggan dan promosi darurat untuk membalikkan tren negatif ini.',
         chartTitle: 'Perkembangan Pertumbuhan Januari 2026',
-<<<<<<< HEAD
-        chartPoints: [50, 55, 65, 72, 80, 88, 95, 105]
-=======
         chartBlocks: [
           { value: '-10%', month: 'Jan', arrow: 'down', label: 'Kritis', color: 'danger' },
           { value: '-12%', month: 'Feb', arrow: 'down', label: 'Memburuk', color: 'danger' },
           { value: '-8%', month: 'Mar', arrow: 'down', label: 'Kritis', color: 'danger' }
         ],
         chartInsight: 'Pertumbuhan <strong>negatif konsisten</strong> selama 3 bulan. Semua indikator menunjukkan tren menurun yang perlu tindakan segera.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       }
     },
     aiAnalysis: 'Skor bisnis Anda berada di <strong>28</strong> (Kritis). Penjualan sangat rendah (30), keuntungan hampir tidak ada (22), dan arus kas negatif (25). Bisnis mengalami defisit karena biaya operasional lebih besar dari pendapatan. Disarankan segera lakukan evaluasi besar-besaran — cek ulang harga jual, kurangi pengeluaran tidak perlu, dan cari strategi promosi darurat untuk meningkatkan omzet.',
@@ -314,55 +282,39 @@ const monthData = {
         summary: 'Omzet mulai naik <strong>Rp 1.850.000</strong>, naik 8% dibanding bulan lalu. Produk <strong>Kopi Susu</strong> mulai diminati kembali dengan 25 porsi per hari. Tren pemulihan sudah terlihat jelas.',
         insight: 'Pemulihan omzet 8% didorong oleh strategi promosi Kopi Susu yang mulai membuahkan hasil dan kembalinya pelanggan. Namun biaya bahan baku masih perlu dikendalikan untuk meningkatkan margin keuntungan.',
         chartTitle: 'Perkembangan Pendapatan Februari 2026',
-<<<<<<< HEAD
-        chartPoints: [90, 85, 78, 70, 62, 55, 48, 42]
-=======
         chartY: [110, 95, 90, 80, 72, 65, 55, 45],
         chartInsight: 'Pendapatan menunjukkan tren <strong>pemulihan</strong> yang konsisten — naik 8% dari bulan lalu. Kopi Susu menjadi motor utama pemulihan dengan 25 porsi/hari.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       profit: {
         value: 'Rp 420.000', change: '+5%', label: 'minggu ini',
         summary: 'Keuntungan mulai membaik menjadi <strong>Rp 420.000</strong>, naik 5% dibanding bulan lalu. Meskipun masih tipis, ini menunjukkan arah yang benar. Volume penjualan mulai menutup biaya operasional tetap.',
         insight: 'Keuntungan naik 5% karena peningkatan volume penjualan mulai menutup biaya operasional. Fokus pada efisiensi biaya dan cari supplier alternatif untuk meningkatkan margin keuntungan.',
         chartTitle: 'Perkembangan Keuntungan Februari 2026',
-<<<<<<< HEAD
-        chartPoints: [95, 88, 80, 75, 65, 58, 50, 45]
-=======
         chartY: [80, 72, 75, 62, 68, 55, 50, 42],
         chartInsight: 'Keuntungan <strong>mulai membaik</strong> dari kondisi hampir nol. Tren pemulihan terlihat meskipun masih perlu waktu untuk mencapai level yang sehat.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       cashflow: {
         value: 'Rp 850.000', status: 'Cukup', change: '', label: 'mulai pulih',
         summary: 'Arus kas membaik dengan status <strong>Cukup</strong> dan saldo Rp 850.000. Mulai ada dana untuk pembelian stok. Pemulihan penjualan meningkatkan pemasukan kas secara bertahap.',
         insight: 'Arus kas mulai pulih dari kondisi negatif. Pemulihan penjualan meningkatkan pemasukan kas. Tetap disarankan mengatur pengeluaran dengan hati-hati dan menyisihkan dana cadangan.',
         chartTitle: 'Perkembangan Arus Kas Februari 2026',
-<<<<<<< HEAD
-        chartPoints: [95, 88, 80, 72, 65, 58, 50, 42]
-=======
         chartBars: [
           { val: '400K', pct: 35 }, { val: '500K', pct: 42 }, { val: '550K', pct: 48 },
           { val: '600K', pct: 52 }, { val: '680K', pct: 58 }, { val: '750K', pct: 65 }, { val: '850K', pct: 72 }
         ],
         chartInsight: 'Arus kas <strong>mulai pulih</strong> dari negatif. Peningkatan konsisten setiap hari menunjukkan pemulihan penjualan yang efektif.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       growth: {
         value: '+7%', change: 'Mulai naik', label: 'Bulan ini',
         summary: 'Bisnis mulai tumbuh <strong>+7%</strong> setelah mengalami kontraksi di bulan sebelumnya. Pertumbuhan didorong oleh kembalinya pelanggan dan efektivitas strategi promosi Kopi Susu.',
         insight: 'Pertumbuhan 7% menandakan awal pemulihan. Untuk mempercepat laju pertumbuhan, disarankan optimalkan jam sibuk dan kendalikan biaya bahan baku agar margin keuntungan meningkat.',
         chartTitle: 'Perkembangan Pertumbuhan Februari 2026',
-<<<<<<< HEAD
-        chartPoints: [100, 92, 82, 75, 65, 55, 48, 40]
-=======
         chartBlocks: [
           { value: '-3%', month: 'Jan', arrow: 'down', label: 'Menurun', color: 'danger' },
           { value: '+3%', month: 'Feb', arrow: 'up', label: 'Pemulihan', color: 'warning' },
           { value: '+7%', month: 'Mar', arrow: 'up', label: 'Membaik', color: 'secondary' }
         ],
         chartInsight: 'Pertumbuhan menunjukkan tren <strong>pemulihan</strong> dari -3% ke +7%. Strategi promosi Kopi Susu menjadi kunci keberhasilan pemulihan.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       }
     },
     aiAnalysis: 'Skor bisnis Anda <strong>62</strong> (Perlu Perhatian). Penjualan mulai membaik (65) dibanding bulan lalu, namun keuntungan masih tipis (58). Arus kas cukup (70) namun perputaran stok lambat (55). Disarankan untuk fokus pada produk yang cepat laku, kurangi stok barang yang bergerak lambat, dan tingkatkan promosi untuk mendorong penjualan.',
@@ -425,55 +377,39 @@ const monthData = {
         summary: 'Pendapatan bulan ini mencapai <strong>Rp 2.450.000</strong>, tumbuh 10% dari bulan lalu. <strong>Kopi Susu</strong> tetap menjadi andalan dengan 32 porsi per hari. Pola pertumbuhan konsisten dan stabil.',
         insight: 'Pertumbuhan 10% didorong oleh kombinasi strategi promosi yang tepat dan peningkatan loyalitas pelanggan. Untuk mempertahankan tren ini, disarankan ekspansi variasi menu dan optimalkan promo bundling.',
         chartTitle: 'Perkembangan Pendapatan Maret 2026',
-<<<<<<< HEAD
-        chartPoints: [80, 72, 68, 58, 52, 42, 35, 28]
-=======
         chartY: [75, 65, 60, 50, 45, 40, 35, 25],
         chartInsight: 'Pendapatan tumbuh <strong>10% stabil</strong>. Kopi Susu tetap andalan dengan 32 porsi/hari. Pola pertumbuhan konsisten menunjukkan bisnis sehat.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       profit: {
         value: 'Rp 720.000', change: '+6%', label: 'minggu ini',
         summary: 'Keuntungan stabil di <strong>Rp 720.000</strong> dengan margin yang terjaga. Biaya bahan baku sudah terkendali dan harga jual optimal. Pertahankan strategi pengelolaan biaya saat ini.',
         insight: 'Keuntungan stabil karena efisiensi pengadaan bahan baku dan penyesuaian harga jual membuahkan hasil. Evaluasi harga jual untuk peningkatan margin lebih lanjut sudah bisa dilakukan.',
         chartTitle: 'Perkembangan Keuntungan Maret 2026',
-<<<<<<< HEAD
-        chartPoints: [85, 78, 72, 68, 60, 55, 48, 42]
-=======
         chartY: [55, 48, 50, 42, 45, 38, 40, 32],
         chartInsight: 'Keuntungan <strong>stabil</strong> dengan margin terjaga. Biaya bahan baku sudah terkendali dan harga jual optimal.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       cashflow: {
         value: 'Rp 1.250.000', status: 'Stabil', change: '', label: 'cukup',
         summary: 'Arus kas dalam kondisi <strong>stabil</strong> dengan saldo Rp 1.250.000. Bisnis memiliki likuiditas yang cukup untuk operasional dan pengembangan. Pemasukan konsisten dari penjualan harian.',
         insight: 'Arus kas sehat dan stabil karena pemasukan konsisten. Disarankan menyisihkan sebagian surplus untuk dana cadangan dan persiapan investasi pengembangan usaha di masa depan.',
         chartTitle: 'Perkembangan Arus Kas Maret 2026',
-<<<<<<< HEAD
-        chartPoints: [75, 68, 62, 55, 50, 45, 40, 35]
-=======
         chartBars: [
           { val: '1.1M', pct: 65 }, { val: '1.15M', pct: 68 }, { val: '1.2M', pct: 72 },
           { val: '1.22M', pct: 73 }, { val: '1.25M', pct: 75 }, { val: '1.28M', pct: 78 }, { val: '1.25M', pct: 75 }
         ],
         chartInsight: 'Arus kas <strong>stabil dan sehat</strong> dengan rata-rata saldo Rp 1,21 juta. Pemasukan konsisten dari penjualan harian.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       },
       growth: {
         value: '+10%', change: 'Meningkat', label: 'Bulan ini',
         summary: 'Bisnis tumbuh <strong>+10%</strong> secara stabil bulan ini. Pertumbuhan konsisten dari bulan ke bulan menunjukkan tren positif yang berkelanjutan. Semua indikator berada di zona sehat.',
         insight: 'Pertumbuhan 10% stabil menunjukkan bisnis dalam kondisi sehat. Untuk percepatan pertumbuhan, disarankan tambah varian minuman hangat untuk musim hujan dan persiapkan stok untuk akhir pekan.',
         chartTitle: 'Perkembangan Pertumbuhan Maret 2026',
-<<<<<<< HEAD
-        chartPoints: [85, 78, 70, 62, 55, 48, 40, 32]
-=======
         chartBlocks: [
           { value: '+5%', month: 'Jan', arrow: 'up', label: 'Naik', color: 'warning' },
           { value: '+8%', month: 'Feb', arrow: 'up', label: 'Meningkat', color: 'secondary' },
           { value: '+10%', month: 'Mar', arrow: 'up', label: 'Sehat', color: 'secondary' }
         ],
         chartInsight: 'Pertumbuhan <strong>konsisten meningkat</strong> dari +5% ke +10%. Tren positif yang berkelanjutan menunjukkan strategi bisnis efektif.'
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
       }
     },
     aiAnalysis: 'Skor bisnis Anda <strong>78</strong> (Sehat). Penjualan cukup baik (80), keuntungan stabil (75), dan arus kas terkendali (82). Perputaran stok (70) masih perlu ditingkatkan — beberapa produk seperti teh perlu strategi promosi agar lebih cepat terjual. Pertumbuhan bisnis (78) menunjukkan tren positif yang perlu dipertahankan.',
@@ -546,20 +482,31 @@ function renderPassport() {
   const risk = document.getElementById('passportRisk');
   if (risk) {
     risk.textContent = p.risk;
-    risk.style.background = p.riskColor;
-    risk.style.color = '#fff';
+    risk.style.background = 'none';
+    risk.style.color = p.riskColor;
   }
   const verified = document.getElementById('passportVerified');
   if (verified) verified.style.display = p.verified ? 'flex' : 'none';
 
   const statsEl = document.getElementById('passportStats');
   if (statsEl && p.stats) {
-    statsEl.innerHTML = p.stats.map(s => `
-      <div class="passport-stat">
-        <div class="stat-value green">${s.value}</div>
-        <div class="stat-label">${s.label}</div>
-      </div>
-    `).join('');
+    const statsIconMap = {
+      'Total Transaksi': { icon: 'fa-receipt', color: 'blue' },
+      'Rata-rata/Hari': { icon: 'fa-clock', color: 'blue' },
+      'Produk Terlaris': { icon: 'fa-star', color: 'green' },
+      'Rating Pelanggan': { icon: 'fa-user', color: 'orange' }
+    };
+    statsEl.innerHTML = p.stats.map(s => {
+      const m = statsIconMap[s.label] || { icon: 'fa-chart-simple', color: 'blue' };
+      return `
+      <div class="passport-detail-card">
+        <div class="pdc-icon ${m.color}"><i class="fas ${m.icon}"></i></div>
+        <div class="pdc-info">
+          <span class="pdc-label">${s.label}</span>
+          <span class="pdc-value">${s.value}</span>
+        </div>
+      </div>`;
+    }).join('');
   }
 
   const detailsEl = document.getElementById('passportDetails');
@@ -1114,34 +1061,6 @@ function updateDetailPage() {
       change.className = `detail-big-change ${isDown ? 'negative' : 'positive'}`;
     }
     if (label) label.textContent = 'Pertumbuhan bisnis ' + metricData.label;
-<<<<<<< HEAD
-  }
-
-  // Update summary, insight, and chart title
-  const summaryEl = document.getElementById('detailSummary');
-  const insightEl = document.getElementById('detailInsight');
-  const chartTitleEl = document.getElementById('chartTitle');
-  if (summaryEl && metricData.summary) summaryEl.innerHTML = metricData.summary;
-  if (insightEl && metricData.insight) insightEl.innerHTML = metricData.insight;
-  if (chartTitleEl && metricData.chartTitle) chartTitleEl.textContent = metricData.chartTitle;
-
-  // Update chart SVG if chartPoints exist
-  if (metricData.chartPoints && metricData.chartPoints.length === 8) {
-    const xs = [10, 50, 90, 130, 170, 210, 250, 290];
-    const pts = metricData.chartPoints;
-    const pointsStr = xs.map((x, i) => x + ',' + pts[i]).join(' ');
-    const pathD = 'M0,100 L0,100 ' + xs.map((x, i) => 'L' + x + ',' + pts[i]).join(' ') + ' L300,' + pts[7] + ' L300,120 L0,120 Z';
-    const svg = document.querySelector('.chart-svg');
-    if (svg) {
-      const polyline = svg.querySelector('polyline');
-      const path = svg.querySelector('path');
-      const circle = svg.querySelector('circle');
-      if (polyline) polyline.setAttribute('points', pointsStr);
-      if (path) path.setAttribute('d', pathD);
-      if (circle) circle.setAttribute('cy', pts[7]);
-    }
-=======
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   }
 
   // Update summary, insight, and chart title
@@ -1348,20 +1267,31 @@ function renderPassport() {
   const risk = document.getElementById('passportRisk');
   if (risk) {
     risk.textContent = p.risk;
-    risk.style.background = p.riskColor;
-    risk.style.color = '#fff';
+    risk.style.background = 'none';
+    risk.style.color = p.riskColor;
   }
   const verified = document.getElementById('passportVerified');
   if (verified) verified.style.display = p.verified ? 'flex' : 'none';
 
   const statsEl = document.getElementById('passportStats');
   if (statsEl && p.stats) {
-    statsEl.innerHTML = p.stats.map(s => `
-      <div class="passport-stat">
-        <div class="stat-value">${s.value}</div>
-        <div class="stat-label">${s.label}</div>
-      </div>
-    `).join('');
+    const statsIconMap = {
+      'Total Transaksi': { icon: 'fa-receipt', color: 'blue' },
+      'Rata-rata/Hari': { icon: 'fa-clock', color: 'blue' },
+      'Produk Terlaris': { icon: 'fa-star', color: 'green' },
+      'Rating Pelanggan': { icon: 'fa-user', color: 'orange' }
+    };
+    statsEl.innerHTML = p.stats.map(s => {
+      const m = statsIconMap[s.label] || { icon: 'fa-chart-simple', color: 'blue' };
+      return `
+      <div class="passport-detail-card">
+        <div class="pdc-icon ${m.color}"><i class="fas ${m.icon}"></i></div>
+        <div class="pdc-info">
+          <span class="pdc-label">${s.label}</span>
+          <span class="pdc-value">${s.value}</span>
+        </div>
+      </div>`;
+    }).join('');
   }
 
   const detailsEl = document.getElementById('passportDetails');
@@ -1731,14 +1661,6 @@ function handleLogin(e) {
     return false;
   }
 
-<<<<<<< HEAD
-  if (!localStorage.getItem('aksaOnboarded')) {
-    window.location.href = 'onboarding.html';
-  } else {
-    window.location.href = 'dashboard.html';
-  }
-  localStorage.setItem('aksaLoggedIn', 'true');
-=======
   localStorage.setItem('aksaLoggedIn', 'true');
   localStorage.setItem('aksaPassword', password);
 
@@ -1747,19 +1669,10 @@ function handleLogin(e) {
   } else {
     window.location.href = 'dashboard.html';
   }
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
   return false;
 }
 
 function handleGoogleLogin() {
-<<<<<<< HEAD
-  if (!localStorage.getItem('aksaOnboarded')) {
-    window.location.href = 'onboarding.html';
-  } else {
-    window.location.href = 'dashboard.html';
-  }
-  localStorage.setItem('aksaLoggedIn', 'true');
-=======
   localStorage.setItem('aksaLoggedIn', 'true');
   if (!localStorage.getItem('aksaPassword')) {
     localStorage.setItem('aksaPassword', '123456');
@@ -1770,7 +1683,6 @@ function handleGoogleLogin() {
   } else {
     window.location.href = 'dashboard.html';
   }
->>>>>>> 245e892a7fb64a33b8d146bea76f5e7898f546b6
 }
 
 /* ==========================================
