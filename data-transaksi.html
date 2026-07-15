@@ -246,6 +246,9 @@
 
       <!-- TAB STOK -->
       <div class="dt-section" id="dtStok">
+        <button class="btn btn-secondary-soft btn-full" onclick="openStokModal()" style="margin-bottom:14px;">
+          <i class="fas fa-plus"></i> Tambah Produk
+        </button>
         <div class="dt-table-wrap">
           <table class="dt-table">
             <thead>
@@ -256,71 +259,39 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Kopi Susu</td>
-                <td>Minuman</td>
-                <td>120 porsi</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-              <tr>
-                <td>Es Kopi Susu</td>
-                <td>Minuman</td>
-                <td>85 porsi</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-              <tr>
-                <td>Americano</td>
-                <td>Minuman</td>
-                <td>95 porsi</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-              <tr>
-                <td>Matcha Latte</td>
-                <td>Minuman</td>
-                <td>30 porsi</td>
-                <td><span class="dt-status menipis">Menipis</span></td>
-              </tr>
-              <tr>
-                <td>Es Teh Manis</td>
-                <td>Minuman</td>
-                <td>110 porsi</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-              <tr>
-                <td>Croissant</td>
-                <td>Makanan</td>
-                <td>15 pcs</td>
-                <td><span class="dt-status menipis">Menipis</span></td>
-              </tr>
-              <tr>
-                <td>Roti Bakar</td>
-                <td>Makanan</td>
-                <td>40 pcs</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-              <tr>
-                <td>Pisang Goreng</td>
-                <td>Makanan</td>
-                <td>0 pcs</td>
-                <td><span class="dt-status habis">Habis</span></td>
-              </tr>
-              <tr>
-                <td>Sandwich</td>
-                <td>Makanan</td>
-                <td>8 pcs</td>
-                <td><span class="dt-status menipis">Menipis</span></td>
-              </tr>
-              <tr>
-                <td>Cappuccino</td>
-                <td>Minuman</td>
-                <td>75 porsi</td>
-                <td><span class="dt-status aman">Aman</span></td>
-              </tr>
-            </tbody>
+            <tbody id="stokTableBody"></tbody>
           </table>
         </div>
         <div class="dt-footnote">Data stok diperbarui real-time dari integrasi Kasir Pintar.</div>
+      </div>
+
+      <!-- Modal Tambah Produk Stok -->
+      <div class="modal-overlay" id="stokOverlay" onclick="closeStokModal()"></div>
+      <div class="modal" id="stokModal">
+        <div class="modal-header">
+          <h3>Tambah Produk</h3>
+          <button class="modal-close" onclick="closeStokModal()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama Produk</label>
+            <input type="text" id="stokName" placeholder="Contoh: Kopi Susu">
+          </div>
+          <div class="form-group">
+            <label>Kategori</label>
+            <select id="stokCategory">
+              <option value="Minuman">Minuman</option>
+              <option value="Makanan">Makanan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Stok Awal</label>
+            <input type="number" id="stokQty" min="0" placeholder="Contoh: 50">
+          </div>
+          <button class="btn btn-primary btn-full" onclick="addStokItem()">
+            <i class="fas fa-check"></i> Simpan
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -337,6 +308,124 @@
       document.getElementById('dtTransaksi').classList.toggle('active', tab === 'transaksi');
       document.getElementById('dtStok').classList.toggle('active', tab === 'stok');
     }
+
+    /* ==============================
+       STOK MANAGEMENT (CRUD)
+       ============================== */
+    var stokSeed = [
+      { id: 1, name: 'Kopi Susu', category: 'Minuman', stock: 120 },
+      { id: 2, name: 'Es Kopi Susu', category: 'Minuman', stock: 85 },
+      { id: 3, name: 'Americano', category: 'Minuman', stock: 95 },
+      { id: 4, name: 'Matcha Latte', category: 'Minuman', stock: 30 },
+      { id: 5, name: 'Es Teh Manis', category: 'Minuman', stock: 110 },
+      { id: 6, name: 'Croissant', category: 'Makanan', stock: 15 },
+      { id: 7, name: 'Roti Bakar', category: 'Makanan', stock: 40 },
+      { id: 8, name: 'Pisang Goreng', category: 'Makanan', stock: 0 },
+      { id: 9, name: 'Sandwich', category: 'Makanan', stock: 8 },
+      { id: 10, name: 'Cappuccino', category: 'Minuman', stock: 75 }
+    ];
+
+    function loadStokData() {
+      try {
+        var raw = localStorage.getItem('aksaStokData');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch(e) {}
+      saveStokData(stokSeed);
+      return JSON.parse(JSON.stringify(stokSeed));
+    }
+
+    function saveStokData(data) {
+      localStorage.setItem('aksaStokData', JSON.stringify(data));
+    }
+
+    function getStokStatus(stock) {
+      if (stock <= 0) return { text: 'Habis', cls: 'habis' };
+      if (stock <= 10) return { text: 'Menipis', cls: 'menipis' };
+      return { text: 'Aman', cls: 'aman' };
+    }
+
+    function renderStokTable() {
+      var data = loadStokData();
+      var tbody = document.getElementById('stokTableBody');
+      var unit = function(cat) { return cat === 'Makanan' ? 'pcs' : 'porsi'; };
+      var html = '';
+      for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        var s = getStokStatus(item.stock);
+        html += '<tr>' +
+          '<td>' + item.name + '</td>' +
+          '<td>' + item.category + '</td>' +
+          '<td><div class="stok-qty">' +
+            '<button class="stok-qty-btn" onclick="updateStokQty(' + item.id + ',-1)"><i class="fas fa-minus"></i></button>' +
+            '<span class="stok-qty-val">' + item.stock + ' ' + unit(item.category) + '</span>' +
+            '<button class="stok-qty-btn" onclick="updateStokQty(' + item.id + ',1)"><i class="fas fa-plus"></i></button>' +
+          '</div></td>' +
+          '<td><span class="dt-status ' + s.cls + '">' + s.text + '</span></td>' +
+          '<td><button class="stok-del-btn" onclick="deleteStokItem(' + item.id + ')"><i class="fas fa-trash"></i></button></td>' +
+          '</tr>';
+      }
+      tbody.innerHTML = html;
+    }
+
+    function openStokModal() {
+      document.getElementById('stokName').value = '';
+      document.getElementById('stokCategory').value = 'Minuman';
+      document.getElementById('stokQty').value = '';
+      document.getElementById('stokOverlay').classList.add('open');
+      document.getElementById('stokModal').classList.add('open');
+    }
+
+    function closeStokModal() {
+      document.getElementById('stokOverlay').classList.remove('open');
+      document.getElementById('stokModal').classList.remove('open');
+    }
+
+    function addStokItem() {
+      var name = document.getElementById('stokName').value.trim();
+      var category = document.getElementById('stokCategory').value;
+      var qty = parseInt(document.getElementById('stokQty').value) || 0;
+
+      if (!name) { alert('Nama produk wajib diisi.'); return; }
+      if (qty < 0) { alert('Stok tidak boleh negatif.'); return; }
+
+      var data = loadStokData();
+      var maxId = 0;
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].id > maxId) maxId = data[i].id;
+      }
+      data.push({ id: maxId + 1, name: name, category: category, stock: qty });
+      saveStokData(data);
+      renderStokTable();
+      closeStokModal();
+    }
+
+    function updateStokQty(id, delta) {
+      var data = loadStokData();
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].id === id) {
+          data[i].stock = Math.max(0, data[i].stock + delta);
+          break;
+        }
+      }
+      saveStokData(data);
+      renderStokTable();
+    }
+
+    function deleteStokItem(id) {
+      if (!confirm('Yakin ingin menghapus produk ini?')) return;
+      var data = loadStokData();
+      var updated = [];
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].id !== id) updated.push(data[i]);
+      }
+      saveStokData(updated);
+      renderStokTable();
+    }
+
+    renderStokTable();
   </script>
 </body>
 </html>

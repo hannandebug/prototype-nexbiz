@@ -80,33 +80,39 @@
             <input type="date" id="manualDate" value="">
           </div>
 
-          <div class="form-group">
-            <label>Produk</label>
-            <select id="manualProduct">
-              <option value="">Pilih produk</option>
-              <option value="Kopi Susu">Kopi Susu</option>
-              <option value="Es Teh">Es Teh</option>
-              <option value="Roti Bakar">Roti Bakar</option>
-              <option value="Kopi Aren">Kopi Aren</option>
-              <option value="Matcha Latte">Matcha Latte</option>
-              <option value="Cokelat Hangat">Cokelat Hangat</option>
-            </select>
+          <div id="manualRows">
+            <div class="manual-row" data-index="0">
+              <div class="form-group">
+                <label>Produk</label>
+                <input type="text" id="manualProduct_0" list="productSuggestions" placeholder="Ketik atau pilih produk" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label>Jumlah Terjual (Porsi)</label>
+                <input type="number" class="manual-qty" placeholder="Contoh: 25" min="1">
+              </div>
+              <div class="form-group">
+                <label>Harga Per Porsi (Rp)</label>
+                <input type="number" class="manual-price" placeholder="Contoh: 18000" min="0">
+              </div>
+              <div class="form-group">
+                <label>Total Pendapatan</label>
+                <input type="text" class="manual-total" placeholder="Otomatis dihitung" readonly style="background: var(--bg); color: var(--text-secondary);">
+              </div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Jumlah Terjual (Porsi)</label>
-            <input type="number" id="manualQty" placeholder="Contoh: 25" min="1">
-          </div>
+          <datalist id="productSuggestions">
+            <option value="Kopi Susu">
+            <option value="Es Teh">
+            <option value="Roti Bakar">
+            <option value="Kopi Aren">
+            <option value="Matcha Latte">
+            <option value="Cokelat Hangat">
+          </datalist>
 
-          <div class="form-group">
-            <label>Harga Per Porsi (Rp)</label>
-            <input type="number" id="manualPrice" placeholder="Contoh: 18000" min="0">
-          </div>
-
-          <div class="form-group">
-            <label>Total Pendapatan</label>
-            <input type="text" id="manualTotal" placeholder="Otomatis dihitung" readonly style="background: var(--bg); color: var(--text-secondary);">
-          </div>
+          <button class="btn btn-secondary-soft btn-full" onclick="addManualRow()" type="button" style="margin-bottom:14px;">
+            <i class="fas fa-plus"></i> Tambah Produk Lain
+          </button>
 
           <button class="btn btn-primary btn-full" onclick="submitManualData()">
             <i class="fas fa-plus"></i> Simpan Data
@@ -139,22 +145,95 @@
     const dateInput = document.getElementById('manualDate');
     if (dateInput) dateInput.value = today;
 
-    // Auto-calculate total
-    const qtyInput = document.getElementById('manualQty');
-    const priceInput = document.getElementById('manualPrice');
-    const totalInput = document.getElementById('manualTotal');
+    // Load custom products into datalist
+    const defaultProducts = ['Kopi Susu','Es Teh','Roti Bakar','Kopi Aren','Matcha Latte','Cokelat Hangat'];
+    const datalist = document.getElementById('productSuggestions');
+    function loadCustomProducts() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('aksaCustomProducts') || '[]');
+        saved.forEach(function(p) {
+          if (p && !defaultProducts.includes(p)) {
+            const opt = document.createElement('option');
+            opt.value = p;
+            datalist.appendChild(opt);
+          }
+        });
+      } catch(e) {}
+    }
+    loadCustomProducts();
 
-    function updateTotal() {
-      const qty = parseInt(qtyInput.value) || 0;
-      const price = parseInt(priceInput.value) || 0;
-      const total = qty * price;
-      totalInput.value = total > 0 ? 'Rp ' + total.toLocaleString('id-ID') : '';
+    function saveCustomProduct(name) {
+      if (!name || defaultProducts.includes(name)) return;
+      try {
+        const saved = JSON.parse(localStorage.getItem('aksaCustomProducts') || '[]');
+        if (!saved.includes(name)) {
+          saved.push(name);
+          localStorage.setItem('aksaCustomProducts', JSON.stringify(saved));
+          const opt = document.createElement('option');
+          opt.value = name;
+          datalist.appendChild(opt);
+        }
+      } catch(e) {}
     }
 
-    if (qtyInput) qtyInput.addEventListener('input', updateTotal);
-    if (priceInput) priceInput.addEventListener('input', updateTotal);
+    // Auto-calculate total per row
+    function updateRowTotal(row) {
+      const qty = parseInt(row.querySelector('.manual-qty').value) || 0;
+      const price = parseInt(row.querySelector('.manual-price').value) || 0;
+      const total = qty * price;
+      row.querySelector('.manual-total').value = total > 0 ? 'Rp ' + total.toLocaleString('id-ID') : '';
+    }
+
+    function attachRowListeners(row) {
+      row.querySelector('.manual-qty').addEventListener('input', function() { updateRowTotal(row); });
+      row.querySelector('.manual-price').addEventListener('input', function() { updateRowTotal(row); });
+    }
+
+    // Attach listeners to initial row
+    const firstRow = document.querySelector('.manual-row');
+    if (firstRow) attachRowListeners(firstRow);
 
     let manualEntries = [];
+
+    let manualRowCounter = 1;
+
+    function addManualRow() {
+      const container = document.getElementById('manualRows');
+      const idx = manualRowCounter++;
+      const row = document.createElement('div');
+      row.className = 'manual-row';
+      row.dataset.index = idx;
+      row.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">' +
+          '<label style="font-size:12px;font-weight:500;color:var(--text-secondary);">Produk</label>' +
+          '<button type="button" onclick="removeManualRow(this)" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:14px;padding:2px 4px;"><i class="fas fa-xmark"></i></button>' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<input type="text" class="manual-product" list="productSuggestions" placeholder="Ketik atau pilih produk" autocomplete="off">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label>Jumlah Terjual (Porsi)</label>' +
+          '<input type="number" class="manual-qty" placeholder="Contoh: 25" min="1">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label>Harga Per Porsi (Rp)</label>' +
+          '<input type="number" class="manual-price" placeholder="Contoh: 18000" min="0">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label>Total Pendapatan</label>' +
+          '<input type="text" class="manual-total" placeholder="Otomatis dihitung" readonly style="background: var(--bg); color: var(--text-secondary);">' +
+        '</div>';
+      container.appendChild(row);
+      attachRowListeners(row);
+    }
+
+    function removeManualRow(btn) {
+      const row = btn.closest('.manual-row');
+      const container = document.getElementById('manualRows');
+      if (container.children.length > 1) {
+        row.remove();
+      }
+    }
 
     function handleFileUpload(input, type) {
       const file = input.files[0];
@@ -238,25 +317,52 @@
 
     function submitManualData() {
       const date = document.getElementById('manualDate').value;
-      const product = document.getElementById('manualProduct').value;
-      const qty = document.getElementById('manualQty').value;
-      const price = document.getElementById('manualPrice').value;
-
-      if (!date || !product || !qty || !price) {
-        alert('Harap isi semua field terlebih dahulu.');
+      if (!date) {
+        alert('Harap isi tanggal transaksi terlebih dahulu.');
         return;
       }
 
-      const total = parseInt(qty) * parseInt(price);
-      manualEntries.push({ date, product, qty: parseInt(qty), price: parseInt(price), total });
+      const rows = document.querySelectorAll('#manualRows .manual-row');
+      let addedCount = 0;
+      let skippedNames = [];
+
+      rows.forEach(function(row) {
+        const productInput = row.querySelector('.manual-product') || row.querySelector('#manualProduct_0');
+        const qtyInput = row.querySelector('.manual-qty');
+        const priceInput = row.querySelector('.manual-price');
+        const product = productInput ? productInput.value.trim() : '';
+        const qty = qtyInput ? qtyInput.value : '';
+        const price = priceInput ? priceInput.value : '';
+
+        if (!product || !qty || !price) {
+          if (product || qty || price) {
+            skippedNames.push(product || '(kosong)');
+          }
+          return;
+        }
+
+        const total = parseInt(qty) * parseInt(price);
+        manualEntries.push({ date: date, product: product, qty: parseInt(qty), price: parseInt(price), total: total });
+        saveCustomProduct(product);
+        addedCount++;
+      });
+
+      if (addedCount === 0) {
+        alert('Harap isi minimal 1 baris produk dengan lengkap.');
+        return;
+      }
+
+      if (skippedNames.length > 0) {
+        alert('Dilewati (field tidak lengkap): ' + skippedNames.join(', '));
+      }
 
       renderManualEntries();
 
-      // Reset form
-      document.getElementById('manualProduct').value = '';
-      document.getElementById('manualQty').value = '';
-      document.getElementById('manualPrice').value = '';
-      totalInput.value = '';
+      // Reset to 1 empty row, keep date
+      const container = document.getElementById('manualRows');
+      container.innerHTML = '';
+      manualRowCounter = 0;
+      addManualRow();
 
       document.getElementById('btnFinishManual').style.display = '';
     }
