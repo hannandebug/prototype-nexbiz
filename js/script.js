@@ -1350,72 +1350,19 @@ function applyManualData() {
    CHAT ASSISTANT
    ========================================== */
 
-/* ----- Chat Responses ----- */
-const chatResponses = [
-  {
-    keywords: ['omzet', 'turun', 'pendapatan', 'penjualan'],
-    response: 'Penjualan minuman turun 18% selama 7 hari terakhir.',
-    penyebab: 'Produk yang paling memengaruhi:\n• Kopi Susu (-20%)\n• Es Teh (-15%)',
-    rekomendasi: 'Buat promo bundling Kopi Susu + Roti Bakar.',
-    urgency: 'Penting',
-    confidence: 94,
-    related: ['analysis', 'forecast', 'recommendation']
-  },
-  {
-    keywords: ['naik', 'meningkat', 'untung', 'laba'],
-    response: 'Omzet mengalami kenaikan 12% dibandingkan minggu lalu.',
-    penyebab: 'Produk yang paling berkontribusi:\n• Kopi Susu (+25%)\n• Roti Bakar (+15%)',
-    rekomendasi: 'Pertahankan stok bahan baku agar tidak kehabisan di akhir pekan.',
-    urgency: 'Normal',
-    confidence: 92,
-    related: ['analysis', 'recommendation']
-  },
-  {
-    keywords: ['stok', 'habis', 'bahan', 'gula', 'susu', 'kopi', 'teh'],
-    response: 'Stok gula akan habis dalam 4 hari dengan tingkat konsumsi saat ini.',
-    penyebab: 'Konsumsi harian rata-rata 2 kg dengan stok tersisa 8 kg.',
-    rekomendasi: 'Segera lakukan pemesanan gula untuk menghindari kehabisan stok.',
-    urgency: 'Sangat Penting',
-    confidence: 91,
-    related: ['forecast', 'recommendation']
-  },
-  {
-    keywords: ['promo', 'promosi', 'diskon', 'bundling'],
-    response: 'Promo bundling Kopi Susu + Roti Bakar meningkatkan penjualan 35%.',
-    penyebab: 'Data menunjukkan jam 14.00-16.00 memiliki rata-rata kunjungan terendah.',
-    rekomendasi: 'Terapkan promo bundling di jam 14.00-16.00 untuk meningkatkan kunjungan.',
-    urgency: 'Penting',
-    confidence: 89,
-    related: ['analysis', 'recommendation']
-  },
-  {
-    keywords: ['pelanggan', 'pengunjung', 'rame', 'ramai', 'sepi'],
-    response: 'Jumlah pelanggan meningkat 8% dalam 2 minggu terakhir.',
-    penyebab: 'Puncak kunjungan pada jam 08.00-10.00 dan 17.00-19.00.',
-    rekomendasi: 'Buat promo khusus di jam sepi (14.00-16.00) untuk menarik pelanggan.',
-    urgency: 'Normal',
-    confidence: 93,
-    related: ['analysis', 'recommendation']
-  },
-  {
-    keywords: ['biaya', 'modal', 'pengeluaran', 'belanja'],
-    response: 'Biaya bahan baku naik 8% dibandingkan bulan lalu.',
-    penyebab: 'Kenaikan harga susu dan gula menjadi faktor utama.',
-    rekomendasi: 'Cari supplier alternatif atau beli dalam jumlah grosir untuk harga lebih murah.',
-    urgency: 'Penting',
-    confidence: 87,
-    related: ['analysis', 'recommendation']
-  },
-  {
-    keywords: ['rekomendasi', 'saran', 'harus', 'baik'],
-    response: 'Berdasarkan kondisi bisnis saat ini, berikut rekomendasi prioritas:',
-    penyebab: '1. Tambah stok gula (sangat mendesak)\n2. Buat promo bundling untuk jam sepi\n3. Evaluasi harga jual produk\n4. Kurangi stok teh yang berlebih',
-    rekomendasi: 'Dengan menerapkan rekomendasi ini, diprediksi omzet dapat naik 15-20% dalam 2 minggu.',
-    urgency: 'Sangat Penting',
-    confidence: 95,
-    related: ['analysis', 'forecast', 'recommendation']
-  }
-];
+function getWelcomeMessage() {
+  return {
+    html: '<div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI <span class="premium-badge" style="margin-left:6px;"><i class="fas fa-crown"></i> Premium</span></div>' +
+      '<div>Halo! Saya AKSA, asisten AI bisnis Anda.<br><br>' +
+      'Saya bisa membantu menganalisis:<br>' +
+      '✅ Kenapa omzet naik atau turun<br>' +
+      '✅ Prediksi stok bahan baku<br>' +
+      '✅ Rekomendasi promo terbaik<br>' +
+      '✅ Kondisi pelanggan dan tren<br><br>' +
+      '<strong>Coba tanya:</strong> "Kenapa omzet saya turun minggu ini?"</div>',
+    text: 'Halo! Saya AKSA, asisten AI bisnis Anda.'
+  };
+}
 
 function setupChat() {
   const chatInput = document.getElementById('chatInput');
@@ -1424,10 +1371,18 @@ function setupChat() {
 
   if (!chatInput || !sendBtn || !chatContainer) return;
 
-  // Load saved chat history
-  loadChatHistory();
+  const saved = localStorage.getItem('aksaChatHistory');
+  if (saved) {
+    loadChatHistory();
+  } else {
+    const w = getWelcomeMessage();
+    const div = document.createElement('div');
+    div.className = 'chat-message ai';
+    div.innerHTML = w.html;
+    chatContainer.appendChild(div);
+    saveChatHistory();
+  }
 
-  // Toggle send button active state based on input
   function toggleSendBtn() {
     if (chatInput.value.trim().length > 0) {
       sendBtn.classList.add('active');
@@ -1443,12 +1398,10 @@ function setupChat() {
     const text = chatInput.value.trim();
     if (!text) return;
 
-    // Add user message
     addUserMessage(text);
     chatInput.value = '';
     toggleSendBtn();
 
-    // Simulate AI typing delay
     setTimeout(() => {
       const response = getAIResponse(text);
       addAIMessage(response.response, response.confidence, response.extra);
@@ -1487,7 +1440,6 @@ function addAIMessage(text, confidence, extra) {
   let structuredHTML = '';
 
   if (extra && extra.penyebab) {
-    // Structured response
     const urgencyClass = extra.urgency === 'Sangat Penting' ? 'urgent' : extra.urgency === 'Penting' ? 'important' : 'normal';
     const urgencyIcon = urgencyClass === 'urgent' ? 'fa-fire' : urgencyClass === 'important' ? 'fa-triangle-exclamation' : 'fa-check-circle';
 
@@ -1497,43 +1449,31 @@ function addAIMessage(text, confidence, extra) {
         if (r === 'analysis') return '<a href="analysis.html" class="ai-related-link"><i class="fas fa-chart-bar"></i> Business Analysis</a>';
         if (r === 'forecast') return '<a href="forecast.html" class="ai-related-link"><i class="fas fa-chart-simple"></i> Forecast</a>';
         if (r === 'recommendation') return '<a href="recommendation.html" class="ai-related-link"><i class="fas fa-lightbulb"></i> Recommendation</a>';
+        if (r === 'dashboard') return '<a href="dashboard.html" class="ai-related-link"><i class="fas fa-gauge-high"></i> Dashboard</a>';
+        if (r === 'health') return '<a href="health-report.html" class="ai-related-link"><i class="fas fa-heart-pulse"></i> Health Report</a>';
+        if (r === 'passport') return '<a href="passport.html" class="ai-related-link"><i class="fas fa-passport"></i> Passport</a>';
+        if (r === 'data') return '<a href="data-transaksi.html" class="ai-related-link"><i class="fas fa-database"></i> Data Transaksi</a>';
         return '';
       }).join('');
 
-      relatedHTML = `
-        <div class="ai-related">
-          <div class="ai-related-title">Analisis Terkait</div>
-          <div class="ai-related-links">${relatedLinks}</div>
-        </div>
-      `;
+      relatedHTML = '<div class="ai-related"><div class="ai-related-title">Analisis Terkait</div><div class="ai-related-links">' + relatedLinks + '</div></div>';
     }
 
-    structuredHTML = `
-      <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>
-      <div><strong>Penyebab</strong></div>
-      <div>${text}</div>
-      <div style="margin-top:6px;">${extra.penyebab.replace(/\n/g, '<br>')}</div>
-      <div style="margin-top:10px;"><strong>Rekomendasi</strong></div>
-      <div>${extra.rekomendasi}</div>
-      <div class="explainable-ai">
-        <div class="ai-explain-row">
-          <span class="ai-explain-label">Urgensi</span>
-          <span class="ai-explain-value urgency ${urgencyClass}"><i class="fas ${urgencyIcon}"></i> ${extra.urgency}</span>
-        </div>
-        <div class="ai-explain-row">
-          <span class="ai-explain-label">Confidence</span>
-          <span class="ai-explain-value confidence-val">${extra.confidence}%</span>
-          <div class="ai-conf-mini-bar"><div class="conf-mini-fill" style="width: ${extra.confidence}%;"></div></div>
-        </div>
-      </div>
-      ${relatedHTML}
-    `;
+    structuredHTML = '<div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>' +
+      '<div><strong>Penyebab</strong></div>' +
+      '<div>' + text + '</div>' +
+      '<div style="margin-top:6px;">' + extra.penyebab.replace(/\n/g, '<br>') + '</div>' +
+      '<div style="margin-top:10px;"><strong>Rekomendasi</strong></div>' +
+      '<div>' + extra.rekomendasi + '</div>' +
+      '<div class="explainable-ai">' +
+      '<div class="ai-explain-row"><span class="ai-explain-label">Urgensi</span><span class="ai-explain-value urgency ' + urgencyClass + '"><i class="fas ' + urgencyIcon + '"></i> ' + extra.urgency + '</span></div>' +
+      '<div class="ai-explain-row"><span class="ai-explain-label">Confidence</span><span class="ai-explain-value confidence-val">' + extra.confidence + '%</span><div class="ai-conf-mini-bar"><div class="conf-mini-fill" style="width: ' + extra.confidence + '%;"></div></div></div>' +
+      '</div>' + relatedHTML;
   } else {
-    // Simple fallback response
     const lines = text.split('\n');
     let formattedText = '';
-    lines.forEach((line, idx) => {
-      if (line.trim().startsWith('1.') || line.trim().startsWith('2.') || line.trim().startsWith('3.') || line.trim().startsWith('4.') || line.trim().startsWith('5.')) {
+    lines.forEach(function(line, idx) {
+      if (line.trim().match(/^[0-9]+\./)) {
         formattedText += '<br>' + line;
       } else if (idx > 0 && line.trim() !== '') {
         formattedText += '<br>' + line;
@@ -1542,11 +1482,9 @@ function addAIMessage(text, confidence, extra) {
       }
     });
 
-    structuredHTML = `
-      <div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>
-      <div>${formattedText}</div>
-      <div class="ai-confidence"><i class="fas fa-check-circle"></i> Confidence: ${confidence || 85}%</div>
-    `;
+    structuredHTML = '<div class="ai-badge"><i class="fas fa-robot"></i> AKSA AI</div>' +
+      '<div>' + formattedText + '</div>' +
+      '<div class="ai-confidence"><i class="fas fa-check-circle"></i> Confidence: ' + (confidence || 85) + '%</div>';
   }
 
   const div = document.createElement('div');
@@ -1561,7 +1499,7 @@ function saveChatHistory() {
   const container = document.getElementById('chatMessages');
   if (!container) return;
   const messages = [];
-  container.querySelectorAll('.chat-message').forEach(msg => {
+  container.querySelectorAll('.chat-message').forEach(function(msg) {
     const isUser = msg.classList.contains('user');
     messages.push({
       type: isUser ? 'user' : 'ai',
@@ -1569,8 +1507,7 @@ function saveChatHistory() {
       text: msg.textContent
     });
   });
-  // Limit to last 50 messages
-  const limited = messages.slice(-50);
+  var limited = messages.slice(-50);
   localStorage.setItem('aksaChatHistory', JSON.stringify(limited));
 }
 
@@ -1582,65 +1519,363 @@ function loadChatHistory() {
 
   try {
     const messages = JSON.parse(saved);
-    messages.forEach(msg => {
+    container.innerHTML = '';
+    messages.forEach(function(msg) {
       const div = document.createElement('div');
       div.className = 'chat-message ' + msg.type;
       div.innerHTML = msg.html;
       container.appendChild(div);
     });
     scrollContentToBottom();
-  } catch(e) {
-    // ignore parse errors
-  }
+  } catch(e) {}
 }
 
 function clearChatHistory() {
   localStorage.removeItem('aksaChatHistory');
 }
 
+/* ==========================================
+   AI RESPONSE ENGINE - Data-Aware
+   ========================================== */
+
+function getBusinessContext() {
+  var data = getData();
+  if (!data) data = monthData.keseluruhan;
+  var d = data;
+  return {
+    period: selectedMonth,
+    periodLabel: monthLabels[selectedMonth] || 'Keseluruhan',
+    healthScore: d.healthScore,
+    healthStatus: d.healthStatus,
+    categories: d.categories,
+    revenue: d.dashboard.revenue,
+    profit: d.dashboard.profit,
+    cashflow: d.dashboard.cashflow,
+    growth: d.dashboard.growth,
+    recommendations: d.recommendations,
+    analysis: d.analysis,
+    forecast: d.forecast,
+    aiAnalysis: d.aiAnalysis,
+    insight: d.insight,
+    priorityText: d.priorityText,
+    totalTransactions: getTransactionCount(),
+    passportStats: d.passport ? d.passport.stats : [],
+    passportDetails: d.passport ? d.passport.details : []
+  };
+}
+
 function getAIResponse(userMessage) {
-  const msg = userMessage.toLowerCase();
+  var msg = userMessage.toLowerCase();
+  var ctx = getBusinessContext();
 
-  // Find best matching response
-  let bestMatch = null;
-  let bestScore = 0;
+  var handlers = [
+    { keys: ['omzet turun','omset turun','penjualan turun','penjualan menurun','omzet anjlok','omset anjlok','omzet turun','omzet naik turun'], fn: handleOmzetTurun },
+    { keys: ['omzet naik','omset naik','penjualan naik','penjualan meningkat','omzet meningkat','omset meningkat','untung naik','laba naik','keuntungan naik'], fn: handleOmzetNaik },
+    { keys: ['stok habis','stok gula','stok susu','stok kopi','stok teh','stok bahan','habis stok','kehabisan','stok menipis'], fn: handleStok },
+    { keys: ['promo','promosi','diskon','bundling','potongan harga','promo terbaik'], fn: handlePromo },
+    { keys: ['pelanggan','pengunjung','kunjungan','rame','ramai','sepi','pelanggan turun','pelanggan naik'], fn: handlePelanggan },
+    { keys: ['biaya','modal','pengeluaran','belanja','harga bahan','harga naik','cost'], fn: handleBiaya },
+    { keys: ['rekomendasi','saran','harus','langkah','strategi','yang terbaik'], fn: handleRekomendasi },
+    { keys: ['kopi susu','kopi','es teh','roti bakar','pisang goreng','menu','produk','minuman','makanan'], fn: handleProduk },
+    { keys: ['arus kas','kas','cashflow','saldo','likuiditas','uang'], fn: handleArusKas },
+    { keys: ['pertumbuhan','growth','tumbuh','meningkatkan pertumbuhan','bisnis tumbuh'], fn: handlePertumbuhan },
+    { keys: ['prediksi','forecast','masa depan','minggu depan','bulan depan','diprediksi'], fn: handlePrediksi },
+    { keys: ['skor','health score','kesehatan','nilai bisnis','penilaian'], fn: handleSkor },
+    { keys: ['transaksi','total transaksi','jumlah transaksi','data transaksi','berapa transaksi'], fn: handleTransaksi },
+    { keys: ['jam','waktu','jam sibuk','jam sepi','jam ramai','puncak'], fn: handleJam },
+    { keys: ['supplier','pemasok','beli stok','restok','pemesanan'], fn: handleSupplier },
+    { keys: ['harga jual','harga menu','menaikkan harga','harga naik'], fn: handleHargaJual },
+    { keys: ['musim','hujan','panas','cuaca','musiman'], fn: handleMusim },
+    { keys: ['rating','ulasan','review','feedback','puas','tidak puas'], fn: handleRating },
+    { keys: ['karyawan','pegawai','staff','kerja','gaji'], fn: handleKaryawan },
+    { keys: ['laba bersih','profit margin','margin','margin keuntungan'], fn: handleMargin },
+    { keys: ['pembayaran','bayar','cash','debit','qris','transfer'], fn: handlePembayaran },
+    { keys: ['beranda','dashboard','ringkasan','summary','secara umum'], fn: handleDashboard },
+    { keys: ['passport','paspor','kartu bisnis'], fn: handlePassport },
+    { keys: ['hello','halo','hai','hi','hey','selamat'], fn: handleSapaan },
+    { keys: ['terima kasih','makasih','thanks','thank'], fn: handleTerimaKasih },
+    { keys: ['siapa kamu','apa ini','tentang','about','fitur'], fn: handleTentang },
+  ];
 
-  chatResponses.forEach(item => {
-    let score = 0;
-    item.keywords.forEach(keyword => {
-      if (msg.includes(keyword)) {
-        score++;
-        // Give extra weight to multiple keyword matches
-        const regex = new RegExp(keyword, 'gi');
-        const matches = msg.match(regex);
-        if (matches) score += matches.length * 0.5;
+  for (var i = 0; i < handlers.length; i++) {
+    var h = handlers[i];
+    for (var j = 0; j < h.keys.length; j++) {
+      if (msg.indexOf(h.keys[j]) !== -1) {
+        return h.fn(msg, ctx);
       }
-    });
-    if (score > bestScore) {
-      bestScore = score;
-      bestMatch = item;
     }
-  });
-
-  // Default response if no keywords match
-  if (!bestMatch || bestScore === 0) {
-    return {
-      response: 'Maaf, saya belum bisa menganalisis pertanyaan tersebut. Coba tanyakan tentang omzet, stok, pelanggan, atau promo bisnis Anda.',
-      confidence: 85,
-      extra: null
-    };
   }
 
   return {
-    response: bestMatch.response,
-    confidence: bestMatch.confidence,
+    response: 'Maaf, saya belum bisa menganalisis pertanyaan tersebut. Coba tanyakan tentang omzet, stok, pelanggan, promo, arus kas, prediksi, atau kondisi bisnis Anda secara umum.',
+    confidence: 75,
+    extra: null
+  };
+}
+
+function mkResp(response, penyebab, rekomendasi, urgency, confidence, related) {
+  return {
+    response: response,
+    confidence: confidence,
     extra: {
-      penyebab: bestMatch.penyebab,
-      rekomendasi: bestMatch.rekomendasi,
-      urgency: bestMatch.urgency,
-      confidence: bestMatch.confidence,
-      related: bestMatch.related
+      penyebab: penyebab,
+      rekomendasi: rekomendasi,
+      urgency: urgency,
+      confidence: confidence,
+      related: related || ['analysis','dashboard']
     }
+  };
+}
+
+function handleOmzetTurun(msg, ctx) {
+  var r = ctx.revenue;
+  var isDown = r.change && r.change.indexOf('-') !== -1;
+  var changeVal = r.change || '+0%';
+  var response = 'Omzet ' + ctx.periodLabel + ' saat ini ' + r.value + ' (' + changeVal + ' ' + r.label + ').';
+  var penyebab = ctx.analysis ? ctx.analysis.filter(function(a){ return a.icon === 'down'; }).map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n') : 'Data analisis tidak tersedia untuk periode ini.';
+  if (!penyebab) penyebab = 'Penurunan terjadi karena faktor musiman dan persaingan pasar.';
+  var rekomendasi = ctx.recommendations && ctx.recommendations.length > 0 ? ctx.recommendations[0].title + ' — ' + ctx.recommendations[0].desc.substring(0, 120) + '...' : 'Evaluasi strategi penjualan dan pertimbangkan promo bundling.';
+  var urgency = isDown ? 'Penting' : 'Normal';
+  var conf = isDown ? 93 : 90;
+  return mkResp(response, penyebab, rekomendasi, urgency, conf, ['analysis','forecast','recommendation']);
+}
+
+function handleOmzetNaik(msg, ctx) {
+  var r = ctx.revenue;
+  var response = 'Omzet ' + ctx.periodLabel + ' saat ini ' + r.value + ' (' + r.change + ' ' + r.label + ').';
+  var penyebab = ctx.analysis ? ctx.analysis.filter(function(a){ return a.icon === 'up'; }).map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n') : 'Peningkatan terjadi berkat strategi yang efektif.';
+  if (!penyebab) penyebab = 'Peningkatan omzet didorong oleh peningkatan penjualan produk unggulan.';
+  var rekomendasi = 'Pertahankan strategi saat ini dan pastikan stok bahan baku mencukupi untuk mengantisipasi lonjakan permintaan.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 92, ['analysis','recommendation']);
+}
+
+function handleStok(msg, ctx) {
+  var stokItems = ['gula','susu','kopi','teh'];
+  var found = null;
+  stokItems.forEach(function(item) { if (msg.indexOf(item) !== -1) found = item; });
+  var forecastItem = ctx.forecast ? ctx.forecast.find(function(f){ return f.title.toLowerCase().indexOf('stok') !== -1 || f.title.toLowerCase().indexOf('habis') !== -1; }) : null;
+  var response = forecastItem ? forecastItem.title + ' — ' + forecastItem.desc.substring(0, 150) : 'Stok bahan baku perlu dipantau secara berkala.';
+  var penyebab = forecastItem ? forecastItem.reason : 'Konsumsi bahan baku bervariasi tergantung musim dan tren penjualan.';
+  var rekomendasi = ctx.recommendations ? ctx.recommendations.filter(function(r){ return r.title.toLowerCase().indexOf('stok') !== -1 || r.title.toLowerCase().indexOf('gula') !== -1; }).map(function(r){ return r.title + ': ' + r.desc.substring(0, 100); }).join('\n') : 'Lakukan pemesanan ulang stok secara berkala.';
+  if (!rekomendasi) rekomendasi = 'Pantau konsumsi harian dan lakukan pemesanan ulang sebelum stok habis.';
+  var urgency = forecastItem && forecastItem.urgency === 'urgent' ? 'Sangat Penting' : 'Penting';
+  var conf = forecastItem ? forecastItem.confidence : 88;
+  return mkResp(response, penyebab, rekomendasi, urgency, conf, ['forecast','recommendation']);
+}
+
+function handlePromo(msg, ctx) {
+  var recPromo = ctx.recommendations ? ctx.recommendations.find(function(r){ return r.title.toLowerCase().indexOf('promo') !== -1 || r.title.toLowerCase().indexOf('bundling') !== -1; }) : null;
+  var response = recPromo ? recPromo.title + ' — ' + recPromo.desc.substring(0, 150) : 'Promo bundling terbukti efektif meningkatkan penjualan hingga 35%.';
+  var penyebab = recPromo ? recPromo.reason : 'Data menunjukkan jam 14.00-16.00 memiliki rata-rata kunjungan terendah.';
+  var rekomendasi = 'Terapkan promo bundling di jam sepi (14.00-16.00). Contoh: Kopi Susu + Roti Bakar dengan harga spesial.';
+  var conf = recPromo ? recPromo.confidence : 89;
+  return mkResp(response, penyebab, rekomendasi, 'Penting', conf, ['analysis','recommendation']);
+}
+
+function handlePelanggan(msg, ctx) {
+  var growthData = ctx.growth;
+  var response = 'Pertumbuhan ' + ctx.periodLabel + ': ' + growthData.value + ' — ' + growthData.change + '.';
+  var penyebab = ctx.analysis ? ctx.analysis.filter(function(a){ return a.title.toLowerCase().indexOf('pelanggan') !== -1; }).map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n') : 'Pola kunjungan pelanggan bervariasi berdasarkan jam dan hari.';
+  if (!penyebab) penyebab = 'Jumlah pelanggan dipengaruhi oleh musim, promosi, dan kondisi cuaca.';
+  var rekomendasi = 'Buat promo khusus di jam sepi (14.00-16.00) untuk menarik pelanggan. Manfaatkan jam sibuk pagi (08.00-10.00) dan sore (17.00-19.00).';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 91, ['analysis','recommendation']);
+}
+
+function handleBiaya(msg, ctx) {
+  var p = ctx.profit;
+  var response = 'Keuntungan ' + ctx.periodLabel + ': ' + p.value + ' (' + p.change + ' ' + p.label + ').';
+  var penyebab = 'Biaya bahan baku seperti susu dan gula merupakan komponen pengeluaran terbesar. Fluktuasi harga supplier berdampak langsung pada margin keuntungan.';
+  var rekomendasi = ctx.recommendations ? ctx.recommendations.filter(function(r){ return r.title.toLowerCase().indexOf('biaya') !== -1 || r.title.toLowerCase().indexOf('harga') !== -1; }).map(function(r){ return r.title + ': ' + r.desc.substring(0, 100); }).join('\n') : 'Cari supplier alternatif atau beli dalam jumlah grosir untuk mendapatkan harga lebih murah.';
+  if (!rekomendasi) rekomendasi = 'Cari supplier alternatif atau beli dalam jumlah grosir untuk mengurangi biaya bahan baku.';
+  return mkResp(response, penyebab, rekomendasi, 'Penting', 87, ['analysis','recommendation']);
+}
+
+function handleRekomendasi(msg, ctx) {
+  var recs = ctx.recommendations;
+  if (!recs || recs.length === 0) return mkResp('Belum ada rekomendasi tersedia untuk periode ini.', '-', 'Silakan periksa halaman Rekomendasi.', 'Normal', 80, ['recommendation']);
+  var response = 'Berdasarkan data ' + ctx.periodLabel + ', berikut rekomendasi prioritas AKSA:';
+  var penyebab = recs.slice(0, 4).map(function(r, i){ return (i+1) + '. ' + r.icon + ' ' + r.title + ' (' + r.badge + ') — Confidence: ' + r.confidence + '%'; }).join('\n');
+  var rekomendasi = 'Dengan menerapkan rekomendasi di atas, diprediksi performa bisnis dapat meningkat secara signifikan. Prioritaskan yang berlabel "Sangat Mendesak" terlebih dahulu.';
+  return mkResp(response, penyebab, rekomendasi, 'Sangat Penting', 95, ['recommendation','analysis']);
+}
+
+function handleProduk(msg, ctx) {
+  var productInfo = {
+    'kopi susu': { share: '40%', porsi: '45 porsi/hari', trend: 'naik 25%', status: 'Produk terlaris' },
+    'es teh': { share: '25%', porsi: '28 porsi/hari', trend: 'turun 15%', status: 'Perlu strategi promo' },
+    'roti bakar': { share: '20%', porsi: '22 porsi/hari', trend: 'naik 15%', status: 'Stabil' },
+    'pisang goreng': { share: '10%', porsi: '11 porsi/hari', trend: 'stabil', status: 'Potensial' }
+  };
+  var found = null;
+  Object.keys(productInfo).forEach(function(k){ if (msg.indexOf(k) !== -1) found = k; });
+  if (found) {
+    var p = productInfo[found];
+    var response = found.charAt(0).toUpperCase() + found.slice(1) + ': ' + p.status + ' — ' + p.share + ' total penjualan, ' + p.porsi + ', tren ' + p.trend + '.';
+    var penyebab = found === 'kopi susu' ? 'Kopi Susu menjadi primadona karena cuaca dingin dan rasa yang konsisten. Kontribusi terbesar terhadap omzet.' :
+                   found === 'es teh' ? 'Es Teh mengalami penurunan permintaan karena cuaca hujan. Perlu strategi bundling untuk mempercepat perputaran.' :
+                   found === 'roti bakar' ? 'Roti Bakar stabil sebagai pendamping minuman. Cocok untuk promo bundling.' :
+                   'Pisang Goreng memiliki potensi untuk dikembangkan sebagai variasi menu.';
+    var rekomendasi = found === 'kopi susu' ? 'Pertahankan stok susu dan kopi. Pertimbangkan varian seperti Kopi Aren.' :
+                      found === 'es teh' ? 'Buat promo bundling Es Teh + Gorengan atau kurangi stok sementara.' :
+                      found === 'roti bakar' ? 'Kembangkan varian roti bakar (keju, cokelat, selai) dan bundling dengan minuman.' :
+                      'Tingkatkan promosi Pisang Goreng sebagai camilan pendamping.';
+    return mkResp(response, penyebab, rekomendasi, found === 'es teh' ? 'Penting' : 'Normal', 92, ['analysis','recommendation']);
+  }
+  var allProducts = Object.keys(productInfo).map(function(k){ return '• ' + k.charAt(0).toUpperCase() + k.slice(1) + ': ' + productInfo[k].share + ' — ' + productInfo[k].status; }).join('\n');
+  return mkResp('Produk unggulan ' + ctx.periodLabel + ':', allProducts, 'Fokus promosi pada produk dengan kontribusi terbesar dan pastikan stok selalu tersedia.', 'Normal', 90, ['analysis','recommendation']);
+}
+
+function handleArusKas(msg, ctx) {
+  var cf = ctx.cashflow;
+  var response = 'Arus kas ' + ctx.periodLabel + ': ' + cf.value + ' — Status: ' + cf.status + '.';
+  var penyebab = 'Arus kas dipengaruhi oleh keseimbangan pemasukan harian dari penjualan dan pengeluaran untuk bahan baku serta operasional.';
+  var rekomendasi = cf.status === 'Negatif' ? 'Segera cari solusi pendanaan darurat atau kurangi pengeluaran secara agresif. Arus kas negatif berisiko menghentikan operasional.' :
+                    cf.status === 'Stabil' ? 'Arus kas dalam kondisi sehat. Disarankan menyisihkan 20% surplus untuk dana cadangan.' :
+                    'Arus kas cukup namun perlu dikendalikan. Tetap pantau pengeluaran agar tidak melebihi pemasukan.';
+  var urgency = cf.status === 'Negatif' ? 'Sangat Penting' : cf.status === 'Stabil' ? 'Normal' : 'Penting';
+  return mkResp(response, penyebab, rekomendasi, urgency, 91, ['analysis','forecast']);
+}
+
+function handlePertumbuhan(msg, ctx) {
+  var g = ctx.growth;
+  var response = 'Pertumbuhan ' + ctx.periodLabel + ': ' + g.value + ' — ' + g.change + '.';
+  var penyebab = 'Pertumbuhan dipengaruhi oleh peningkatan pelanggan baru, efektivitas strategi promosi, dan retensi pelanggan existing.';
+  var rekomendasi = 'Untuk mempertahankan tren pertumbuhan, terus berinovasi pada menu, optimalkan jam sibuk, dan pertahankan kualitas layanan.';
+  var urgency = g.value && g.value.indexOf('-') !== -1 ? 'Sangat Penting' : 'Normal';
+  return mkResp(response, penyebab, rekomendasi, urgency, 90, ['analysis','forecast']);
+}
+
+function handlePrediksi(msg, ctx) {
+  var fc = ctx.forecast;
+  if (!fc || fc.length === 0) return mkResp('Data prediksi belum tersedia untuk periode ini.', '-', 'Silakan periksa halaman Prediksi.', 'Normal', 80, ['forecast']);
+  var response = 'Prediksi ' + ctx.periodLabel + ' berdasarkan data historis:';
+  var penyebab = fc.map(function(f){ return '• ' + f.title + ' — Confidence: ' + f.confidence + '% (' + f.urgency + ')'; }).join('\n');
+  var rekomendasi = fc.filter(function(f){ return f.urgency === 'urgent' || f.urgency === 'important'; }).map(function(f){ return '⚠ ' + f.title; }).join('\n') || 'Pantau perkembangan secara berkala.';
+  return mkResp(response, penyebab, rekomendasi, 'Sangat Penting', 90, ['forecast','recommendation']);
+}
+
+function handleSkor(msg, ctx) {
+  var response = 'Skor kesehatan bisnis ' + ctx.periodLabel + ': ' + ctx.healthScore + ' (' + ctx.healthStatus + ').';
+  var cats = ctx.categories;
+  var penyebab = 'Rincian kategori:\n• Penjualan: ' + cats.penjualan.score + '/100\n• Keuntungan: ' + cats.keuntungan.score + '/100\n• Arus Kas: ' + cats.arusKas.score + '/100\n• Perputaran Stok: ' + cats.perputaranStok.score + '/100\n• Pertumbuhan: ' + cats.pertumbuhan.score + '/100';
+  var weakest = Object.keys(cats).reduce(function(a, b){ return cats[a].score < cats[b].score ? a : b; });
+  var weakLabel = { penjualan:'Penjualan', keuntungan:'Keuntungan', arusKas:'Arus Kas', perputaranStok:'Perputaran Stok', pertumbuhan:'Pertumbuhan' };
+  var rekomendasi = 'Fokus perbaikan pada kategori ' + (weakLabel[weakest] || weakest) + ' yang memiliki skor terendah (' + cats[weakest].score + '/100) untuk meningkatkan skor keseluruhan.';
+  var urgency = ctx.healthScore < 50 ? 'Sangat Penting' : ctx.healthScore < 75 ? 'Penting' : 'Normal';
+  return mkResp(response, penyebab, rekomendasi, urgency, 94, ['health','analysis']);
+}
+
+function handleTransaksi(msg, ctx) {
+  var total = ctx.totalTransactions;
+  var statsStr = ctx.passportStats.map(function(s){ return '• ' + s.label + ': ' + s.value; }).join('\n');
+  var response = 'Total data transaksi di prototipe ini: ' + total.toLocaleString('id-ID') + ' transaksi.';
+  var penyebab = statsStr || 'Data transaksi terdiri dari semua pencatatan penjualan yang telah diinput.';
+  var rekomendasi = 'Data transaksi ini menjadi dasar analisis AI AKSA. Semakin banyak data, semakin akurat prediksi dan rekomendasi yang diberikan.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 95, ['data','dashboard']);
+}
+
+function handleJam(msg, ctx) {
+  var response = 'Pola waktu kunjungan ' + ctx.periodLabel + ':';
+  var penyebab = '• Jam sibuk: 08.00-10.00 (pagi) dan 17.00-19.00 (sore)\n• Jam sepi: 14.00-16.00 (siang)\n• Rata-rata pelanggan jam sepi: 3-4 orang/jam';
+  var rekomendasi = 'Manfaatkan jam sibuk dengan stok penuh dan layanan cepat. Buat promo khusus di jam sepi (14.00-16.00) untuk meningkatkan kunjungan.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 89, ['analysis','recommendation']);
+}
+
+function handleSupplier(msg, ctx) {
+  var response = 'Pengelolaan supplier ' + ctx.periodLabel + ':';
+  var penyebab = 'Biaya bahan baku merupakan komponen terbesar pengeluaran. Negosiasi harga dengan supplier berdampak langsung pada margin keuntungan.';
+  var rekomendasi = '• Beli dalam jumlah grosir untuk harga lebih murah\n• Cari minimal 2 supplier alternatif\n• Negosiasi harga saat volume tinggi\n• Evaluasi supplier setiap bulan';
+  return mkResp(response, penyebab, rekomendasi, 'Penting', 86, ['recommendation']);
+}
+
+function handleHargaJual(msg, ctx) {
+  var response = 'Evaluasi harga jual ' + ctx.periodLabel + ':';
+  var penyebab = 'Harga bahan baku naik 8% (susu dan gula) sehingga margin keuntungan menipis. Perlu penyesuaian harga jual untuk mempertahankan profitabilitas.';
+  var rekomendasi = 'Pertimbangkan kenaikan harga jual sebesar 5-10% secara bertahap. Komunikasikan value proposition kepada pelanggan agar harga baru diterima.';
+  return mkResp(response, penyebab, rekomendasi, 'Penting', 88, ['analysis','recommendation']);
+}
+
+function handleMusim(msg, ctx) {
+  var response = 'Dampak musim terhadap bisnis ' + ctx.periodLabel + ':';
+  var penyebab = '• Musim hujan: Minuman hangat naik 25-30%, Es Teh turun 10-15%\n• Cuaca dingin: Kopi Susu naik 20-25%\n• Akhir pekan: Lonjakan permintaan 20-30%';
+  var rekomendasi = 'Sesuaikan stok dan promosi dengan musim. Tambah varian minuman hangat saat musim hujan. Kurangi stok es saat cuaca dingin.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 85, ['forecast','recommendation']);
+}
+
+function handleRating(msg, ctx) {
+  var stats = ctx.passportStats;
+  var ratingStat = stats.find(function(s){ return s.label === 'Rating Pelanggan'; });
+  var response = 'Rating pelanggan ' + ctx.periodLabel + ': ' + (ratingStat ? ratingStat.value : '4.8 ★') + '.';
+  var penyebab = 'Rating pelanggan mencerminkan kepuasan terhadap kualitas produk, kecepatan layanan, dan pengalaman keseluruhan.';
+  var rekomendasi = 'Pertahankan kualitas produk dan layanan. Tanggapi setiap umpan balik pelanggan dengan cepat. Program loyalitas dapat meningkatkan retensi.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 87, ['analysis']);
+}
+
+function handleKaryawan(msg, ctx) {
+  var response = 'Pengelolaan karyawan ' + ctx.periodLabel + ':';
+  var penyebab = 'Jumlah karyawan ideal ditentukan oleh volume penjualan dan jam operasional. Overstaffing meningkatkan biaya, understaffing menurunkan layanan.';
+  var rekomendasi = '• Tambah 1 karyawan paruh waktu untuk jam sibuk (08.00-10.00 & 17.00-19.00)\n• Latih staf untuk upselling produk unggulan\n• Evaluasi performa secara berkala';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 82, ['recommendation']);
+}
+
+function handleMargin(msg, ctx) {
+  var p = ctx.profit;
+  var response = 'Margin keuntungan ' + ctx.periodLabel + ': ' + p.value + ' (' + p.change + ').';
+  var penyebab = 'Margin keuntungan = (Pendapatan - Biaya) / Pendapatan. Kenaikan harga bahan baku menggerus margin meskipun omzet naik.';
+  var rekomendasi = 'Tingkatkan margin dengan: (1) Efisiensi pengadaan bahan baku, (2) Penyesuaian harga jual, (3) Fokus produk margin tinggi seperti Kopi Susu.';
+  var urgency = p.change && p.change.indexOf('-') !== -1 ? 'Penting' : 'Normal';
+  return mkResp(response, penyebab, rekomendasi, urgency, 89, ['analysis','recommendation']);
+}
+
+function handlePembayaran(msg, ctx) {
+  var response = 'Metode pembayaran yang didukung:';
+  var penyebab = 'Prototipe ini mendukung berbagai metode pembayaran: Tunai, Kartu Debit/Kredit, QRIS, dan Transfer Bank.';
+  var rekomendasi = 'Aktifkan QRIS untuk kemudahan transaksi. Data pembayaran otomatis tercatat dan dianalisis oleh AKSA untuk insight bisnis.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 88, ['dashboard']);
+}
+
+function handleDashboard(msg, ctx) {
+  var r = ctx.revenue;
+  var p = ctx.profit;
+  var cf = ctx.cashflow;
+  var g = ctx.growth;
+  var response = 'Ringkasan bisnis ' + ctx.periodLabel + ' (Skor: ' + ctx.healthScore + '/100):';
+  var penyebab = '• Pendapatan: ' + r.value + ' (' + r.change + ')\n• Keuntungan: ' + p.value + ' (' + p.change + ')\n• Arus Kas: ' + cf.value + ' (' + cf.status + ')\n• Pertumbuhan: ' + g.value + ' (' + g.change + ')';
+  var rekomendasi = ctx.aiAnalysis ? ctx.aiAnalysis.replace(/<[^>]*>/g, '') : 'Lihat detail di dashboard untuk analisis lebih lengkap.';
+  if (rekomendasi.length > 200) rekomendasi = rekomendasi.substring(0, 200) + '...';
+  return mkResp(response, penyebab, rekomendasi, ctx.healthScore < 50 ? 'Sangat Penting' : 'Normal', 93, ['dashboard','analysis']);
+}
+
+function handlePassport(msg, ctx) {
+  var passport = getData().passport;
+  if (!passport) return mkResp('Data Business Passport tidak tersedia.', '-', '-', 'Normal', 80, ['passport']);
+  var response = 'Business Passport ' + ctx.periodLabel + ': Skor ' + passport.healthScore + ' (' + passport.healthLabel + '), Pertumbuhan ' + passport.growth + ', Risiko ' + passport.risk + '.';
+  var penyebab = passport.stats.map(function(s){ return '• ' + s.label + ': ' + s.value; }).join('\n');
+  var rekomendasi = 'Passport bisnis Anda mencerminkan kondisi keseluruhan. Skor ' + passport.healthScore + ' menunjukkan bisnis dalam kondisi ' + passport.healthLabel.toLowerCase() + '.';
+  return mkResp(response, penyebab, rekomendasi, passport.healthScore < 50 ? 'Sangat Penting' : 'Normal', 94, ['passport','dashboard']);
+}
+
+function handleSapaan(msg, ctx) {
+  return {
+    response: 'Halo! Saya AKSA, asisten AI bisnis Anda. Saya memiliki akses ke semua data ' + ctx.totalTransactions.toLocaleString('id-ID') + ' transaksi Anda. Silakan tanyakan apa saja tentang bisnis Anda — omzet, stok, pelanggan, prediksi, atau rekomendasi strategi.',
+    confidence: 95,
+    extra: null
+  };
+}
+
+function handleTerimaKasih(msg, ctx) {
+  return {
+    response: 'Sama-sama! Saya senang bisa membantu. Jangan ragu untuk bertanya lagi kapan saja. AKSA selalu siap menganalisis data bisnis Anda.',
+    confidence: 95,
+    extra: null
+  };
+}
+
+function handleTentang(msg, ctx) {
+  return {
+    response: 'Saya adalah AKSA — AI Business Passport untuk UMKM. Saya dianalisis berdasarkan ' + ctx.totalTransactions.toLocaleString('id-ID') + ' data transaksi Anda yang mencakup:\n• Data pendapatan, keuntungan, arus kas, dan pertumbuhan\n• Analisis produk (Kopi Susu, Es Teh, Roti Bakar, dll)\n• Prediksi stok bahan baku dan tren penjualan\n• Rekomendasi strategi bisnis berbasis Explainable AI\n\nSilakan tanyakan apa saja!',
+    confidence: 96,
+    extra: null
   };
 }
 
