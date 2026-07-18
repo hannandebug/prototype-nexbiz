@@ -720,6 +720,75 @@ img {
   font-weight: 500;
 }
 
+/* ----- Login Page Scoped Overrides ----- */
+.login-page {
+  justify-content: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.login-header {
+  padding: 20px 0 28px;
+}
+
+.login-header .login-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+}
+
+.login-header h2 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.login-header p {
+  font-size: 14px;
+}
+
+.login-form {
+  flex: none;
+}
+
+.login-page .form-group {
+  margin-bottom: 18px;
+}
+
+.login-page .form-group label {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.login-page .form-group input {
+  height: 48px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.login-page .forgot-password {
+  margin-bottom: 20px;
+}
+
+.login-page .forgot-password a {
+  font-size: 13px;
+}
+
+.login-page .btn {
+  height: 50px;
+  font-size: 15px;
+}
+
+.login-page .divider {
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.login-page .login-footer {
+  padding: 20px 0 8px;
+  font-size: 13px;
+}
+
 /* ----- Dashboard ----- */
 .greeting {
   margin-bottom: 20px;
@@ -4008,60 +4077,60 @@ img {
   }
 
   .login-header {
-    padding: 20px 0 18px;
+    padding: 16px 0 22px;
   }
 
   .login-header .login-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin-bottom: 10px;
+    width: 76px;
+    height: 76px;
+    border-radius: 16px;
+    margin-bottom: 14px;
   }
 
   .login-header h2 {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .login-header p {
-    font-size: 12px;
-  }
-
-  .form-group {
-    margin-bottom: 12px;
-  }
-
-  .form-group label {
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-
-  .form-group input {
-    height: 42px;
-    padding: 0 12px;
     font-size: 13px;
   }
 
-  .forgot-password {
-    margin-bottom: 12px;
+  .login-page .form-group {
+    margin-bottom: 14px;
   }
 
-  .forgot-password a {
+  .login-page .form-group label {
     font-size: 12px;
+    margin-bottom: 5px;
   }
 
-  .btn {
-    height: 44px;
+  .login-page .form-group input {
+    height: 46px;
+    padding: 0 14px;
     font-size: 13px;
   }
 
-  .divider {
-    margin: 12px 0;
-    font-size: 11px;
+  .login-page .forgot-password {
+    margin-bottom: 16px;
   }
 
-  .login-footer {
-    padding: 12px 0;
-    font-size: 11px;
+  .login-page .forgot-password a {
+    font-size: 12px;
+  }
+
+  .login-page .btn {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .login-page .divider {
+    margin: 16px 0;
+    font-size: 12px;
+  }
+
+  .login-page .login-footer {
+    padding: 16px 0 6px;
+    font-size: 12px;
   }
 
   .modal {
