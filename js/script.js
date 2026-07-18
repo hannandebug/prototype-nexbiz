@@ -1535,7 +1535,7 @@ function clearChatHistory() {
 }
 
 /* ==========================================
-   AI RESPONSE ENGINE - Data-Aware
+   AI RESPONSE ENGINE - Data-Aware v2
    ========================================== */
 
 function getBusinessContext() {
@@ -1564,53 +1564,102 @@ function getBusinessContext() {
   };
 }
 
+function detectTopic(msg) {
+  var topics = [];
+  var topicDefs = [
+    { id: 'transaksi', words: ['transaksi','data transaksi','jumlah transaksi'] },
+    { id: 'prediksi', words: ['prediksi','forecast','masa depan','minggu depan','bulan depan','diprediksi','ramalan','proyeksi'] },
+    { id: 'stok', words: ['stok','stock','gula','susu','kopi','teh','bahan baku','habis','menipis','kehabisan','restok','persediaan'] },
+    { id: 'produk', words: ['kopi susu','es teh','roti bakar','pisang goreng','kopi aren','matcha','cokelat','menu','produk','minuman','makanan'] },
+    { id: 'pelanggan', words: ['pelanggan','pengunjung','kunjungan','customer','pengguna','langganan'] },
+    { id: 'promo', words: ['promo','promosi','diskon','bundling','potongan harga','voucher','cashback'] },
+    { id: 'omzet', words: ['omzet','omset','penjualan','revenue','sales','pendapatan','omset'] },
+    { id: 'keuntungan', words: ['keuntungan','untung','laba','profit','margin'] },
+    { id: 'biaya', words: ['biaya','modal','pengeluaran','belanja','cost','operasional','beban'] },
+    { id: 'arus_kas', words: ['arus kas','cashflow','cash flow','saldo','likuiditas','kas'] },
+    { id: 'pertumbuhan', words: ['pertumbuhan','growth','tumbuh','berkembang'] },
+    { id: 'skor', words: ['skor','health score','kesehatan','nilai','penilaian','score'] },
+    { id: 'jam', words: ['jam','waktu','jam sibuk','jam sepi','jam ramai','puncak'] },
+    { id: 'supplier', words: ['supplier','pemasok','vendor','distributor'] },
+    { id: 'harga', words: ['harga jual','harga menu','harga naik','menaikkan harga','pricing'] },
+    { id: 'musim', words: ['musim','hujan','panas','cuaca','musiman','dingin'] },
+    { id: 'rating', words: ['rating','ulasan','review','feedback','puas','tidak puas','bintang'] },
+    { id: 'karyawan', words: ['karyawan','pegawai','staff','staffing','gaji','pekerja'] },
+    { id: 'pembayaran', words: ['pembayaran','bayar','cash','debit','qris','transfer','tunai'] },
+    { id: 'passport', words: ['passport','paspor','kartu bisnis'] },
+    { id: 'dashboard', words: ['dashboard','beranda','ringkasan','summary','overview'] },
+    { id: 'sapaan', words: ['hello','halo','hai','hi','hey','selamat','pagi','siang','sore','malam'] },
+    { id: 'terima_kasih', words: ['terima kasih','makasih','thanks','thank'] },
+    { id: 'tentang', words: ['siapa kamu','apa ini','tentang','about','fitur','kamu siapa'] },
+  ];
+  topicDefs.forEach(function(t) {
+    t.words.forEach(function(w) {
+      if (msg.indexOf(w) !== -1 && topics.indexOf(t.id) === -1) {
+        topics.push(t.id);
+      }
+    });
+  });
+  return topics;
+}
+
+function hasTopic(topics, id) { return topics.indexOf(id) !== -1; }
+
 function getAIResponse(userMessage) {
   var msg = userMessage.toLowerCase();
   var ctx = getBusinessContext();
+  var topics = detectTopic(msg);
 
-  var handlers = [
-    { keys: ['omzet turun','omset turun','penjualan turun','penjualan menurun','omzet anjlok','omset anjlok','omzet turun','omzet naik turun'], fn: handleOmzetTurun },
-    { keys: ['omzet naik','omset naik','penjualan naik','penjualan meningkat','omzet meningkat','omset meningkat','untung naik','laba naik','keuntungan naik'], fn: handleOmzetNaik },
-    { keys: ['stok habis','stok gula','stok susu','stok kopi','stok teh','stok bahan','habis stok','kehabisan','stok menipis'], fn: handleStok },
-    { keys: ['promo','promosi','diskon','bundling','potongan harga','promo terbaik'], fn: handlePromo },
-    { keys: ['pelanggan','pengunjung','kunjungan','rame','ramai','sepi','pelanggan turun','pelanggan naik'], fn: handlePelanggan },
-    { keys: ['biaya','modal','pengeluaran','belanja','harga bahan','harga naik','cost'], fn: handleBiaya },
-    { keys: ['rekomendasi','saran','harus','langkah','strategi','yang terbaik'], fn: handleRekomendasi },
-    { keys: ['kopi susu','kopi','es teh','roti bakar','pisang goreng','menu','produk','minuman','makanan'], fn: handleProduk },
-    { keys: ['arus kas','kas','cashflow','saldo','likuiditas','uang'], fn: handleArusKas },
-    { keys: ['pertumbuhan','growth','tumbuh','meningkatkan pertumbuhan','bisnis tumbuh'], fn: handlePertumbuhan },
-    { keys: ['prediksi','forecast','masa depan','minggu depan','bulan depan','diprediksi'], fn: handlePrediksi },
-    { keys: ['skor','health score','kesehatan','nilai bisnis','penilaian'], fn: handleSkor },
-    { keys: ['transaksi','total transaksi','jumlah transaksi','data transaksi','berapa transaksi'], fn: handleTransaksi },
-    { keys: ['jam','waktu','jam sibuk','jam sepi','jam ramai','puncak'], fn: handleJam },
-    { keys: ['supplier','pemasok','beli stok','restok','pemesanan'], fn: handleSupplier },
-    { keys: ['harga jual','harga menu','menaikkan harga','harga naik'], fn: handleHargaJual },
-    { keys: ['musim','hujan','panas','cuaca','musiman'], fn: handleMusim },
-    { keys: ['rating','ulasan','review','feedback','puas','tidak puas'], fn: handleRating },
-    { keys: ['karyawan','pegawai','staff','kerja','gaji'], fn: handleKaryawan },
-    { keys: ['laba bersih','profit margin','margin','margin keuntungan'], fn: handleMargin },
-    { keys: ['pembayaran','bayar','cash','debit','qris','transfer'], fn: handlePembayaran },
-    { keys: ['beranda','dashboard','ringkasan','summary','secara umum'], fn: handleDashboard },
-    { keys: ['passport','paspor','kartu bisnis'], fn: handlePassport },
-    { keys: ['hello','halo','hai','hi','hey','selamat'], fn: handleSapaan },
-    { keys: ['terima kasih','makasih','thanks','thank'], fn: handleTerimaKasih },
-    { keys: ['siapa kamu','apa ini','tentang','about','fitur'], fn: handleTentang },
-  ];
-
-  for (var i = 0; i < handlers.length; i++) {
-    var h = handlers[i];
-    for (var j = 0; j < h.keys.length; j++) {
-      if (msg.indexOf(h.keys[j]) !== -1) {
-        return h.fn(msg, ctx);
-      }
-    }
+  if (topics.length === 0) {
+    return {
+      response: 'Maaf, saya belum bisa menganalisis pertanyaan tersebut. Coba tanyakan tentang:\n• Omzet & penjualan\n• Stok bahan baku\n• Pelanggan & kunjungan\n• Promo & diskon\n• Keuntungan & biaya\n• Arus kas\n• Prediksi & forecast\n• Kondisi bisnis secara umum',
+      confidence: 75,
+      extra: null
+    };
   }
 
-  return {
-    response: 'Maaf, saya belum bisa menganalisis pertanyaan tersebut. Coba tanyakan tentang omzet, stok, pelanggan, promo, arus kas, prediksi, atau kondisi bisnis Anda secara umum.',
-    confidence: 75,
-    extra: null
-  };
+  if (hasTopic(topics, 'sapaan')) return handleSapaan(msg, ctx);
+  if (hasTopic(topics, 'terima_kasih')) return handleTerimaKasih(msg, ctx);
+  if (hasTopic(topics, 'tentang')) return handleTentang(msg, ctx);
+
+  if (hasTopic(topics, 'transaksi')) return handleTransaksi(msg, ctx);
+  if (hasTopic(topics, 'passport')) return handlePassport(msg, ctx);
+
+  if (hasTopic(topics, 'skor')) return handleSkor(msg, ctx);
+  if (hasTopic(topics, 'dashboard')) return handleDashboard(msg, ctx);
+
+  if (hasTopic(topics, 'prediksi')) return handlePrediksi(msg, ctx);
+
+  if (hasTopic(topics, 'stok')) return handleStok(msg, ctx);
+  if (hasTopic(topics, 'produk')) return handleProduk(msg, ctx);
+
+  if (hasTopic(topics, 'omzet') && hasTopic(topics, 'keuntungan')) return handleMargin(msg, ctx);
+  if (hasTopic(topics, 'omzet')) {
+    if (msg.indexOf('turun') !== -1 || msg.indexOf('anjlok') !== -1 || msg.indexOf('menurun') !== -1 || msg.indexOf('merosot') !== -1) return handleOmzetTurun(msg, ctx);
+    if (msg.indexOf('naik') !== -1 || msg.indexOf('meningkat') !== -1 || msg.indexOf('bertambah') !== -1 || msg.indexOf('tinggi') !== -1) return handleOmzetNaik(msg, ctx);
+    return handleOmzetUmum(msg, ctx);
+  }
+
+  if (hasTopic(topics, 'keuntungan')) {
+    if (msg.indexOf('turun') !== -1 || msg.indexOf('menurun') !== -1 || msg.indexOf('anjlok') !== -1 || msg.indexOf('tipis') !== -1 || msg.indexOf('merosot') !== -1) return handleKeuntunganTurun(msg, ctx);
+    if (msg.indexOf('naik') !== -1 || msg.indexOf('meningkat') !== -1 || msg.indexOf('tinggi') !== -1) return handleKeuntunganNaik(msg, ctx);
+    return handleKeuntunganUmum(msg, ctx);
+  }
+
+  if (hasTopic(topics, 'biaya')) return handleBiaya(msg, ctx);
+  if (hasTopic(topics, 'arus_kas')) return handleArusKas(msg, ctx);
+  if (hasTopic(topics, 'pertumbuhan')) return handlePertumbuhan(msg, ctx);
+
+  if (hasTopic(topics, 'pelanggan')) return handlePelanggan(msg, ctx);
+  if (hasTopic(topics, 'promo')) return handlePromo(msg, ctx);
+  if (hasTopic(topics, 'jam')) return handleJam(msg, ctx);
+  if (hasTopic(topics, 'supplier')) return handleSupplier(msg, ctx);
+  if (hasTopic(topics, 'harga')) return handleHargaJual(msg, ctx);
+  if (hasTopic(topics, 'musim')) return handleMusim(msg, ctx);
+  if (hasTopic(topics, 'rating')) return handleRating(msg, ctx);
+  if (hasTopic(topics, 'karyawan')) return handleKaryawan(msg, ctx);
+  if (hasTopic(topics, 'pembayaran')) return handlePembayaran(msg, ctx);
+
+  return handleDashboard(msg, ctx);
 }
 
 function mkResp(response, penyebab, rekomendasi, urgency, confidence, related) {
@@ -1649,18 +1698,50 @@ function handleOmzetNaik(msg, ctx) {
   return mkResp(response, penyebab, rekomendasi, 'Normal', 92, ['analysis','recommendation']);
 }
 
+function handleOmzetUmum(msg, ctx) {
+  var r = ctx.revenue;
+  var analysisUp = ctx.analysis ? ctx.analysis.filter(function(a){ return a.icon === 'up'; }).map(function(a){ return '• ' + a.title + ': ' + a.desc.replace(/<[^>]*>/g, '').substring(0, 100); }).join('\n') : '';
+  var analysisDown = ctx.analysis ? ctx.analysis.filter(function(a){ return a.icon === 'down'; }).map(function(a){ return '• ' + a.title + ': ' + a.desc.replace(/<[^>]*>/g, '').substring(0, 100); }).join('\n') : '';
+  var response = 'Omzet ' + ctx.periodLabel + ': ' + r.value + ' (' + r.change + ' ' + r.label + ').';
+  var penyebab = (analysisUp ? 'Positif:\n' + analysisUp : '') + (analysisDown ? '\nNegatif:\n' + analysisDown : '') || ctx.insight || 'Analisis omzet berdasarkan data transaksi terkini.';
+  var rekomendasi = ctx.aiAnalysis ? ctx.aiAnalysis.replace(/<[^>]*>/g, '').substring(0, 200) + '...' : 'Pertahankan strategi penjualan yang sudah efektif.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 91, ['analysis','dashboard','recommendation']);
+}
+
 function handleStok(msg, ctx) {
-  var stokItems = ['gula','susu','kopi','teh'];
-  var found = null;
-  stokItems.forEach(function(item) { if (msg.indexOf(item) !== -1) found = item; });
+  var stokItems = {
+    'gula': { emoji: '🧂', unit: 'kg', konsumsi: '2 kg/hari', stokTersisa: '8 kg', hariHabis: '4 hari' },
+    'susu': { emoji: '🥛', unit: 'liter', konsumsi: '3 liter/hari', stokTersisa: '12 liter', hariHabis: '4 hari' },
+    'kopi': { emoji: '☕', unit: 'kg', konsumsi: '1 kg/hari', stokTersisa: '5 kg', hariHabis: '5 hari' },
+    'teh': { emoji: '🍵', unit: 'kg', konsumsi: '0.5 kg/hari', stokTersisa: '15 kg', hariHabis: '30 hari (berlebih)' }
+  };
+  var foundItems = [];
+  Object.keys(stokItems).forEach(function(item) {
+    if (msg.indexOf(item) !== -1) foundItems.push(item);
+  });
+
+  if (foundItems.length > 0) {
+    var detail = foundItems.map(function(item) {
+      var s = stokItems[item];
+      return s.emoji + ' ' + item.charAt(0).toUpperCase() + item.slice(1) + ': stok tersisa ' + s.stokTersisa + ', konsumsi ' + s.konsumsi + ', habis dalam ' + s.hariHabis;
+    }).join('\n');
+    var response = 'Detail stok bahan baku ' + ctx.periodLabel + ':';
+    var rekomendasi = foundItems.indexOf('teh') !== -1 ? 'Stok teh berlebih — kurangi pembelian dan buat promo bundling untuk mempercepat perputaran.' :
+                      'Segera lakukan pemesanan ulang sebelum stok habis. Antisipasi lonjakan permintaan akhir pekan.';
+    var urgency = foundItems.some(function(i){ return stokItems[i].hariHabis.indexOf('4') !== -1 || stokItems[i].hariHabis.indexOf('5') !== -1; }) ? 'Sangat Penting' : 'Normal';
+    return mkResp(response, detail, rekomendasi, urgency, 92, ['forecast','recommendation']);
+  }
+
+  var allStock = Object.keys(stokItems).map(function(item) {
+    var s = stokItems[item];
+    return s.emoji + ' ' + item.charAt(0).toUpperCase() + item.slice(1) + ': ' + s.stokTersisa + ' tersisa (habis dalam ' + s.hariHabis + ')';
+  }).join('\n');
   var forecastItem = ctx.forecast ? ctx.forecast.find(function(f){ return f.title.toLowerCase().indexOf('stok') !== -1 || f.title.toLowerCase().indexOf('habis') !== -1; }) : null;
-  var response = forecastItem ? forecastItem.title + ' — ' + forecastItem.desc.substring(0, 150) : 'Stok bahan baku perlu dipantau secara berkala.';
-  var penyebab = forecastItem ? forecastItem.reason : 'Konsumsi bahan baku bervariasi tergantung musim dan tren penjualan.';
-  var rekomendasi = ctx.recommendations ? ctx.recommendations.filter(function(r){ return r.title.toLowerCase().indexOf('stok') !== -1 || r.title.toLowerCase().indexOf('gula') !== -1; }).map(function(r){ return r.title + ': ' + r.desc.substring(0, 100); }).join('\n') : 'Lakukan pemesanan ulang stok secara berkala.';
-  if (!rekomendasi) rekomendasi = 'Pantau konsumsi harian dan lakukan pemesanan ulang sebelum stok habis.';
+  var response = 'Status stok bahan baku ' + ctx.periodLabel + ':';
+  var penyebab = allStock;
+  var rekomendasi = forecastItem ? '⚠ ' + forecastItem.title + ' — ' + forecastItem.desc.substring(0, 120) : 'Pantau konsumsi harian dan lakukan pemesanan ulang sebelum stok habis.';
   var urgency = forecastItem && forecastItem.urgency === 'urgent' ? 'Sangat Penting' : 'Penting';
-  var conf = forecastItem ? forecastItem.confidence : 88;
-  return mkResp(response, penyebab, rekomendasi, urgency, conf, ['forecast','recommendation']);
+  return mkResp(response, penyebab, rekomendasi, urgency, 91, ['forecast','recommendation']);
 }
 
 function handlePromo(msg, ctx) {
@@ -1673,11 +1754,16 @@ function handlePromo(msg, ctx) {
 }
 
 function handlePelanggan(msg, ctx) {
-  var growthData = ctx.growth;
-  var response = 'Pertumbuhan ' + ctx.periodLabel + ': ' + growthData.value + ' — ' + growthData.change + '.';
-  var penyebab = ctx.analysis ? ctx.analysis.filter(function(a){ return a.title.toLowerCase().indexOf('pelanggan') !== -1; }).map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n') : 'Pola kunjungan pelanggan bervariasi berdasarkan jam dan hari.';
-  if (!penyebab) penyebab = 'Jumlah pelanggan dipengaruhi oleh musim, promosi, dan kondisi cuaca.';
-  var rekomendasi = 'Buat promo khusus di jam sepi (14.00-16.00) untuk menarik pelanggan. Manfaatkan jam sibuk pagi (08.00-10.00) dan sore (17.00-19.00).';
+  var g = ctx.growth;
+  var stats = ctx.passportStats;
+  var ratingStat = stats.find(function(s){ return s.label === 'Rating Pelanggan'; });
+  var response = 'Data pelanggan ' + ctx.periodLabel + ':';
+  var penyebab = '• Pertumbuhan: ' + g.value + ' (' + g.change + ')\n• Rating: ' + (ratingStat ? ratingStat.value : '4.8 ★') + '\n• Puncak kunjungan: 08.00-10.00 & 17.00-19.00\n• Jam sepi: 14.00-16.00 (3-4 pelanggan/jam)';
+  var pelangganAnalysis = ctx.analysis ? ctx.analysis.filter(function(a){ return a.title.toLowerCase().indexOf('pelanggan') !== -1; }) : [];
+  if (pelangganAnalysis.length > 0) {
+    penyebab += '\n\n' + pelangganAnalysis.map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n');
+  }
+  var rekomendasi = '• Manfaatkan jam sibuk (08-10 & 17-19) dengan stok penuh\n• Buat promo khusus jam sepi (14-16) untuk menarik pelanggan\n• Terapkan program loyalitas untuk retensi pelanggan';
   return mkResp(response, penyebab, rekomendasi, 'Normal', 91, ['analysis','recommendation']);
 }
 
@@ -1688,6 +1774,32 @@ function handleBiaya(msg, ctx) {
   var rekomendasi = ctx.recommendations ? ctx.recommendations.filter(function(r){ return r.title.toLowerCase().indexOf('biaya') !== -1 || r.title.toLowerCase().indexOf('harga') !== -1; }).map(function(r){ return r.title + ': ' + r.desc.substring(0, 100); }).join('\n') : 'Cari supplier alternatif atau beli dalam jumlah grosir untuk mendapatkan harga lebih murah.';
   if (!rekomendasi) rekomendasi = 'Cari supplier alternatif atau beli dalam jumlah grosir untuk mengurangi biaya bahan baku.';
   return mkResp(response, penyebab, rekomendasi, 'Penting', 87, ['analysis','recommendation']);
+}
+
+function handleKeuntunganTurun(msg, ctx) {
+  var p = ctx.profit;
+  var response = 'Keuntungan ' + ctx.periodLabel + ': ' + p.value + ' (' + p.change + ' ' + p.label + ').';
+  var penyebab = ctx.analysis ? ctx.analysis.filter(function(a){ return a.title.toLowerCase().indexOf('laba') !== -1 || a.title.toLowerCase().indexOf('untung') !== -1 || a.title.toLowerCase().indexOf('keuntungan') !== -1; }).map(function(a){ return '• ' + a.title + ': ' + a.reason; }).join('\n') : 'Margin keuntungan tertekan oleh kenaikan biaya bahan baku.';
+  if (!penyebab) penyebab = 'Penurunan keuntungan disebabkan oleh kenaikan harga bahan baku (susu, gula) sebesar 8% yang menggerus margin.';
+  var rekomendasi = '• Evaluasi harga jual untuk menyesuaikan kenaikan biaya\n• Cari supplier alternatif dengan harga lebih kompetitif\n• Fokus pada produk dengan margin tinggi seperti Kopi Susu';
+  return mkResp(response, penyebab, rekomendasi, 'Penting', 90, ['analysis','recommendation']);
+}
+
+function handleKeuntunganNaik(msg, ctx) {
+  var p = ctx.profit;
+  var response = 'Keuntungan ' + ctx.periodLabel + ': ' + p.value + ' (' + p.change + ' ' + p.label + ').';
+  var penyebab = 'Peningkatan keuntungan didorong oleh efisiensi operasional dan peningkatan penjualan produk dengan margin tinggi.';
+  var rekomendasi = 'Pertahankan strategi efisiensi biaya saat ini. Pantau harga bahan baku agar margin tetap terjaga.';
+  return mkResp(response, penyebab, rekomendasi, 'Normal', 91, ['analysis','recommendation']);
+}
+
+function handleKeuntunganUmum(msg, ctx) {
+  var p = ctx.profit;
+  var response = 'Keuntungan ' + ctx.periodLabel + ': ' + p.value + ' (' + p.change + ' ' + p.label + ').';
+  var penyebab = 'Keuntungan = Pendapatan - Total Biaya. Saat ini margin ' + (p.change.indexOf('-') !== -1 ? 'tertek' : 'stabil') + ' karena kenaikan harga bahan baku.';
+  var rekomendasi = 'Tingkatkan margin dengan efisiensi pengadaan bahan baku, penyesuaian harga jual, dan fokus pada produk margin tinggi.';
+  var urgency = p.change.indexOf('-') !== -1 ? 'Penting' : 'Normal';
+  return mkResp(response, penyebab, rekomendasi, urgency, 89, ['analysis','recommendation']);
 }
 
 function handleRekomendasi(msg, ctx) {
@@ -1701,27 +1813,24 @@ function handleRekomendasi(msg, ctx) {
 
 function handleProduk(msg, ctx) {
   var productInfo = {
-    'kopi susu': { share: '40%', porsi: '45 porsi/hari', trend: 'naik 25%', status: 'Produk terlaris' },
-    'es teh': { share: '25%', porsi: '28 porsi/hari', trend: 'turun 15%', status: 'Perlu strategi promo' },
-    'roti bakar': { share: '20%', porsi: '22 porsi/hari', trend: 'naik 15%', status: 'Stabil' },
-    'pisang goreng': { share: '10%', porsi: '11 porsi/hari', trend: 'stabil', status: 'Potensial' }
+    'kopi susu': { share: '40%', porsi: '45 porsi/hari', trend: 'naik 25%', status: 'Produk terlaris', reason: 'Cuaca dingin meningkatkan permintaan minuman hangat. Kopi Susu menjadi favorit utama pelanggan.' },
+    'es teh': { share: '25%', porsi: '28 porsi/hari', trend: 'turun 15%', status: 'Perlu strategi promo', reason: 'Permintaan Es Teh turun saat musim hujan. Perlu strategi bundling untuk mempercepat perputaran stok.' },
+    'roti bakar': { share: '20%', porsi: '22 porsi/hari', trend: 'naik 15%', status: 'Stabil', reason: 'Roti Bakar stabil sebagai pendamping minuman. Cocok untuk promo bundling dengan Kopi Susu.' },
+    'pisang goreng': { share: '10%', porsi: '11 porsi/hari', trend: 'stabil', status: 'Potensial', reason: 'Pisang Goreng memiliki potensi untuk dikembangkan sebagai variasi menu camilan.' }
   };
   var found = null;
   Object.keys(productInfo).forEach(function(k){ if (msg.indexOf(k) !== -1) found = k; });
   if (found) {
     var p = productInfo[found];
     var response = found.charAt(0).toUpperCase() + found.slice(1) + ': ' + p.status + ' — ' + p.share + ' total penjualan, ' + p.porsi + ', tren ' + p.trend + '.';
-    var penyebab = found === 'kopi susu' ? 'Kopi Susu menjadi primadona karena cuaca dingin dan rasa yang konsisten. Kontribusi terbesar terhadap omzet.' :
-                   found === 'es teh' ? 'Es Teh mengalami penurunan permintaan karena cuaca hujan. Perlu strategi bundling untuk mempercepat perputaran.' :
-                   found === 'roti bakar' ? 'Roti Bakar stabil sebagai pendamping minuman. Cocok untuk promo bundling.' :
-                   'Pisang Goreng memiliki potensi untuk dikembangkan sebagai variasi menu.';
-    var rekomendasi = found === 'kopi susu' ? 'Pertahankan stok susu dan kopi. Pertimbangkan varian seperti Kopi Aren.' :
-                      found === 'es teh' ? 'Buat promo bundling Es Teh + Gorengan atau kurangi stok sementara.' :
+    var penyebab = p.reason;
+    var rekomendasi = found === 'kopi susu' ? 'Pertahankan stok susu dan kopi. Pertimbangkan varian seperti Kopi Aren untuk variasi.' :
+                      found === 'es teh' ? 'Buat promo bundling Es Teh + Gorengan atau kurangi stok sementara. Alihkan fokus ke minuman hangat.' :
                       found === 'roti bakar' ? 'Kembangkan varian roti bakar (keju, cokelat, selai) dan bundling dengan minuman.' :
-                      'Tingkatkan promosi Pisang Goreng sebagai camilan pendamping.';
+                      'Tingkatkan promosi Pisang Goreng sebagai camilan pendamping. Pertimbangkan varian rasa.';
     return mkResp(response, penyebab, rekomendasi, found === 'es teh' ? 'Penting' : 'Normal', 92, ['analysis','recommendation']);
   }
-  var allProducts = Object.keys(productInfo).map(function(k){ return '• ' + k.charAt(0).toUpperCase() + k.slice(1) + ': ' + productInfo[k].share + ' — ' + productInfo[k].status; }).join('\n');
+  var allProducts = Object.keys(productInfo).map(function(k){ return '• ' + k.charAt(0).toUpperCase() + k.slice(1) + ': ' + productInfo[k].share + ' — ' + productInfo[k].status + ' (tren ' + productInfo[k].trend + ')'; }).join('\n');
   return mkResp('Produk unggulan ' + ctx.periodLabel + ':', allProducts, 'Fokus promosi pada produk dengan kontribusi terbesar dan pastikan stok selalu tersedia.', 'Normal', 90, ['analysis','recommendation']);
 }
 
