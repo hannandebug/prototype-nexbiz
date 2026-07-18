@@ -101,5 +101,10 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.querySelector('.phone').classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

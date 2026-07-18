@@ -90,13 +90,6 @@
       document.querySelector('.phone').classList.add('dark-mode');
     }
   </script>
-  <script>
-    // Instant redirect if already onboarded — prevents flash/ghost
-    if (localStorage.getItem('aksaOnboarded') === 'true') {
-      document.documentElement.style.display = 'none';
-      window.location.replace('dashboard.html');
-    }
-  </script>
   <script src="js/script.js"></script>
   <script>
     let currentStep = 1;

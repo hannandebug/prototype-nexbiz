@@ -161,6 +161,11 @@
 
   <script src="js/script.js"></script>
   <script>
+    if (localStorage.getItem('aksadarkmode') === 'true') {
+      document.querySelector('.phone').classList.add('dark-mode');
+    }
+  </script>
+  <script>
     function openForgotModal(e) {
       e.preventDefault();
       document.getElementById('forgotOverlay').classList.add('open');

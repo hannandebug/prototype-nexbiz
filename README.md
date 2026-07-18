@@ -10,16 +10,34 @@ AKSA adalah aplikasi *prototype* berbasis web yang dirancang untuk membantu pemi
 
 | Fitur | Keterangan |
 |-------|------------|
-| **Onboarding** | Alur perkenalan 5 langkah yang ditampilkan saat pertama kali menggunakan aplikasi |
+| **Onboarding** | Alur perkenalan 5 langkah yang ditampilkan **setiap kali login** — tidak bisa dilewati atau di-skip |
 | **Dashboard** | Gambaran singkat skor kesehatan bisnis, metrik utama, insight harian, rekomendasi prioritas, dan status integrasi data |
 | **Health Report** | Laporan detail skor kesehatan bisnis berdasarkan 5 kategori: Penjualan, Keuntungan, Arus Kas, Perputaran Stok, dan Pertumbuhan |
 | **Analisis Bisnis** | Analisis otomatis dari data transaksi — tren omzet, laba, pelanggan, dan produk terlaris. Setiap analisis dilengkapi **Mengapa**, **Urgensi**, dan **Confidence Score** |
-| **Business Passport** | Kartu identitas bisnis dengan detail: Health Score, Business Stage, Risk Level, Cash Flow, Growth Rate, Last Updated, dan **AI Verification Badge** |
+| **Business Passport** | Kartu identitas bisnis dengan detail: Health Score, Business Stage, Risk Level, Cash Flow, Growth Rate, Last Updated, dan **AI Verification Badge**. Tombol **Unduh Passport (PDF)** membuka halaman passport PDF siap cetak |
 | **Rekomendasi** | Daftar rekomendasi prioritas dengan penjelasan **Mengapa**, **Urgensi**, dan **Confidence Score** per item |
 | **Prediksi** (Premium) | Prediksi berbasis AI untuk stok, permintaan produk, dan tren bisnis — dilengkapi Explainable AI |
 | **AI Assistant** (Premium) | Tanya jawab interaktif dengan respons terstruktur: Penyebab, Rekomendasi, Urgensi, Confidence, dan tautan Analisis Terkait. Chat tersimpan lintas halaman |
 | **Integrasi Data** | Status koneksi Kasir Pintar, waktu sinkronisasi real-time, total transaksi, dan detail data yang digunakan AI |
 | **Filter Bulanan** | Lihat data per bulan (Januari, Februari, Maret, dan seterusnya) atau gabungan semua bulan |
+| **Dark Mode** | Mode gelap yang tersimpan otomatis — berlaku di semua halaman termasuk login, profil bisnis, dan sumber data |
+
+---
+
+## Alur Penggunaan
+
+```
+index.html (splash, 3 detik)
+  → login.html (login / daftar)
+    → business-profile.html (isi profil bisnis) ← wajib setiap login
+      → data-source.html (pilih sumber data) ← wajib setiap login
+        → onboarding.html (5 langkah perkenalan) ← wajib setiap login
+          → dashboard.html (mulai eksplorasi)
+```
+
+**Setiap kali login**, pengguna akan melewati alur: **Profil Bisnis → Sumber Data → Onboarding → Dashboard**. Tidak ada shortcut atau skip — memastikan data profil dan sumber data selalu terisi.
+
+Saat **logout**, semua data sesi dihapus (kecuali dark mode dan preferensi notifikasi). Login berikutnya akan memulai alur dari awal.
 
 ---
 
@@ -27,12 +45,14 @@ AKSA adalah aplikasi *prototype* berbasis web yang dirancang untuk membantu pemi
 
 1. Buka `index.html` di browser (splash screen akan tampil, lalu otomatis pindah ke halaman login)
 2. Masukkan email dan password (proses login bersifat simulasi)
-3. Isi profil bisnis dan pilih sumber data (Kasir Pintar, Excel, CSV, atau Input Manual)
-4. **Onboarding** akan tampil — ikuti 5 langkah perkenalan fitur AKSA
-5. Mulai eksplorasi dashboard, health report, analisis, dan fitur lainnya
-6. Gunakan **filter periode** di bagian atas halaman untuk melihat data per bulan
-7. Aktifkan **Premium** di halaman Profile untuk membuka fitur Prediksi dan AI Assistant
-8. Lihat status integrasi data di **Profile > Integrasi Data**
+3. Isi profil bisnis (nama, jenis usaha, alamat, dll) — data tersimpan di localStorage
+4. Pilih sumber data (Kasir Pintar, Excel, CSV, atau Input Manual)
+5. **Onboarding** akan tampil — ikuti 5 langkah perkenalan fitur AKSA
+6. Mulai eksplorasi dashboard, health report, analisis, dan fitur lainnya
+7. Gunakan **filter periode** di bagian atas halaman untuk melihat data per bulan
+8. Aktifkan **Premium** di halaman Profile untuk membuka fitur Prediksi dan AI Assistant
+9. Lihat status integrasi data di **Profile > Integrasi Data**
+10. **Mode gelap** bisa diaktifkan/nonaktifkan di **Profile > Mode Gelap** — berlaku di semua halaman
 
 ---
 
@@ -52,7 +72,8 @@ Setiap analisis, rekomendasi, dan prediksi di AKSA dilengkapi penjelasan transpa
 - **CSS3** — Tampilan dan animasi (single file: `css/style.css`)
 - **JavaScript Vanilla** — Semua logika dalam satu file (`js/script.js`)
 - **Font Awesome 6** — Ikon
-- **LocalStorage** — Penyimpanan data preferensi pengguna, riwayat chat AI, waktu integrasi, dan status onboarding
+- **html2pdf.js** — Konversi HTML ke PDF untuk Business Passport
+- **LocalStorage** — Penyimpanan data preferensi pengguna, profil bisnis, riwayat chat AI, waktu integrasi, dan status onboarding
 
 > **Catatan:** Ini adalah prototype frontend murni. Data transaksi, analisis, dan prediksi masih bersifat statis (contoh / *dummy data*). Belum ada backend atau database sungguhan.
 
@@ -63,18 +84,20 @@ Setiap analisis, rekomendasi, dan prediksi di AKSA dilengkapi penjelasan transpa
 ```
 AKSA/
 ├── index.html                 # Splash screen
-├── login.html                 # Halaman masuk
-├── business-profile.html      # Isi profil bisnis
+├── login.html                 # Halaman masuk & daftar
+├── business-profile.html      # Form profil bisnis (nama, jenis, alamat, omzet, dll)
 ├── data-source.html           # Pilih sumber data (Kasir Pintar, Excel, CSV, Manual)
 ├── onboarding.html            # Onboarding 5 langkah
 ├── dashboard.html             # Dashboard utama
 ├── health-report.html         # Laporan kesehatan bisnis
 ├── analysis.html              # Analisis bisnis (Explainable AI)
 ├── passport.html              # Business Passport (AI Verification Badge)
+├── passportpdf.html           # Halaman cetak Business Passport (PDF siap unduh)
 ├── recommendation.html        # Rekomendasi (Explainable AI)
 ├── forecast.html              # Prediksi AI (Premium + Explainable AI)
 ├── assistant.html             # AI Assistant (Premium, chat persisten)
-├── profile.html               # Profil, Integrasi Data, & pengaturan Premium
+├── profile.html               # Profil, Integrasi Data, Mode Gelap, & pengaturan Premium
+├── data-transaksi.html        # Detail data transaksi
 ├── revenue-detail.html        # Detail pendapatan
 ├── profit-detail.html         # Detail keuntungan
 ├── cashflow-detail.html       # Detail arus kas
@@ -84,8 +107,10 @@ AKSA/
 ├── js/
 │   └── script.js              # Semua logika JavaScript
 └── assets/
-    └── logo/
-        └── aksa-logo.png      # Logo AKSA
+    ├── logo/
+    │   └── aksa-logo.png      # Logo AKSA
+    └── qr/
+        └── qr-aksa-nexbiz.png # QR Code verifikasi Business Passport
 ```
 
 ---
@@ -109,12 +134,34 @@ Setiap bulan memiliki data yang berbeda — mulai dari metrik keuangan, insight,
 
 | Key | Fungsi |
 |-----|--------|
-| `aksapremium` | Status langganan Premium (`true` / `false`) |
+| `aksaLoggedIn` | Status login pengguna (`true` / `false`) |
+| `aksaPassword` | Password pengguna (simulasi) |
 | `aksaOnboarded` | Status onboarding sudah diselesaikan |
+| `aksaBusinessProfile` | Data profil bisnis (JSON: nama, jenis, alamat, omzet, karyawan, jam operasional) |
 | `aksaDataSource` | Metode sumber data yang dipilih |
 | `aksaSyncTime` | Waktu integrasi data (ISO timestamp) |
-| `aksaChatHistory` | Riwayat chat AI Assistant (JSON array) |
+| `aksaTransactionData` | Data transaksi (jika ada) |
 | `aksaManualData` | Data transaksi manual (jika input manual) |
+| `aksaCustomProducts` | Daftar produk custom dari pengguna |
+| `aksaFileName` | Nama file yang di-upload |
+| `aksapremium` | Status langganan Premium (`true` / `false`) |
+| `aksadarkmode` | Status mode gelap (`true` / `false`) — berlaku di semua halaman |
+| `aksaChatHistory` | Riwayat chat AI Assistant (JSON array) |
+| `aksaMonth` | Filter bulan yang dipilih |
+| `aksaYear` | Filter tahun yang dipilih |
+| `notif_stock` | Preferensi notifikasi stok |
+| `notif_rekomendasi` | Preferensi notifikasi rekomendasi |
+| `notif_laporan` | Preferensi notifikasi laporan |
+| `notif_promo` | Preferensi notifikasi promo |
+
+---
+
+## Fitur Keamanan (Auth Guard)
+
+- Hanya `index.html` dan `login.html` yang bisa diakses tanpa login
+- `business-profile.html`, `data-source.html`, dan `onboarding.html` **wajib login** — tidak bisa diakses langsung
+- Jika belum login, otomatis redirect ke `login.html`
+- Saat logout, semua data sesi dihapus kecuali `aksadarkmode` dan `notif_*`
 
 ---
 

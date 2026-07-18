@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Passport - Warung Kopi Senja</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #2d3748;
+            background-color: #f4f6f9;
+        }
+        /* Container utama seukuran kertas A4 */
+        .passport-container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding-bottom: 30mm;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        /* Header Banner Biru Tua */
+        .header-banner {
+            background: linear-gradient(135deg, #0f2042 0%, #1a365d 100%);
+            color: #ffffff;
+            padding: 40px 50px 60px 50px;
+            position: relative;
+            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 40px;
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-banner h1 {
+            margin: 0;
+            font-size: 28pt;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .header-banner p {
+            margin: 4px 0 0 0;
+            font-size: 11pt;
+            color: #cbd5e0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Pembungkus Logo */
+        .logo-wrapper {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* Profile Bisnis */
+        .profile-container {
+            padding: 0 50px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+        .profile-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #3182ce;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-card h2 {
+            margin: 0;
+            font-size: 20pt;
+            color: #1a202c;
+            font-weight: 700;
+        }
+        .profile-card p {
+            margin: 5px 0 0 0;
+            font-size: 11pt;
+            color: #718096;
+        }
+        /* Meta info dokumen di dalam profile card */
+        .doc-meta {
+            text-align: right;
+            font-size: 9pt;
+            color: #718096;
+            line-height: 1.5;
+        }
+        .doc-meta strong {
+            color: #2d3748;
+            font-family: monospace;
+            font-size: 10pt;
+        }
+
+        /* Grid Metrics Utama */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px 50px 10px 50px;
+        }
+        .metric-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .metric-label {
+            font-size: 9pt;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        .text-green { color: #2f855a; }
+        .text-blue { color: #2b6cb0; }
+
+        /* Judul Section Detail */
+        .section-title {
+            font-size: 14pt;
+            color: #1a365d;
+            font-weight: 700;
+            margin: 35px 50px 15px 50px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        /* List Tabel Ringkasan */
+        .details-list {
+            margin: 0 50px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .details-row:last-child {
+            border-bottom: none;
+        }
+        .details-label {
+            font-size: 10.5pt;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        .details-value {
+            font-size: 11pt;
+            color: #1a202c;
+            font-weight: 600;
+        }
+        /* Kotak Status Rekomendasi */
+        .status-box {
+            margin: 30px 50px 0 50px;
+            border-left: 4px solid #38a169;
+            background-color: #f0fff4;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+        }
+        .status-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 11pt;
+            color: #276749;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-box p {
+            margin: 0;
+            font-size: 10.5pt;
+            line-height: 1.5;
+            color: #2f855a;
+        }
+        
+        /* DESAIN HATI-HATI PADA KOTAK VERIFIKASI DENGAN QR */
+        .verified-badge {
+            margin: 45px 50px 0 50px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .badge-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .badge-icon {
+            font-size: 20pt;
+            color: #38a169;
+            font-weight: bold;
+            line-height: 1;
+            margin-top: 2px;
+        }
+        .badge-text {
+            font-size: 10pt;
+            color: #2d3748;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .badge-desc {
+            font-weight: normal;
+            font-size: 8.5pt;
+            color: #718096;
+            margin-top: 4px;
+            display: block;
+        }
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            border-left: 1px solid #e2e8f0;
+            padding-left: 20px;
+        }
+        .qr-placeholder {
+            width: 75px;
+            height: 75px;
+            background-color: #edf2f7;
+            border: 1px dashed #cbd5e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7.5pt;
+            color: #a0aec0;
+            text-align: center;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        .qr-label {
+            font-size: 7.5pt;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Footer Dokumen */
+        .footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8.5pt;
+            color: #a0aec0;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+            margin: 0 50px;
+        }
+        @media print {
+            body { background: none; padding: 0; }
+            .passport-container { box-shadow: none; margin: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="passport-container">
+        <!-- HEADER BANNER -->
+        <div class="header-banner">
+            <div class="header-top">
+                <div>
+                    <h1>AKSA</h1>
+                    <p>AI Business Passport</p>
+                </div>
+                <div class="logo-wrapper">
+                    <img src="assets/logo/aksa-logo.png" alt="Aksa Logo" class="logo-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE BISNIS + METADATA TERBIT -->
+        <div class="profile-container">
+            <div class="profile-card">
+                <div>
+                    <h2>Warung Kopi Senja</h2>
+                    <p>F&B</p>
+                </div>
+                <div class="doc-meta">
+                    No. Paspor: <strong>AKS-2026-071589</strong><br>
+                    Diterbitkan: <strong>18 Juli 2026</strong><br>
+                    Status: <span style="color: #38a169; font-weight: bold;">Aktif </span><br>
+                    Masa Berlaku: <strong>1 Tahun</strong><br>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRID METRICS UTAMA -->
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <div class="metric-label">Health Score</div>
+                <div class="metric-value text-green">92</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Growth</div>
+                <div class="metric-value text-green">+15%</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Risk</div>
+                <div class="metric-value text-green">Rendah</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Cash Flow</div>
+                <div class="metric-value text-blue">Sehat</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Business Stage</div>
+                <div class="metric-value text-blue">Growing</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Terdaftar Sejak</div>
+                <div class="metric-value">2021</div>
+            </div>
+        </div>
+
+        <!-- RINGKASAN DETAIL -->
+        <div class="section-title">Ringkasan Analisis Bisnis</div>
+        <div class="details-list">
+            <div class="details-row"><div class="details-label">Total Transaksi</div><div class="details-value">1.284 Transaksi</div></div>
+            <div class="details-row"><div class="details-label">Rata-rata Pendapatan / Hari</div><div class="details-value">Rp 189K</div></div>
+            <div class="details-row"><div class="details-label">Produk Terlaris</div><div class="details-value">Kopi Susu</div></div>
+            <div class="details-row"><div class="details-label">Rating Pelanggan</div><div class="details-value">4.8 ★</div></div>
+            <div class="details-row"><div class="details-label">Total Pendapatan</div><div class="details-value">Rp 3.250.000</div></div>
+            <div class="details-row"><div class="details-label">Total Keuntungan</div><div class="details-value">Rp 975.000</div></div>
+            <div class="details-row"><div class="details-label">Tren Arus Kas</div><div class="details-value">Positif</div></div>
+            <div class="details-row"><div class="details-label">Tingkat Pertumbuhan</div><div class="details-value">+15%</div></div>
+        </div>
+
+        <!-- KOTAK VERIFIKASI RESMI + QR VALIDATION -->
+        <div class="verified-badge">
+            <div class="badge-left">
+                <div class="badge-icon">✓</div>
+                <div class="badge-text">
+                    Sertifikasi Digital Resmi &bull; AKSA Ecosystem
+                    <span class="badge-desc">
+                        Dokumen Paspor Bisnis ini diterbitkan secara sah oleh sistem manajemen kecerdasan buatan AKSA berdasarkan keaslian sinkronisasi data 1.284 data transaksi yang terekam. Keaslian integritas data dilindungi enkripsi sistem.
+                    </span>
+                </div>
+            </div>
+            <div class="qr-section">
+        <img src="assets/qr/qr-aksa-nexbiz.png" alt="QR Verification" style="width: 75px; height: 75px; object-fit: contain; border-radius: 4px;">
+        <div class="qr-label">AKSA AUTH</div>
+    </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Dokumen ini dibuat secara otomatis oleh AKSA Platform. Hak Cipta © 2026 AKSA. Semua Hak Dilindungi.
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var now = new Date();
+            var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            var dd = String(now.getDate()).padStart(2, '0');
+            var mm = String(now.getMonth() + 1).padStart(2, '0');
+            var yyyy = now.getFullYear();
+            var randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+            var passportNo = 'AKS-' + yyyy + '-' + mm + dd + randomSuffix;
+            var issuedDate = dd + ' ' + months[now.getMonth()] + ' ' + yyyy;
+
+            var docMeta = document.querySelector('.doc-meta');
+            if (docMeta) {
+                docMeta.innerHTML = docMeta.innerHTML
+                    .replace(/AKS-\d{4}-\d{6}/, passportNo)
+                    .replace(/\d{1,2}\s\w+\s\d{4}/, issuedDate);
+            }
+
+            var footer = document.querySelector('.footer');
+            if (footer) {
+                footer.textContent = footer.textContent.replace(/\d{4}\sAKSA/, yyyy + ' AKSA');
+            }
+        })();
+    </script>
+</body>
+</html>

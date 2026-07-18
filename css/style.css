@@ -3227,6 +3227,10 @@ img {
   margin-bottom: 16px;
 }
 
+#passportStats {
+  margin-bottom: 8px;
+}
+
 .passport-detail-card {
   display: flex;
   align-items: center;
